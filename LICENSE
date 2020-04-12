@@ -1,0 +1,7 @@
+This package is available under GPL-2.
+
+Standard ff R-code and C-code is under GPL-2 | GPL-3 (see file COPYING that comes with your R distribution). 
+
+NOTE that the .Rd documentation source is part of the .R files and thus copyright and licence apply to any exported documentation format as well.
+
+C++ code and "file.resize" implementation by Daniel Adler is under the less restrictive ISC license version of free BSD (see file-headers).

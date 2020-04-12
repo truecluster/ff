@@ -1,0 +1,554 @@
+		CHANGES IN ff VERSION 2.2.16
+
+USER VISIBLE CHANGES
+
+    o    license has been extendend from GPL-2 to GPL-2 | GPL-3
+    o    since template ffdfs now can be created with zero rows,
+         read.table.ffdf and wrappers simply append to the template
+         (and no longer treat templates with onw row different)
+    o    parameter 'drop' for ff_array now behaves more like in standard R arrays
+    o    new fftempdir handling (suggested by William Dunlap)
+    o    .onLoad no longer sets an undefined options("fftempdir") to tempdir() 
+         but to standardPathFile(file.path(tempdir(), "ff")), hence by default 
+         .onUnload will not unlink tempdir() but will unlink
+         standardPathFile(file.path(tempdir(), "ff"))
+    o    .onLoad will create the fftempdir if it does not exists,
+         but only if dirname(fftempdir) exists, if it does not exists
+         it will consider fftempdir undefined (see above)
+    o    .onLoad sets a new options("fftempkeep") 
+         to TRUE if the fftempdir already existed 
+         and to FALSE if it was created by .onLoad
+    o    .onUnload will unlink fftempdir only if options("fftempkeep")==FALSE
+         hence you can during a session can decide to keep a user-defined 
+         fftempdir (won't work across R sessions if it was a subdiretory of 
+         tempdir() because this is unlinked anyhow at terminating R).
+    o    furthermore .onUnload will now only set options("fftempdir") to NULL
+         if it was equal to standardPathFile(file.path(tempdir(), "ff"))
+         and hence preserve any (other) value that was set before .onLoad
+    o    clone.default() and clone.list() are no longer exported from ff
+         (covered by clone.default in package bit)
+         
+MAINTENANCE
+         
+    o    ff has been changed for R_useDynamicSymbols(dll, FALSE)
+
+BUG FIXES
+
+    o   read.table.ffdf and wrappers now can handle Coltype "ordered" from template
+    o   getset.ff and readwrite.ff now return the proper vmode
+    o   getset.ff and readwrite.ff now repects add=TRUE
+    o   getset.ff and readwrite.ff with add=TRUE  now longer returns values above the vmode domain
+    o   reducing the length of ff-objects with packed vmodes 
+        (boolean, logical, quad, nibble, byte, ubyte, short, ushort)
+        will now fill non-used parts of the file such that
+        subsequent enlarging the length of the ff-object will
+        all be initialized with the same value 
+        (note that the filling depends on the presence of a names attribtute,
+        with names filling uses .vNA, without names filling uses 0)
+    
+
+    
+		CHANGES IN ff VERSION 2.2.15
+
+USER VISIBLE CHANGES
+
+    o   S3 methods are no longer exported
+    o   The generics maxindex() and poslength() have been moved to package bit,
+	also their methods for 'bit', 'bitwhich', 'ri' and their default methods.
+    o   chunk.bit has been removed.
+    o   ff vectors can now have length=0 (and filesize=0) (with the help of Martijn Schuemje)
+    o   ff() now has default length=0 and default vmode=logical (wish of Martijn Schuemje)
+    o   ffdf data.frames can now have nrow=0 (and filesizes=0)
+    o   get.ff and set.ff no longer throw an error for zero-length index
+    o   get.ff (and [[.ff) now return the appropriate vmode
+    o   read.table.ffdf and its wrappers no longer overwrite one-row-templates 
+        in argument 'x' (since now zero-row-templates are possible)
+	
+
+BUG FIXES
+    o   maxlength of ff with vmodes having .ffbytes < 1 now are multiples of 1/.ffbytes
+    o   default pattern with given filename is now file.path(filename)$path, "ff") instead of the path alone
+    o   [[.ff now calls get.ff and no longer set..ff (reported by me :-)
+	
+    
+
+		CHANGES IN ff VERSION 2.2.14
+
+USER VISIBLE CHANGES
+
+    o   The $x component in hybrid indices now has class 'rlepack'.
+	If you have stored hi's of older versions you can convert them by
+	i <- as.hi(i)
+	
+	
+BUG FIXES
+
+    o   ram2ramcode() no longer gives wrong warnings 
+        (reported by Fabian Werner)
+
+    
+
+        CHANGES IN ff VERSION 2.2.13
+
+USER VISIBLE CHANGES
+
+    o    clone.default no longer switches to clone.ff if dot-arguments are used.
+
+MAINTENANCE
+
+    o    clone(), clone.default() and clone.list() were moved to package bit
+    o    clone(), clone.default() and clone.list() are also exported from ff
+        (wish of CRAN maintainers)
+    o    several compiler warnings have been removed
+
+BUG FIXES
+
+    o   On opening an ff vector the C-code now properly assignes the 'readonly'
+        value to fresh memory. Changing the readonly status of an ff *could* 
+        have unwanted side effects in R <= 3.0.2 and definitely *would* have 
+        for R >= 3.1.0. Big thanks to Luke Tierney for spotting this!
+    o    the C-code of the shellsorts at loop termination no longer reads at 
+        incs[SHELLARRAYSIZE] (UBSAN)
+
+    
+
+        CHANGES IN ff VERSION 2.2.12
+
+USER VISIBLE CHANGES
+
+    o    new function file.move used instead of file.rename in order to 
+        allow moving files across filesystem boundaries
+    o    filename<-.ff now copies and deletes if file.rename cannot move 
+        across filesystem boundaries (suggested by Milan Bouchet-Valat)
+
+    
+    
+        CHANGES IN ff VERSION 2.2.11
+
+        
+USER VISIBLE CHANGES
+
+    o    Methods 'open.ff' and 'open.ffdf' gain a new parameter 'assert' by which 'open' can be used to assert openness. 
+    
+    
+BUG FIXES
+
+    o   ff no longer segfaults when using closed ff objects, e.g. if an integer ff index was used and index or object was closed (reported by Jan Wijffels)
+    o    ffdf[DuplicatedRows,] works now (reported by Debabrata Midya)
+
+            
+
+        CHANGES IN ff VERSION 2.2.10
+
+        
+BUG FIXES
+
+    o   .Call("R_bit_as_hi") now again addresses package="bit" as it 
+        should be (reported by Martijn Tennekes)
+
+            
+
+        CHANGES IN ff VERSION 2.2.9
+
+        
+USER VISIBLE CHANGES
+
+    o    Functions 'ramsort', 'ramorder', 'is.sorted' and 'na.count' are now generic 
+        in package 'bit'.
+
+    
+BUG FIXES
+
+    o    in ffdf argument 'ff_join' now also allows naming columns by name as documented (reported by Suharto Anggono)
+
+
+    
+        CHANGES IN ff VERSION 2.2.8
+
+        
+BUG FIXES
+
+    o    read.table.ffdf no longer overwrites the comment.char explicitely given
+        and finally sets comment.char="" if it was not given (now as documented, 
+        reported by Julin Maloof)
+    o    ffsort no longer stops when sorting an fffactor with keysort
+    o    fforder no longer creates NA when ordering an fffactor (reported by Jan Wijffels)
+    o    .Call("R_bit_as_hi") now correctly addresses package="ff"
+    
+
+
+        CHANGES IN ff VERSION 2.2.7
+
+        
+BUG FIXES
+
+    o    Fixed memory allocation error in keysort
+
+    
+    
+        CHANGES IN ff VERSION 2.2.6
+
+        
+MAINTENANCE
+
+    o    Removed .Internal calls to as.vector
+
+    
+BUG FIXES
+
+    o    fixed a bug in insertion sort for integers that could have affected function ramsort
+
+    
+    
+        CHANGES IN ff VERSION 2.2.5
+        
+        
+MAINTENANCE
+
+    o    Removed assignInNamespace("[.AsIs" ... since no longer neccessary and 
+        just causing CHECK warnings
+
+    
+
+    
+        CHANGES IN ff VERSION 2.2.4
+        
+
+BUG FIXES
+
+    o    ff again compiles on NEtBSD (reported by Thomas Vaughan)
+    o    as.integer.hi() now correctly returns integer() for an empty subscript (reported by Ivan Zhang)
+    o    ffsave now respects argument 'envir'
+    o    ffsave now generates as default for rootpath the root of the drive on which the ff data is (not the current drive)
+    o    ffload no longer tries to create the archive directory if not existing
+    o    ffload no longer tries to create the directory of the stored rootpath if different from the new rootpath (wish of Ivan Zhang)
+      (let us know if this creates problems with case spelling of the old rootpath)
+
+    
+    
+
+        CHANGES IN ff VERSION 2.2.2
+
+
+
+USER VISIBLE CHANGES
+
+    o    In read.table.ffdf arguments 'colClasses' and 'col.names' are now 
+        enforced also during 'next.rows' chunks. If they are not provided
+        by the user, they are derived now BEFORE argument 'transFUN' is 
+        applied. This allows dropping columns in transFUN - and still
+        having all columns info ready for next chunk's call.
+
+    o    all calls to 'seq.int' have been replaced by 'seq_along' or 'seq_len'
+
+    o    most calls to 'cat' have been replaced by 'message' or 'packageStartupMessage'
+
+    
+BUG FIXES
+
+    o    fforder no longer creates an integer overflow (thanks to Edwin de Jonge)
+
+
+
+        CHANGES IN ff VERSION 2.2.0
+
+
+NEW FEATURES
+
+    o    ff now supports the 64 bit Windows and Sun versions of R 
+        (thanks to Brian Ripley)
+    o    ff now supports sorting and ordering of ff vectors and dataframes
+        (see ramsort, ffsort, ffdfsort, ramorder, fforder, ffdforder)
+    o    ff now supports ff vectors as subscripts of ff objects
+        (currently positive integers only, booleans are planned)
+    o    New option 'ffmaxbytes' which allows certain ff procedures like sorting
+        using larger limit of RAM than 'ffbatchbytes' in chunked processing.
+        Such higher limit is useful for (single-R-process) sorting compared to
+        some multi-R-process chunked processing. It is a good idea to reduce 
+        'ffmaxbytes' on slaves or avoid ff sorting there completely.
+    o    New generic 'pagesize' with method 'pagesize.ff' which returns the 
+        current pagesize as defined on opening the ff object.
+
+
+USER VISIBLE CHANGES
+
+    o    [.ff now returns with the same vmode as the ff-object
+    o    Certain operations are faster now because we worked around 
+        unnecessary copying triggered by many of R's assignment functions.
+        For example reading a factor from a (well-cached) file is now 20%
+        faster and thus as fast as just creating this factor in-RAM using 
+        levels()<- and class()<- assignments. 
+        (consider this tuning temporary, hoping for a generic fix in base R)
+    o    ff() can now open files larger than .Machine$integer.max elements
+        (but gives access only to the first .Machine$integer.max elements)
+    o    ff now has default pattern NULL translating to the pattern in 'filename'
+        (and only to the previous default 'ff' if no filename is given)
+    o    ff now sets the pattern in synch with a requested 'filename'
+    o    clone.ff now always creates a file consistent with the previous pattern
+    o    clone.ff now always creates a finalizer consistent with the file location
+    o    clone.ffdf has a new argument 'nrow' which allows to create an empty copy 
+        with a different number of rows (currently requires 'initdata=NULL')
+    o    clone.default now deep-copies lists and atomic vectors
+        
+    
+DEPRECATED
+
+    o    virtual window support is deprecated. Let us know if you urgently need this and why.
+   
+
+BUG FIXES
+
+    o    read.table.ffdf now also works if transFUN filters and returns less rows
+
+
+BUG FIXES at 2.1.4
+
+    o    [<-.ffdf no longer does calculate the number of elements in an ffdf
+        which could led to an integer overflow
+
+
+BUG FIXES at 2.1.3
+
+
+    o    ffsafe now always closes ffdf objects - also partially closed ones
+
+    o    ffsafe no longer passes arguments 'add' and 'move' to 'save'
+
+    o    ffsafe and friends now work around the fact that under windows getwd()
+        can report the same path in upper and lower case versions. 
+
+
+
+
+        CHANGES IN ff VERSION 2.1.2
+
+
+NEW FEATURES
+
+    o    New functions ffsave, ffsave.image, ffinfo and ffload allow to save 
+    and load ff and ffdf objects together with all associated ff files 
+    in a ff archive. Incremental save and selective load are supported.
+
+    o    read.table.ffdf now supports reading fixed-width format by specifying
+    FUN="read.fwf". But beware, read.fwf reads fwf, writes csv, then calls 
+    read.table to read csv (Anyone feels challenged to provide faster 
+    csv and fwf reader?)
+
+    o    read.table.ffdf will now treat an argument 'x' with 1 row special: 
+    instead of appending it will overwrite the first row. This is working 
+    around the fact that it is currently not possible to create ff vectors 
+    having length zero and ffdf data.frames with zero rows.
+
+    o    read.table.ffdf and write.table.ffdf have a new argument 'transFUN' 
+    which allows filtering and other modifications on-the-fly of the 
+    data.frames processed in each chunk.
+
+    o    argument 'ff_args' in read.table.ffdf has been renamed to 'asffdf_args'
+
+    o    New 'chunk' methods for classes 'bit' and 'ff_vector'
+
+
+
+USER VISIBLE CHANGES
+
+    o    The filename of each ff object is now always stored with absolute path
+    and assignments to pattern<- "./foo" will now expand "." to getwd()
+
+    o    as.ffdf.data.frame now passes '...' to ffdf like the other as.ffdf 
+    methods do. From now on use 'col_args' for passing arguments to ff
+    (first ff columns are created, then ffdf is called to bind them).
+
+    o    New argument 'RECORDBYTES' for chunk methods. Position of dots argument
+    moved to last position.
+
+    o    The low-level access-functions 'get.ff', 'set.ff' and 'getset.ff' now 
+    accept vectors (not only scalars) of positive subscript positions. This
+    allows to evaluate the benefit of the hybrid index preprocessing done in
+    '[.ff', '[<-.ff' and 'swap.ff'.
+
+
+BUG FIXES
+
+    o    Fixed problems with negative subscripts (discovered by Trishank 
+    Kuppusamy):  [.ff_array and [<-.ff_array no longer skip over -1 in a 
+    non-packed negative index, and hybrid indexing no longer reverts the 
+    order of assigned or returned values (for negative subscripts we now 
+    always set hi$ix=NULL and hi$re=FALSE).
+
+    o    as.hi.ri no longer blows RAM by expanding the sequence ri[[1]]:ri[[2]]
+
+    o    [.ffdf now requires less RAM because it avoids as.data.frame
+
+    o    as.hi.which now call as.hi.integer and works
+
+    o    chunk.default no longer uses seq.int or seq because these were buggy
+
+    o    now also compiles under latest max os snow leopard
+
+    o    default for options("ffbatchbytes") is now 1% of RAM under windows and 
+    16MB on other OSes (was much too small on other)
+
+
+
+
+        CHANGES IN ff VERSION 2.1.0
+
+
+NEW LICENCING
+
+    o    Dual licencing has been removed, all ff functionality is now 
+    available under GPL-2 (and some under the ISC license version 
+    of free BSD)
+
+
+NEW FEATURES
+
+    o    New packed vmodes 'boolean', 'quad', 'nibble', 'byte', 'ubyte', 
+    'short', 'ushort' and 'single' allow efficient storage of integer or 
+    factor data.
+
+    o    New class 'ffdf' supports data.frame structure with several 
+    options for physical storage of virtual columns.
+
+    o    New functions 'read.table.ffdf' and 'write.table.ffdf' for reading/ 
+    writing csv files into/from ffdf objects.
+
+    o    Improved handling of files and finalizers (see user visible changes).
+
+    o    New generic function 'chunk' from package 'bit' with a first method 
+    'chunk.ffdf' that supports automated chunking suitable for parallel 
+    processing.
+
+    o    New subscript types from package 'bit' are supported: 'bit', 
+    'bitwhich' and 'ri' for chunked processing.
+    
+    o    New coercing functions between 'ff' and 'bit': as.ff.bit, as.bit.ff
+    as.hi.bit, as.bit.hi, as.hi.bitwhich, as.bitwhich.hi, as.hi.ri.
+
+    o    The generics 'maxindex' and 'poslength' now also have methods 
+    for classes 'bit', 'bitwhich' and 'ri' from package 'bit', 
+    implemented via bit's corresponding generics 'length' and 'sum'
+    
+    o    Function 'ff' has a new parameter 'update'=TRUE that can be used 
+    to create ff objects like 'initdata' without actually filling 
+    it with initdata (used by ffdf)
+    
+    o    In function 'update' parameter 'delete' now accepts a tri-bool: 
+    update(delete=NA) will do fast update by file exchange without 
+    deleting the source file.
+
+
+USER VISIBLE CHANGES
+
+    o    Package 'ff' now depends on package 'bit' (1.1.1 or higher), 
+    which offers many functions useful for subsetting 'ff' (see there).
+
+    o    Functions 'bbatch', 'repfromto' and 'repfromto<-' have been 
+    moved to file 'chunkutil.R' in package 'bit' where they 
+    support the  new generic function 'chunk'. See also utility function 
+    'vecseq' which allows to generate concatenated  multiple sequences and 
+    return them as a call.
+
+    o    ff files created via "pattern" (without giving an explicit filename) 
+    now have by default extension 'ff' which can be changed via 
+    options("ffextension"). The old behaviour without extension can be
+    restored by setting options(ffextension=NULL) AFTER loading package ff.
+
+    o    If an option("fffinalizer") is defined, ff(finalizer=NULL) now takes 
+    it from there. If not defined, ff() behaves as before: if the file 
+    location equals option("fftempdir") it chooses 'delete', otherwise 
+    it chooses 'close'.
+
+    o    ff args 'pattern' and 'filename' allow more detailed control 
+    where to create ff files. 'pattern' now also accepts a rootname
+    with a path. 'filename' now can be given in three forms: with an 
+    explicit path to create there, with a preceding "./" to create in 
+    getwd() and without path to create in getOption("fftempdir"). 
+
+    o    New assignment generic 'filename<-' renames/moves the underlying file 
+    AND changes the finalizer if the location is changed in or out of 
+    fftempdir. New assignment generic 'pattern<-' does similar renaming by 
+    giving a pattern and also has a method that renames/moves all files of 
+    a ffdf dataframe.
+
+    o    The finalizer logic has been changed. The finalizer function (which 
+    name is stored in the ff object) is now attached at finalize-time
+    (not at create-time) by attaching a single 'finalize' function at 
+    create-time (for details see ?finalize). As a benefit we can access and
+    change the finalizer through new functions 'finalizer' and 
+    'finalizer<-'. Finalizers are now expected to set the finalizer name to
+    NULL and the 'open' method makes use of this information: 'open' will 
+    activate a 'close' finalizer, but only if there was no finalizer 
+    activated. Finalized ff objects will have no memory about which 
+    finalizer they had, and 'clone' of a finalized ff will no longer copy 
+    the finalizer. 
+
+    o    'length<-.ff' will now change the length of the existing ff
+    file. For increased ff size it no longer needs to copy contents
+    and will no longer guarantee to fill the new elements with NA, 
+    see the help page. For decreased ff size it will physically reduce 
+    the filesize. These operations carried out by file.resize are extremely
+    fast and save disk space. 
+
+    o    'dim<-.ff' will now allow changing the fastest rotating dimension
+    and automatically adjust the length (dimorder retained, 
+    dimnames removed).
+
+    o    The default in all ff access functions has been changed from 
+    pack=TRUE to pack=FALSE. Packing an evaluated index is only 
+    efficient if the index is re-used.
+    ('hi' and 'as.hi' still have default pack=TRUE)
+
+    o    '[.ff_array' used with one subscript like in ff[i] will now return the 
+    elements of the array taken from their virtual positions (more 
+    compatible with R standard behaviour. If you want to access elements in 
+    their physical order, you can remove the 'dim' attribute by 
+    'dim(ff) <- NULL' and then use ff[i].
+
+    o    'as.hi' and 'hiparse' now take an argument 'envir' rather than 
+    'parents' to specify in which frame to evaluate
+
+    o    Assigning NA of length 1 to a signed ff factor no longer gives 
+    a warning (ram2ffcode no longer warns here)
+
+    o    "levels<-.ff" now warns if the number of levels was reduced, but no 
+    longer if it was increased
+
+
+BUG FIXES
+
+    o    'bbatch' now balances better
+
+    o    'vw<-.ff_array' no longer complains about a wrong value 
+    when vw had been set before
+
+    o    'maxffmode' now also returns only one .ffmode if a single vmode was 
+    passed in
+
+    o    '[.ff' and friends now also find their (unevaluated) index arguments 
+    if the call was inherited via 'NextMethod'
+
+    o    '[.AsIs' now returns a class based on the class AFTER subscripting
+    not the the class of the un-subscripted object (BUG in R Base)
+
+    o    'update.ff' now handles factors correctly
+
+    o    Closing and re-opening ff files will no longer trigger attempts to 
+    delete ff files with a 'delete' finalizer multiple times
+
+
+KNOWN PROBLEMS / TODOs
+
+    o    bootstrapping rows from matrix with dimorder=c(2,1) is (under Win32) 
+    not faster than bootstrapping rows from a ffdf build physically on 
+    top of vectors: the fs-cache has problems handling larger matrix
+    compared to smaller vectors. Therefore we consider partitioning of 
+    ff objects in a future release.
+
+    o    ff objects can be nicely used in multi-core processing, however be 
+    aware that there is yet no locking mechanism against concurrent writes
+    (often locking is not needed).
+
+    o    NAs are mapped to TRUE in 'bit' and to FALSE in 'ff' booleans. Might be aligned 
+    in a future release. Don't use bit or ff booleans if you have NAs 
+    - or map NAs explicitely.
