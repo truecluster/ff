@@ -1,0 +1,61 @@
+Dear R community,
+
+ff Version 2.0 is available on CRAN. Based on paging concepts from version 1.0, 
+2.0 is a major redesign of this package for handling large datasets. 
+We have implemented numerous enhancements and performance improvements to make 
+this package suitable as a 'base' package for large data processing. 
+
+The ff package provides atomic data structures that are stored on disk but 
+behave (almost) as if they were in RAM by transparently mapping only a section 
+(pagesize) in main memory - the effective virtual memory consumption per ff 
+object.
+
+In addition to the 'double' data type, ff objects now have support for
+'logical', 'raw' and 'integer' atomic datatypes, plus close-to-atomic types 
+like 'factor', 'POSIXct' or custom close-to-atomic types. In addition to fast 
+vector access, ff now has native support for matrices and arrays with flexible 
+dimorder (major column-order, major row-order and generalizations for arrays). 
+
+While the raw data still gets stored on binary flat files in native encoding,
+'ff' objects have been extended to carry their meta information as physical
+and virtual attributes. ff objects have well-defined hybrid copying semantics, 
+which gives rise to certain performance improvements through virtualization. 
+
+The new ff objects can be stored and reopened across R sessions. Flat files can 
+be shared by multiple 'ff' R objects (using different data en/de-coding 
+schemes) in the same process or from multiple R processes to exploit 
+parallelism. A wide choice of finalizer options allows to work with 'permanent'
+files as well as creating/removing 'temporary' ff files completely transparent 
+to the user. On certain OS/Filesystem combinations, the creation process of 
+large atomic data sets has been speed-up dramatically using sparse file 
+allocation.
+
+Several access optimization techniques such as Hybrid Index Preprocessing and 
+Virtualization are implemented to achieve good performance even with large 
+datasets, for example virtual matrix transpose without touching a single byte 
+on disk.
+
+Further, to reduce disk I/O, the atomic data gets stored native and compact on
+binary flat files i.e. logicals take up exactly 2 bits to represent TRUE, FALSE
+and NA.
+
+Beyond basic access functions, the ff package also provides compatibility 
+functions that facilitate writing code for ff and ram objects and support for 
+batch processing on ff objects (e.g. as.ram, as.ff, ffapply).
+
+A package that supports convenient processing of large ff objects is in the 
+making. R.ff will make the bigger part of R's basic functions available for ff 
+objects through method dispatch and/or an evaluator that handles expressions 
+which contain ff objects. 
+ 
+NOTE: A professional extension is available from the authors, which integrates
+      additional high-performance features neatly into the ff package. 
+      The extension allows  efficient handling of symmetric matrices 
+      and supports more packed data types: 
+      boolean (1 bit), quad (2 bit unsigned), nibble (4 bit unsigned)
+      , byte (1 byte signed with NAs), ubyte (1 byte unsigned)
+      , short (2 byte signed with NAs), ushort (2 byte unsigned)
+      , single (4 byte float with NAs). 
+      For example 'quad' allows efficient storage of genomic data as an 
+      'A','T','G','C' factor. The unsigned types support 'circular' arithmetic. 
+  

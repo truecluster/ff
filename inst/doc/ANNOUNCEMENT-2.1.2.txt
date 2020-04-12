@@ -1,0 +1,27 @@
+Dear R community,
+
+Package bit version 1.1-3 and ff version 2.1.2 is available on CRAN and should be useful to handle large datasets.
+
+It adds convenient utilities for managing ff objects and files (see ?ffsave) and removes some performance bottlenecks. 
+
+In case you experience unexpected performance problems with ff, here is a couple of recommendations based on FAQs:
+
+1) Compare the size of data to be written at the same time compared to available RAM for your filesystem cache. 
+   If the data exceeds available RAM, then consider using caching="mmeachflush" instead of caching="mmnoflush", this will make write operations predictably slower but prevent write storms stalling some systems (observed under NTFS win32+64).
+   You can set ff's caching option 
+   either with options(ffcaching="mmeachflush") before creating ff objects
+   or create ff objects with ffobj <- ff(..., caching="mmeachflush") 
+   or open your existing ff object with open(ffobj, caching="mmeachflush") (while it is closed)
+
+2) If you use caching="mmnoflush": check the writeback cache configuration of your filesystem (e.g. set data=writeback for ext3, tune limits for dirty pages, consider different filesystem, consider different OS). 
+
+3) Choose a reasonable size for options("ffbatchbytes"), which limits the amount of RAM used for one chunk. 
+   With too small chunks you pay more performance overhead. 
+   Note that bigger chunks are not always better, for example if you distribute chunked processing on many cores or if some operation involved does not scale well with chunk size. 
+
+Final remark: testing ff access functionality  on a Core i7 920 (4 cores, 8 cores with HT) shows that hyperthreading with 8 parallel processes (snowfall, sockets) gives about 5x the performance of a single process, but already 7 processes with HT perform worse than 4 processes without HT. Conclusion: if a machine is dedicated to R for RAM-critical applications, try switching hyperthreading off. 
+
+Hope you find this useful. We appreciate any feedback.
+
+
+Jens & Daniel

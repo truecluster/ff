@@ -1,0 +1,27 @@
+Dear R community,
+
+ff Version 2.1.1 is available on CRAN. It now supports large data.frames, 
+csv import/export, packed atomic datatypes and bit filtering from package 
+'bit' on which it depends from now.
+
+Some performance results in seconds from test data with 78 mio rows and 7 columns on a 3 GB notebook:
+
+sequential reading 1 mio rows: csv = 32.7  ffdf = 1.3
+sequential writing 1 mio rows: csv = 35.5  ffdf = 1.5
+
+Examples of things you can do with ff and bit:
+- direct random access to rows of large data-frame instead of talking to SQL database (?ffdf)
+- store 4-level factor like A,T,G,C with 2bit instead of 32bit (?vmode)
+- fast chunked iteration (?chunk)
+- run linear model on large dataset using biglm (?chunk.ffdf)
+- handle boolean selections by factor 32 faster and less RAM consuming (?bit)
+- handle very skewed selections very fast (?bitwhich)
+- parallel access to large dataset just by sending ff's small metadata from master to slaves (e.g. with snowfall)
+
+ff is hosted on r-forge now and you find some presentations on ff at
+http://ff.r-forge.r-project.org/
+
+Hope you find this useful. We appreciate any feedback.
+
+
+Jens & Daniel
