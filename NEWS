@@ -53,6 +53,7 @@ BUG FIXES
         all be initialized with the same value 
         (note that the filling depends on the presence of a names attribtute,
         with names filling uses .vNA, without names filling uses 0)
+    o   .onUnload no longer fails when fftempkeep=NULL 
     
 
     

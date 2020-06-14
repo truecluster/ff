@@ -196,8 +196,8 @@
    packageStartupMessage("Unloading package ff")
    #remove(list=".fftemp", envir=globalenv())
    #gc()
-   fftempdir <- options("fftempdir")
-   fftempkeep <- options("fftempkeep")
+   fftempdir <- getOption("fftempdir")
+   fftempkeep <- getOption("fftempkeep", default = FALSE)
    library.dynam.unload("ff", libpath)
    if (!fftempkeep && unlink(fftempdir, recursive = TRUE)){
      packageStartupMessage("Error in unlinking fftempdir")
