@@ -2,12 +2,12 @@ Package: ff
 Version: 4.0.0
 Date: 2020-06-06
 Title: Memory-Efficient Storage of Large Data on Disk and Fast Access Functions
-Author: Daniel Adler <dadler@uni-goettingen.de>, 
-	Christian Gläser <christian_glaeser@gmx.de>,
-	Oleg Nenadic <onenadi@uni-goettingen.de>, 
-	Jens Oehlschlägel <Jens.Oehlschlaegel@truecluster.com>,
-	Martijn Schuemie <schuemie@ohdsi.org>,
-	Walter Zucchini <wzucchi@uni-goettingen.de>
+Author: Daniel Adler [aut],
+	Christian Gläser [aut],
+	Oleg Nenadic  [aut], 
+	Jens Oehlschlägel [aut, cre],
+	Martijn Schuemie [aut],
+	Walter Zucchini  [aut]
 Maintainer: Jens Oehlschlägel <Jens.Oehlschlaegel@truecluster.com>
 Depends: R (>= 2.10.1), bit (>= 4.0.0), utils
 Suggests: biglm, testthat (>= 0.11.0)
