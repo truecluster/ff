@@ -1622,7 +1622,6 @@ ffdfindexget <- function(
     inram <- n*theobytes.inram<=BATCHBYTES & n>=N & BATCHSIZE>=n
 
   theobytes <- ifelse(inram, theobytes.inram, theobytes.chunk)
-
   b <- bbatch(n, as.integer(pmin(BATCHBYTES / theobytes, .Machine$integer.max)))$b
 
   if (!is.null(BATCHSIZE) && !all(inram))

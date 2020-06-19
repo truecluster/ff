@@ -136,6 +136,7 @@ test_that("Can clone zero row ffdf objects", {
   delete(z)
 })
 
+
 test_that("Can save zero row ffdf objects", {
   x <- data.frame(i = integer(), d = double(), q=quad())
   y <- as.ffdf(x)

@@ -1,3 +1,11 @@
+		CHANGES IN ff VERSION 4.0.1
+
+BUG FIXES
+ 
+    o ffindexget no longer allocates batchsizes lager than vector length
+      (realized via fixes to bbatch() in package 'bit')
+
+
 		CHANGES IN ff VERSION 4.0.0
 
 BUG FIXES
