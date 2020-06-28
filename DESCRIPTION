@@ -1,6 +1,6 @@
 Package: ff
-Version: 4.0.1
-Date: 2020-06-19
+Version: 4.0.2
+Date: 2020-06-28
 Title: Memory-Efficient Storage of Large Data on Disk and Fast Access Functions
 Author: Daniel Adler [aut],
 	Christian Gläser [aut],
@@ -61,5 +61,5 @@ License: GPL-2 | GPL-3 | file LICENSE
 LazyLoad: yes
 ByteCompile: yes
 Encoding: UTF-8
-URL: http://ff.r-forge.r-project.org/
+URL: http://github/truecluster/ff
 Packaged: 2010-09-18 10:19:36 UTC; root
