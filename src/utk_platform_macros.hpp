@@ -134,6 +134,8 @@
     #define UTK__Arch_ARM_ARM
   #elif defined(__arm__) && defined(__thumb__)
     #define UTK__Arch_ARM_THUMB
+  #elif defined(__aarch64__)
+    #define UTK__Aarch_AARCH64
   #elif defined(__sh__)
     #define UTK__Arch_SuperH
   #else
