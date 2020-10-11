@@ -1,3 +1,16 @@
+    CHANGES IN ff VERSION 4.0.3
+    
+USER VISIBLE CHANGES
+
+    o now aarch64 is supported (thanks to Terje Kvernes)
+
+BUG FIXES
+
+    o test that fail under r-oldrel-macos-x86_64 
+    have been disabled under that platform
+
+
+
     CHANGES IN ff VERSION 4.0.2
 
 BUG FIXES

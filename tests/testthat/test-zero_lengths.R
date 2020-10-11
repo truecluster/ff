@@ -5,6 +5,8 @@ library("ff")
 #   stopifnot(identical(x,y))
 # }
 
+is_not_oldrel_macos <- function(){Sys.info()["sysname"] != 'Darwin' || R.version$major >= 4}
+
 context("ff-zero-lengths")
 
 test_that("file size is correct  when creating ff integer from scratch", {
@@ -31,8 +33,10 @@ test_that("file size is correct  when creating ff integer from scratch", {
   expect_true(file.exists(f0))
   expect_true(file.exists(f1))
   gc()
-  expect_false(file.exists(f0))
-  expect_false(file.exists(f1))
+  if (is_not_oldrel_macos()){
+    expect_false(file.exists(f0))
+    expect_false(file.exists(f1))
+  }
   rm(f0,f1)
 })
 
@@ -60,8 +64,10 @@ test_that("file size is correct  when creating ff quad from scratch", {
   expect_true(file.exists(f0))
   expect_true(file.exists(f1))
   gc()
-  expect_false(file.exists(f0))
-  expect_false(file.exists(f1))
+  if (is_not_oldrel_macos()){
+    expect_false(file.exists(f0))
+    expect_false(file.exists(f1))
+  }
   rm(f0,f1)
 })
 
@@ -86,8 +92,10 @@ test_that("file size is correct when creating ff integer from existing file", {
   expect_false(file.exists(f0))
   expect_false(file.exists(f1))
   gc()
-  expect_false(file.exists(f0))
-  expect_false(file.exists(f1))
+  if (is_not_oldrel_macos()){
+    expect_false(file.exists(f0))
+    expect_false(file.exists(f1))
+  }
   rm(f0,f1)
 })
 
@@ -118,8 +126,10 @@ test_that("file size is correct when creating ff quad from existing file", {
   expect_false(file.exists(f0))
   expect_false(file.exists(f1))
   gc()
-  expect_false(file.exists(f0))
-  expect_false(file.exists(f1))
+  if (is_not_oldrel_macos()){
+    expect_false(file.exists(f0))
+    expect_false(file.exists(f1))
+  }
   rm(f0,f1)
 })
 

@@ -7,6 +7,18 @@
 
 # source("d:/mwp/eanalysis/ff/R/zzz.R")
 
+# require(rhub)
+# rhub_ff_4.0.3 <- check_for_cran(
+#   path = "../ff_4.0.3.tar.gz"
+# , email = "Jens.Oehlschlaegel@truecluster.com"
+# , check_args = "--as-cran"
+# , env_vars = c('_R_CHECK_FORCE_SUGGESTS_'= "false",'_R_CHECK_CRAN_INCOMING_USE_ASPELL_'= "true", '_R_CHECK_XREFS_MIND_SUSPECT_ANCHORS_'="true")
+# , platform = c('macos-highsierra-release-cran','macos-highsierra-release')
+# , show_status = FALSE
+# )
+
+
+
 .onLoad <- function(lib, pkg) {
   ##library.dynam("ff", pkg, lib) use useDynLib(ff, .registration = TRUE, .fixes = "C_") in NAMESPACE instead
   ##packageStartupMessage("Loading package ff", packageDescription("ff", lib, fields="Version"), "")
