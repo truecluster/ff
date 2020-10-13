@@ -7,7 +7,7 @@
 
 # source("d:/mwp/eanalysis/ff/R/CFUN.R")
 
-# xx TODO: extend this for weighted means, weighted median etc., see http://tolstoy.newcastle.edu.au/R/help/02a/1073.html and http://tolstoy.newcastle.edu.au/R/help/02a/1060.html or google "Re: [R] Weighted median"
+# xx TODO: extend this for weighted means, weighted median etc., google "Re: [R] Weighted median"
 
 #! \name{CFUN}
 #! \alias{CFUN}
@@ -64,7 +64,7 @@
 #! }
 #! \section{ff options}{
 #!   xx TODO: extend this for weighted means, weighted median etc., \cr
-#!   see http://tolstoy.newcastle.edu.au/R/help/02a/1073.html and http://tolstoy.newcastle.edu.au/R/help/02a/1060.html or google "Re: [R] Weighted median"
+#!   google "Re: [R] Weighted median"
 #! }
 #! \value{
 #!   depends on the CFUN used

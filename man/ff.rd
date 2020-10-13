@@ -233,7 +233,7 @@ ff( initdata  = NULL
  }
 }
 \section{OS specific}{
- The following table gives an overview of file size limits for common file systems (see \url{http://en.wikipedia.org/wiki/Comparison_of_file_systems} for further details):
+ The following table gives an overview of file size limits for common file systems (see \url{https://en.wikipedia.org/wiki/Comparison_of_file_systems} for further details):
  \tabular{ll}{
   \strong{File System} \tab \strong{File size limit} \cr
   FAT16              \tab 2GB \cr

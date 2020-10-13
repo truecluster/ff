@@ -1,3 +1,12 @@
+    CHANGES IN ff VERSION 4.0.4
+    
+BUG FIXES
+
+    o test that fail under any MACOS 
+    have been disabled under that platform
+
+
+
     CHANGES IN ff VERSION 4.0.3
     
 USER VISIBLE CHANGES
