@@ -27,6 +27,10 @@
 #define fseeko fseeko64
 #endif
 
+# ifdef WIN32
+# define fseeko _fseeki64
+#endif
+
 #include <cerrno>
 
 namespace utk
