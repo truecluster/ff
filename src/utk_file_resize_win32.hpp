@@ -27,6 +27,9 @@ namespace utk {
   {
     HANDLE hFile = CreateFile(path, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, 0, NULL);
     if (hFile == INVALID_HANDLE_VALUE) return -1;
+    DWORD dwTemp;
+    DeviceIoControl(hSparseFile, FSCTL_SET_SPARSE, NULL, 0, NULL, 0, &dwTemp, NULL);
+
     LARGE_INTEGER liDistanceToMove;
     liDistanceToMove.QuadPart = (LONGLONG) newsize;
     BOOL success;
