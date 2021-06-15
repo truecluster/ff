@@ -28,12 +28,13 @@ namespace utk {
     HANDLE hFile = CreateFile(path, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, 0, NULL);
     if (hFile == INVALID_HANDLE_VALUE) return -1;
     DWORD dwTemp;
-    DeviceIoControl(hFile, FSCTL_SET_SPARSE, NULL, 0, NULL, 0, &dwTemp, NULL);
+    BOOL success;
+    success = DeviceIoControl(hFile, FSCTL_SET_SPARSE, NULL, 0, NULL, 0, &dwTemp, NULL);
 
     LARGE_INTEGER liDistanceToMove;
     liDistanceToMove.QuadPart = (LONGLONG) newsize;
-    BOOL success;
-    success = SetFilePointerEx(hFile, liDistanceToMove, NULL, FILE_BEGIN);
+    if (success)
+      success = SetFilePointerEx(hFile, liDistanceToMove, NULL, FILE_BEGIN);
     if (success)
       success = SetEndOfFile(hFile);
     CloseHandle(hFile);
