@@ -48,30 +48,12 @@
   if (is.null(getOption("ffdrop")))
     options(ffdrop=TRUE)
   if (is.null(getOption("ffbatchbytes"))){
-    # memory.limit is windows specific
-    if (.Platform$OS.type=="windows")
-    {
-      if (getRversion()>="2.6.0")  # memory.limit was silently changed from 2.6.0 to return in MB instead of bytes
-        options(ffbatchbytes=memory.limit()*(1024^2/100))
-      else
-        options(ffbatchbytes=memory.limit()/100)
-    } else {
-      # some magic constant
-      options(ffbatchbytes=16*1024^2)
-    }
+    # some magic constant
+    options(ffbatchbytes=16*1024^2)
   }
   if (is.null(getOption("ffmaxbytes"))){
-    # memory.limit is windows specific
-    if (.Platform$OS.type=="windows")
-    {
-      if (getRversion()>="2.6.0")  # memory.limit was silently changed from 2.6.0 to return in MB instead of bytes
-        options(ffmaxbytes=0.5*memory.limit()*(1024^2))
-      else
-        options(ffmaxbytes=0.5*memory.limit())
-    } else {
-      # some magic constant
-      options(ffmaxbytes=0.5*1024^3)
-    }
+    # some magic constant
+    options(ffmaxbytes=0.5*1024^3)
   }
   # if we want an explicit list of ff objects, we should store them in an environment with hash=TRUE (much faster than a list)
   #assign(".fftemp", new.env(hash=TRUE), envir=globalenv())
