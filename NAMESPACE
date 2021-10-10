@@ -6,7 +6,7 @@
 
 useDynLib(ff, .registration = TRUE, .fixes = "C_")
 
-importFrom(utils, memory.limit, packageDescription, read.fwf, read.table, str, write.table)
+importFrom(utils, packageDescription, read.fwf, read.table, str, write.table)
 importFrom(stats, median, quantile, runif)
 import(bit)
 
@@ -369,7 +369,7 @@ S3method(print,ff_vector)
 S3method(print,ff_matrix)
 S3method(str,ff)
 S3method(update,ff)
-S3method(clone,ff)
+S3method("clone",ff)
 S3method(finalizer, ff)
 S3method("finalizer<-", ff)
 S3method(finalize, ff_pointer)
