@@ -229,7 +229,7 @@ ff( initdata  = NULL
   \code{ffpagesize}    \tab default pagesize                             \tab \code{\link{getdefaultpagesize}} \cr
   \code{ffcaching}     \tab caching scheme for the C++ backend           \tab \code{'mmnoflush'} \cr
   \code{ffdrop}        \tab default for the \option{drop} parameter in the ff subscript methods  \tab TRUE \cr
-  \code{ffbatchbytes}  \tab default for the byte limit in batched/chunked processing             \tab \code{\link{memory.limit}() \%/\% 100} \cr
+  \code{ffbatchbytes}  \tab default for the byte limit in batched/chunked processing             \tab 16MB \cr
  }
 }
 \section{OS specific}{

@@ -6,7 +6,7 @@
 
 useDynLib(ff, .registration = TRUE, .fixes = "C_")
 
-importFrom(utils, memory.limit, packageDescription, read.fwf, read.table, str, write.table)
+importFrom(utils, packageDescription, read.fwf, read.table, str, write.table)
 importFrom(stats, median, quantile, runif)
 import(bit)
 
