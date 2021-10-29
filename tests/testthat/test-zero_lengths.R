@@ -169,7 +169,7 @@ test_that("length changes are correct for ff integer", {
   expect_equal(a1[], r1)
   expect_equal(a0[], r0)
   
-  rm(n1)
+  rm(n)
   rm(a0,a1)
   rm(r0,r1)
   rm(f0,f1)
@@ -1041,11 +1041,11 @@ test_that("lots of stuff related to dims work", {
       fnam <- paste(dim(frc), sep="", collapse="")
       ftmp <- clone(frc)
       rtmp <- ftmp[]
-      etmp <- try(dim(rtmp) <- dtmp)
+      etmp <- try(dim(rtmp) <- dtmp, silent = TRUE)
       if (inherits(etmp, 'try-error')){
         dres[[fnam,dnam]] <- as.character(etmp)
       }
-      etmp <- try(dim(ftmp) <- dtmp)
+      etmp <- try(dim(ftmp) <- dtmp, silent = TRUE)
       if (inherits(etmp, 'try-error')){
         fres[[fnam,dnam]] <- as.character(etmp)
       }

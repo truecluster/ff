@@ -2954,40 +2954,40 @@ update.ff <- function(
 # increased length is filled by recycling
 clone.ff <- function(
   x
-, initdata    = x
-, length      = NULL
-, levels      = NULL
-, ordered     = NULL
-, dim         = NULL
-, dimorder    = NULL
-, bydim       = NULL
-, symmetric   = NULL
-, fixdiag     = NULL
-, names       = NULL    # not taken fom initdata
-, dimnames    = NULL
-, ramclass    = NULL
-, ramattribs  = NULL
-, vmode       = NULL
-, update      = NULL    # set to TRUE to suppress upating ff object with initdata
-, pattern     = NULL
-, filename    = NULL
-, overwrite   = FALSE
-, pagesize    = NULL
-, caching     = NULL
-, finalizer   = NULL
-, finonexit   = NULL
-#, hideclass  = FALSE
-, FF_RETURN   = NULL
-, BATCHSIZE   = .Machine$integer.max       # optional batch size restriction in cases (limiting is useful if pulling values from function accesses raw data with more columns that k)
-, BATCHBYTES  = getOption("ffbatchbytes")  # batch size restriction in bytes
-, VERBOSE     = FALSE
-, ... # dummy to keep R CMD check quiet
+  , initdata    = x
+  , length      = NULL
+  , levels      = NULL
+  , ordered     = NULL
+  , dim         = NULL
+  , dimorder    = NULL
+  , bydim       = NULL
+  , symmetric   = NULL
+  , fixdiag     = NULL
+  , names       = NULL    # not taken fom initdata
+  , dimnames    = NULL
+  , ramclass    = NULL
+  , ramattribs  = NULL
+  , vmode       = NULL
+  , update      = NULL    # set to TRUE to suppress upating ff object with initdata
+  , pattern     = NULL
+  , filename    = NULL
+  , overwrite   = FALSE
+  , pagesize    = NULL
+  , caching     = NULL
+  , finalizer   = NULL
+  , finonexit   = NULL
+  #, hideclass  = FALSE
+  , FF_RETURN   = NULL
+  , BATCHSIZE   = .Machine$integer.max       # optional batch size restriction in cases (limiting is useful if pulling values from function accesses raw data with more columns that k)
+  , BATCHBYTES  = getOption("ffbatchbytes")  # batch size restriction in bytes
+  , VERBOSE     = FALSE
+  , ... # dummy to keep R CMD check quiet
 )
 {
   # BTW: we tried fast cloning via file.copy() but that was slower, only system(copy...) would save 33% time (too wacky)
   if (is.null(vmode) && !is.null(x))
     vmode <- vmode(x)
-
+  
   if (is.null(levels))
     levels <- levels(x)
   if (is.null(ordered))
@@ -2998,7 +2998,7 @@ clone.ff <- function(
     ramclass <- ramclass(x)
   if (is.null(ramattribs))
     ramattribs <- ramattribs(x)
-
+  
   oldlen <- length(x)
   if (is.null(dim) && !is.null(length)){  # not dim but length given
     dimorder <- NULL
@@ -3025,12 +3025,12 @@ clone.ff <- function(
     }else
       dimnames <- NULL
   }
-
+  
   if (is.null(FF_RETURN))
     FF_RETURN <- is.ff(x)
   if ( !(is.logical(FF_RETURN) && length(FF_RETURN)==1) )
     stop("in clone() FF_RETURN must be a logical scalar")
-
+  
   physical <- physical(x)
   if (is.null(pattern)){
     pattern <- physical$pattern
@@ -3047,37 +3047,37 @@ clone.ff <- function(
     finonexit <- physical$finonexit
   if (is.null(finonexit))
     finonexit <- physical$finonexit
-
+  
   # don't use "<-" operator with ff argument in order to avoid recursion (if anyone defines method <-.ff as cloning)
   assign("ret", ff(
     initdata    = initdata
-  , length      = length
-  , levels      = levels
-  , ordered     = ordered
-  , dim         = dim
-  , dimorder    = dimorder
-  , bydim       = bydim
-  , symmetric   = symmetric
-  , fixdiag     = fixdiag
-  , names       = names
-  , dimnames    = dimnames
-  , ramclass    = ramclass
-  , ramattribs  = ramattribs
-  , vmode       = vmode
-  , update      = update
-  , pattern     = pattern
-  , filename    = filename
-  , readonly    = FALSE
-  , overwrite   = overwrite
-  , pagesize    = pagesize
-  , caching     = caching
-  , finalizer   = finalizer
-  , finonexit   = finonexit
-  #, hideclass  = hideclass
-  , FF_RETURN   = FF_RETURN
-  , BATCHSIZE   = BATCHSIZE
-  , BATCHBYTES  = BATCHBYTES
-  , VERBOSE     = VERBOSE
+    , length      = length
+    , levels      = levels
+    , ordered     = ordered
+    , dim         = dim
+    , dimorder    = dimorder
+    , bydim       = bydim
+    , symmetric   = symmetric
+    , fixdiag     = fixdiag
+    , names       = names
+    , dimnames    = dimnames
+    , ramclass    = ramclass
+    , ramattribs  = ramattribs
+    , vmode       = vmode
+    , update      = update
+    , pattern     = pattern
+    , filename    = filename
+    , readonly    = FALSE
+    , overwrite   = overwrite
+    , pagesize    = pagesize
+    , caching     = caching
+    , finalizer   = finalizer
+    , finonexit   = finonexit
+    #, hideclass  = hideclass
+    , FF_RETURN   = FF_RETURN
+    , BATCHSIZE   = BATCHSIZE
+    , BATCHBYTES  = BATCHBYTES
+    , VERBOSE     = VERBOSE
   ))
   newlen <- length(ret)
   nam <- names(x)
@@ -3095,7 +3095,7 @@ clone.ff <- function(
     else{
       na.count(x) <- NULL
       warning("cloning removed attribute 'na.count'")
-   }
+    }
   }
   if (!is.null(physical$is.sorted)){
     if (newlen<=oldlen && is.null(dim(x)) && is.null(dim(ret)))

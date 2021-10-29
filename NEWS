@@ -2,7 +2,14 @@
     
 BUG FIXES
 
-    o 
+    o as of R 4.1.2 memory.limit() is no longer supported
+      and its use has been removed from ff if favor of a constant
+      (thanks to Alexander Grueneberg).
+      Adjust options("ffbatchbytes") and options("ffmaxbytes") 
+      as suitable for your available memory.
+    o ff no longer recreates the 'clone' generic  hence
+      clone(ff) properly dispatches to clone.ff 
+      instead of clone.default
 
 
 

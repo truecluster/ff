@@ -11,12 +11,18 @@ importFrom(stats, median, quantile, runif)
 import(bit)
 
 export(
-  
-# wish of CRAN maintainers: export another time here (now maintained and exported in bit)
-# without this R CMD CHECK complains
+
+# 'clone' and 'clone.default' are defined in package 'bit'
+# ff wants to add methods 'clone.ff' and 'clone.ffdf'
+# however but then clone(ff) dispatches to clone.default
+# probably because 'clone' in bit does not find 'clone.ff' in ff
+# hence it seems to be necessary to redefine 'clone' and 'clone.default' in ff 
+# hence it seems to be necessary to export 'clone' in ff again
+# hence it seems to be necessary to export 'clone.default' and/or register S3method(clone, default) in ff
+# for now I only S3method(clone, default) in ff
 # clone
 #,clone.default
- clone.ff  
+ clone.ff
 ,clone.ffdf
 
 # -- generics.R - all new generics --
@@ -369,7 +375,7 @@ S3method(print,ff_vector)
 S3method(print,ff_matrix)
 S3method(str,ff)
 S3method(update,ff)
-S3method("clone",ff)
+S3method(clone,ff)
 S3method(finalizer, ff)
 S3method("finalizer<-", ff)
 S3method(finalize, ff_pointer)

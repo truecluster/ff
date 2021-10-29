@@ -50,8 +50,7 @@ finalize  <- function(x, ...)UseMethod("finalize")                  # call activ
 delete     <- function(x, ...)UseMethod("delete")
 deleteIfOpen <- function(x, ...)UseMethod("deleteIfOpen")
 
-# complements 'ff' and 'update': cloning and convenience wrappers for swap in/out of cache
-clone  <- function(x, ...)UseMethod("clone")
+# complements 'ff' and 'update': cloning (now in package 'bit') and convenience wrappers for swap in/out of cache
 as.ff  <- function(x, ...)UseMethod("as.ff")
 as.ram <- function(x, ...)UseMethod("as.ram")
 
