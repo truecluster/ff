@@ -27,15 +27,27 @@
 #define fseeko fseeko64
 #endif
 
+# ifdef WIN32
+#include <windows.h>
+#include <io.h>
+# define fseeko _fseeki64
+#endif
+
 #include <cerrno>
 
 namespace utk
 {
   int file_allocate_fseek(const char* path, fsize_t size)
   {
+
     // open new file for writing
     FILE* f = fopen(path,"w");
     if (!f) return errno;
+
+    # ifdef WIN32
+    DWORD dwTemp;
+    DeviceIoControl((HANDLE) _get_osfhandle (_fileno (f)), FSCTL_SET_SPARSE, NULL, 0, NULL, 0, &dwTemp, NULL);
+    #endif
 
     // return value
     int err;
