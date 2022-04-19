@@ -3655,7 +3655,7 @@ getset.ff <- function(x, i, value, add=FALSE)
   if( is.readonly(x) ) stop("ff is readonly")
   if (is.double(i))
     i <- as.integer(i)
-  if (!is.integer(i) || i<1 || i>length(x)) stop("illegal index")
+  if (!is.integer(i) || any(i<1) || any(i>length(x))) stop("illegal index")
   if(!is.null(vw(x))) stop("please use '[' to access ff with vw")
 
   nc <- na.count(x)
