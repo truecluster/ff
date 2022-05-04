@@ -2145,7 +2145,7 @@ str.ff <- function(object, nest.lev=0, ...){
 #!                      \tab Index sequence packing, Documentation \cr
 #!   Walter Zucchini    \tab \email{wzucchi@uni-goettingen.de} \cr
 #!                      \tab Array Indexing, Sampling, Documentation \cr
-#!   Christian Gläser   \tab \email{christian\_glaeser@gmx.de} \cr
+#!   Christian Gläser   \tab \email{christian_glaeser@gmx.de} \cr
 #!                      \tab Wrapper for biglm package \cr
 #!   }
 #!  Package Version 2.0
@@ -3655,7 +3655,7 @@ getset.ff <- function(x, i, value, add=FALSE)
   if( is.readonly(x) ) stop("ff is readonly")
   if (is.double(i))
     i <- as.integer(i)
-  if (!is.integer(i) || i<1 || i>length(x)) stop("illegal index")
+  if (!is.integer(i) || any(i<1) || any(i>length(x))) stop("illegal index")
   if(!is.null(vw(x))) stop("please use '[' to access ff with vw")
 
   nc <- na.count(x)
@@ -3679,7 +3679,7 @@ get.ff   <- function(x, i)
   if (length(i)){
     if (is.double(i))
       i <- as.integer(i)
-    if (!is.integer(i) || i<1 || i>length(x)) stop("illegal index")
+    if (!is.integer(i) || any(i<1) || any(i>length(x))) stop("illegal index")
     if(!is.null(vw(x))) stop("please use '[' to access ff with vw")
     vm <- vmode(x)
     as.vmode(.Call(C_get_vec, .ffmode[vm], attr(x, "physical"), i, length(i), PACKAGE="ff"), vm)
@@ -3697,7 +3697,7 @@ set.ff <- function(x, i, value, add=FALSE)
   if (length(i)){
     if (is.double(i))
       i <- as.integer(i)
-    if (!is.integer(i) || i<1 || i>length(x)) stop("illegal index")
+    if (!is.integer(i) || any(i<1) || any(i>length(x))) stop("illegal index")
     if(!is.null(vw(x))) stop("please use '[' to access ff with vw")
     
     if(!is.null(physical(x)$na.count)) stop("use readwrite.ff instead to maintain na.count (or deactivate na.count(x)<-NULL)")

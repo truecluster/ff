@@ -1,6 +1,6 @@
 Package: ff
-Version: 4.0.5
-Date: 2021-10-17
+Version: 4.0.6
+Date: 2022-05-04
 Title: Memory-Efficient Storage of Large Data on Disk and Fast Access Functions
 Author: Daniel Adler [aut],
 	Christian Gläser [aut],

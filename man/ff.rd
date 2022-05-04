@@ -259,7 +259,7 @@ ff( initdata  = NULL
                      \tab Index sequence packing, Documentation \cr
   Walter Zucchini    \tab \email{wzucchi@uni-goettingen.de} \cr
                      \tab Array Indexing, Sampling, Documentation \cr
-  Christian Gläser   \tab \email{christian\_glaeser@gmx.de} \cr
+  Christian Gläser   \tab 	\email{christian_glaeser@gmx.de} \cr
                      \tab Wrapper for biglm package \cr
   }
  Package Version 2.0

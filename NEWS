@@ -1,3 +1,14 @@
+    CHANGES IN ff VERSION 4.0.6
+    
+BUG FIXES
+
+    o corrected invalid email of Christian Gläser
+    o get.ff, getset.ff and set.ff no longer throw an error
+      when accessing more than one element (found and fixed by
+      Michael Chirico and Jan Wijffels) 
+
+
+
     CHANGES IN ff VERSION 4.0.5
     
 BUG FIXES
