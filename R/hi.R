@@ -498,7 +498,7 @@ as.hi.NULL <- function(x, ...){
 
 # xx temporary compatibility function setting the rlepack class
 as.hi.hi <- function(x, ...){
-  if (class(x$x)!="rlepack")
+  if (!inherits(x$x, "rlepack"))
     class(x$x) <- "rlepack"
   x    
 }
