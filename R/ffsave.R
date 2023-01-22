@@ -161,7 +161,7 @@ if (FALSE){
 #! }
 #! \note{
 #!   The ff files are not platform-independent with regard to byte order.
-#!   For large files and the zip64 format use \code{zip 3.0} and \code{unzip 6.0} from \url{http://infozip.sourceforge.net/}.
+#!   For large files and the zip64 format use \code{zip 3.0} and \code{unzip 6.0} from \url{https://infozip.sourceforge.net/}.
 #! }
 #! \seealso{
 #!   \code{\link{ffinfo}} for inspecting the content of the \code{ffarchive} \cr
@@ -434,7 +434,7 @@ function (
 #!   Jens Oehlschlägel
 #! }
 #! \note{
-#!   For large files and the zip64 format use \code{zip 3.0} and \code{unzip 6.0} from \url{http://infozip.sourceforge.net/}.
+#!   For large files and the zip64 format use \code{zip 3.0} and \code{unzip 6.0} from \url{https://infozip.sourceforge.net/}.
 #! }
 #! \seealso{
 #!   \code{\link{ffsave}}, \code{\link{ffload}}, \code{\link{ffdrop}}
@@ -521,7 +521,7 @@ function (file)
 #! }
 #! \note{
 #!   The ff files are not platform-independent with regard to byte order.
-#!   For large files and the zip64 format use \code{zip 3.0} and \code{unzip 6.0} from \url{http://infozip.sourceforge.net/}.
+#!   For large files and the zip64 format use \code{zip 3.0} and \code{unzip 6.0} from \url{https://infozip.sourceforge.net/}.
 #! }
 #! \author{
 #!   Jens Oehlschlägel

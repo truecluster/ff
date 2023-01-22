@@ -117,7 +117,7 @@ ff( initdata  = NULL
   \code{finalizer} \tab see parameter 'finalizer' \cr
   \code{finonexit} \tab see parameter 'finonexit' \cr
   \code{readonly } \tab see \code{\link{is.readonly}} \cr
-  \code{class    } \tab The external pointer needs class 'ff\_pointer' to allow method dispatch of finalizers  \cr
+  \code{class    } \tab The external pointer needs class 'ff_pointer' to allow method dispatch of finalizers  \cr
  }
 }
 \section{Virtual object component}{

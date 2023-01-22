@@ -1,5 +1,14 @@
-    CHANGES IN ff VERSION 4.0.7
+    CHANGES IN ff VERSION 4.0.8
     
+BUG FIXES
+
+    o renewed .configure using recent autoconf
+      will no longer check for gcc under clang 
+
+
+
+    CHANGES IN ff VERSION 4.0.7
+
 BUG FIXES
 
     o corrected invalid email of Christian Gläser

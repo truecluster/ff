@@ -1,4 +1,19 @@
 AC_INIT(ff,2.0,dadler@uni-goettingen.de)
+: ${R_HOME=`R RHOME`}
+if test -z "${R_HOME}"; then
+  echo "could not determine R_HOME"
+  exit 1
+fi
+CC=`"${R_HOME}/bin/R" CMD config CC`
+CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
+CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
+CXX=`"${R_HOME}/bin/R" CMD config CXX`
+if test -z "$CXX"; then
+  AC_MSG_ERROR([No C++ compiler is available])
+fi
+CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXXFLAGS`
+AC_LANG(C++)
+AC_PROG_CC([cc cl gcc])
 AC_CONFIG_HEADERS([src/ac_config.h])
 AC_CHECK_HEADERS([sys/vfs.h])
 AC_CHECK_HEADERS([sys/mman.h])

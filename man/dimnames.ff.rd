@@ -15,7 +15,7 @@
   \item{value}{ a list with length(dim(x)) elements (either NULL of character vector of length of dimension }
 }
 \details{
-  if \code{\link{vw}} is set, \command{dimnames.ff\_array} returns the appropriate part of the names, but you can't set \command{dimnames} while \command{vw} is set.
+  if \code{\link{vw}} is set, \command{dimnames.ff_array} returns the appropriate part of the names, but you can't set \command{dimnames} while \command{vw} is set.
   \command{dimnames} returns NULL for \code{ff_vectors} and setting \code{dimnames} for \code{ff_vector} is not allowed, but setting \code{\link[=names.ff]{names}} is.
 }
 \value{
