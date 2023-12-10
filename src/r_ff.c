@@ -286,7 +286,7 @@ Rboolean next_positive_neg(
 /* { --- UTILITIES ---------------------------------------------------------- */
 
 
-SEXP r_ff_xtensions_available()
+SEXP r_ff_xtensions_available(void)
 {
   SEXP ret_;
   PROTECT( ret_ = allocVector(LGLSXP,1) );
@@ -295,7 +295,7 @@ SEXP r_ff_xtensions_available()
   return ret_;
 }
 
-SEXP r_ff_symmxtensions_available()
+SEXP r_ff_symmxtensions_available(void)
 {
   SEXP ret_;
   PROTECT( ret_ = allocVector(LGLSXP,1) );
@@ -306,7 +306,7 @@ SEXP r_ff_symmxtensions_available()
 
 
 
-SEXP r_ff_getpagesize()
+SEXP r_ff_getpagesize(void)
 {
   SEXP ret_;
   PROTECT( ret_ = allocVector(INTSXP, 1) );
@@ -465,11 +465,11 @@ SEXP r_ff_new(SEXP name, SEXP ffmode, SEXP initval, SEXP len, SEXP pagesize, SEX
   }
 
   if ( !ff ) {
-    error("nil pointer creating ff");
+    error("r_ff_new nil pointer creating ff");
     return R_NilValue;
   }
   if (ff_geterror( ff )) {
-    error(ff_geterrstr( ff ));
+    error("r_ff_new %s", ff_geterrstr( ff ));
     ff_close(ff);
     return R_NilValue;
   }
@@ -637,9 +637,9 @@ SEXP r_ff_open(SEXP ff_, SEXP ffmode, SEXP ro, SEXP autoflush)
   }
 
   if ( !ff )
-    error("nil pointer reopening ff");
+    error("r_ff_open nil pointer reopening ff");
   if (ff_geterror( ff ))
-    error(ff_geterrstr( ff ));
+    error("r_ff_open %s", ff_geterrstr( ff ));
 
   R_SetExternalPtrAddr(ff_, ff);
 

@@ -59,9 +59,9 @@ Rboolean next_positive_neg(
 /* utility functions */
 
 
-SEXP r_ff_xtensions_available();
-SEXP r_ff_symmxtensions_available();
-SEXP r_ff_getpagesize();
+SEXP r_ff_xtensions_available(void);
+SEXP r_ff_symmxtensions_available(void);
+SEXP r_ff_getpagesize(void);
 SEXP r_ff_int_check_ascending(SEXP x);
 SEXP r_ff_int_check_descending(SEXP x);
 SEXP r_ff_int_rle(SEXP x);

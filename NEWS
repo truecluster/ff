@@ -1,3 +1,20 @@
+    CHANGES IN ff VERSION 4.0.10
+    
+BUG FIXES
+
+    o removed -Wformat-security warnings
+      format string is not a string literal (potentially insecure)
+
+
+    CHANGES IN ff VERSION 4.0.9
+
+    
+BUG FIXES
+
+    o removed -Wstrict-prototypes compiler warnings
+
+
+
     CHANGES IN ff VERSION 4.0.8
     
 BUG FIXES

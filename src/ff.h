@@ -31,7 +31,7 @@ typedef void* FF;
 /* --- COMMON INTERFACE ---------------------------------------------------- */
 
 /** get system page size */
-int    ff_getpagesize();
+int    ff_getpagesize(void);
 
 
 /** get error code */
