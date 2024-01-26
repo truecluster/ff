@@ -170,7 +170,7 @@
   # }
 }
 
-.Last.lib <- function(libpath) {
+.onDetach <- function(libpath) {
    packageStartupMessage("Detaching package ff")
   # if (getRversion()<="2.10.0"){
     # packageStartupMessage('restoring [.AsIs')

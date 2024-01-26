@@ -291,7 +291,7 @@ export(
 , ffdfsort
 , ffdforder
 
-,.Last.lib
+#,.Last.lib
 
 )
 
@@ -412,6 +412,7 @@ S3method(chunk, ff_vector)
 S3method(print, hi)
 S3method(str, hi)
 S3method(as.hi, NULL)
+S3method(as.hi, "(")
 S3method(as.hi, hi)
 S3method(as.hi, ri)
 S3method(as.hi, name)

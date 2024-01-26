@@ -1,3 +1,19 @@
+    CHANGES IN ff VERSION 4.0.12
+    
+BUG FIXES
+
+    o .Last.lib replaced by .onDetach
+
+
+
+    CHANGES IN ff VERSION 4.0.11
+    
+BUG FIXES
+
+    o registered S3 "as.hi.("
+
+
+
     CHANGES IN ff VERSION 4.0.10
     
 BUG FIXES
@@ -8,7 +24,6 @@ BUG FIXES
 
     CHANGES IN ff VERSION 4.0.9
 
-    
 BUG FIXES
 
     o removed -Wstrict-prototypes compiler warnings
