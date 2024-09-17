@@ -1,6 +1,6 @@
 AC_INIT(ff,2.0,dadler@uni-goettingen.de)
 : ${R_HOME=`R RHOME`}
-if test -z "${R_HOME}";  then
+if test -z "${R_HOME}"; then
   echo "could not determine R_HOME"
   exit 1
 fi
