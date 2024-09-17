@@ -24,8 +24,8 @@ ffdfsort(x, ...)
   a \code{\link{data.frame}} (for \code{dforder, dfsort, ramorder, ramsort}) or an \code{\link{ffdf}} object (for \code{ffdforder, ffdfsort})
 }
   \item{\dots}{
-  further arguments passed to \code{\link{sort}}, \code{\link{ramsort}} or \code{\link{ffsort}} (for objects with one column)
-  or passed to \code{\link{order}}, \code{\link{ramorder}} or \code{\link{fforder}} (for objects with mulitple columns)
+  further arguments passed to \code{\link{sort}}, \code{\link[bit]{ramsort}} or \code{\link{ffsort}} (for objects with one column)
+  or passed to \code{\link{order}}, \code{\link[bit]{ramorder}} or \code{\link{fforder}} (for objects with mulitple columns)
 }
 }
 \value{
@@ -36,8 +36,8 @@ ffdfsort(x, ...)
 }
 
 \seealso{
-    \code{\link{sort}}, \code{\link{ramsort}} or \code{\link{ffsort}} \cr
-    \code{\link{order}}, \code{\link{ramorder}} or \code{\link{fforder}}
+    \code{\link{sort}}, \code{\link[bit]{ramsort}} or \code{\link{ffsort}} \cr
+    \code{\link{order}}, \code{\link[bit]{ramorder}} or \code{\link{fforder}}
 }
 \examples{
    x <- ff(sample(1e5, 1e6, TRUE))

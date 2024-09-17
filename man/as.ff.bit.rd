@@ -6,7 +6,7 @@
   Conversion between bit and ff boolean
 }
 \description{
-  Function \code{as.ff.bit} converts a \code{\link{bit}} vector to a boolean \code{\link{ff}} vector.
+  Function \code{as.ff.bit} converts a \code{\link[bit]{bit}} vector to a boolean \code{\link{ff}} vector.
   Function \code{as.bit.ff} converts a boolean \code{\link{ff}} vector to a \code{\link{ff}} vector.
 }
 \usage{
@@ -33,7 +33,7 @@
   Jens Oehlschlägel
 }
 \seealso{
-  \code{\link{bit}}, \code{\link{ff}}, \code{\link{as.ff}}, \code{\link{as.hi.bit}}
+  \code{\link[bit]{bit}}, \code{\link{ff}}, \code{\link{as.ff}}, \code{\link{as.hi.bit}}
 }
 \examples{
   l <- as.boolean(sample(c(FALSE,TRUE), 1000, TRUE))

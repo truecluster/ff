@@ -17,7 +17,7 @@
 }
 \details{
   The \code{ff_pointer} method is not intended for manual use, it is used at finalizer dispatch time.
-  Closing ffdf objects will close all of their \code{\link[=physical.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
+  Closing ffdf objects will close all of their \code{\link[=Extract.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
 }
 \value{
   TRUE if the file could be closed, FALSE if it was closed already (or NA if not all components of an ffdf returned FALSE or TRUE on closing)

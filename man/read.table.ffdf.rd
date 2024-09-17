@@ -128,7 +128,7 @@ If this is provided, it defines crucial features that are otherwise determnined 
     \code{read.table.ffdf} does the same in order to skip efficiently over previously read chunks.
 }
 \value{
-  An \code{\link{ffdf}} object. If created during the 'first' chunk pass, it will have one \code{\link[=physical.ffdf]{physical}} component per \code{\link[=virtual.ffdf]{virtual}} column.
+  An \code{\link{ffdf}} object. If created during the 'first' chunk pass, it will have one \code{\link[=Extract.ffdf]{physical}} component per \code{\link[=Extract.ffdf]{virtual}} column.
 }
 \author{
   Jens Oehlschlägel, Christophe Dutang

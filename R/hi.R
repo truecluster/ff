@@ -44,7 +44,7 @@
 #! }
 #! \value{
 #!   A list of class 'hi' with components
-#!   \item{ x      }{ directly accessed by the C-code: the sorted index of class 'rlepack' as returned by \code{\link{rlepack}} }
+#!   \item{ x      }{ directly accessed by the C-code: the sorted index of class 'rlepack' as returned by \code{\link[bit]{rlepack}} }
 #!   \item{ ix     }{ NULL or positions to restore original order }
 #!   \item{ re     }{ logical scalar indicating if sequence was reversed from descending to ascending (in this case \code{is.null(ix)}) }
 #!   \item{ minindex  }{ directly accessed by the C-code: represents the lowest positive subscript to be enumerated in case of negative subscripts }
@@ -55,11 +55,11 @@
 #!   \item{ symmetric }{ logical scalar indicating whether we have a symmetric matrix }
 #!   \item{ fixdiag   }{ logical scalar indicating whether we have a fixed diagonal (can only be true for symmetric matrices) }
 #!   \item{ vw     }{ virtual window information \code{\link{vw}} }
-#!   \item{ NAs      }{ NULL or NA positions as returned by \code{\link{rlepack}} }
+#!   \item{ NAs      }{ NULL or NA positions as returned by \code{\link[bit]{rlepack}} }
 #! }
 #! \author{ Jens Oehlschlägel }
 #! \note{ \command{hi} defines the class structure, however usually \code{\link{as.hi}} is used to acturally Hybrid Index Preprocessing for \code{\link{ff}} }
-#! \seealso{ \code{\link{as.hi}} for coercion, \code{\link{rlepack}}, \code{\link{intrle}}, \code{\link{maxindex}}, \code{\link{poslength}} }
+#! \seealso{ \code{\link{as.hi}} for coercion, \code{\link[bit]{rlepack}}, \code{\link[bit]{intrle}}, \code{\link[bit:maxindex.default]{maxindex}}, \code{\link[bit:maxindex.default]{poslength}} }
 #! \examples{
 #!   hi(c(1, 11, 29), c(9, 19, 21), c(1,1,-2))
 #!   as.integer(hi(c(1, 11, 29), c(9, 19, 21), c(1,1,-2)))
@@ -403,23 +403,23 @@ hiparse <- function(x, envir, first=NA_integer_, last=NA_integer_){
 #!   \item{vw}{ the virtual window \code{\link{vw}} of the indexed vector or matrix to be stored within the \code{\link{hi}} object, see details }
 #!   \item{vw.convert}{ FALSE to prevent doubly virtual window conversion, this is needed for some internal calls that have done the virtual window conversion already, see details }
 #!   \item{dimorder.convert}{ FALSE to prevent doubly dimorder conversion, this is needed for some internal calls that have done the dimorder conversion already, see details }
-#!   \item{NAs}{ a vector of NA positions to be stored \code{\link{rlepack}ed}, not fully supported yet }
-#!   \item{pack}{ FALSE to prevent \code{\link{rlepack}ing}, note that this is a hint rather than a guarantee, \code{as.hi.bit} might ignore this }
+#!   \item{NAs}{ a vector of NA positions to be stored \code{\link[bit]{rlepack}ed}, not fully supported yet }
+#!   \item{pack}{ FALSE to prevent \code{\link[bit]{rlepack}ing}, note that this is a hint rather than a guarantee, \code{\link[=as.hi]{as.hi.bit}} might ignore this }
 #!   \item{range}{ NULL or a vector with two elements indicating first and last position to be converted from 'bit' to 'hi' }
-#!   \item{\dots}{ further argument passed from generic to method or from wrapper method to \code{as.hi.integer} }
+#!   \item{\dots}{ further argument passed from generic to method or from wrapper method to \code{\link[=as.hi]{as.hi.integer}} }
 #! }
 #! \details{
-#!   The generic dispatches appropriately, \code{as.hi.hi} returns an \code{\link{hi}} object unchanged,
-#!   \code{as.hi.call} tries to \code{\link{hiparse}} instead of evaluate its input in order to save RAM.
-#!   If parsing is successfull \code{as.hi.call} will ignore its argument \code{pack} and always pack unless the subscript is too small to do so.
+#!   The generic dispatches appropriately, \code{\link[=as.hi]{as.hi.hi}} returns an \code{\link{hi}} object unchanged,
+#!   \code{\link[=as.hi]{as.hi.call}} tries to \code{\link{hiparse}} instead of evaluate its input in order to save RAM.
+#!   If parsing is successfull \code{\link[=as.hi]{as.hi.call}} will ignore its argument \code{pack} and always pack unless the subscript is too small to do so.
 #!   If parsing fails it evaluates the index expression and dispatches again to one of the other methods.
-#!   \code{as.hi.name} and \code{as.hi.(} are wrappers to \code{as.hi.call}.
-#!   \code{as.hi.integer} is the workhorse for coercing evaluated expressions
-#!   and \code{as.hi.which} is a wrapper removing the \code{which} class attribute.
-#!   \code{as.hi.double}, \code{as.hi.logical} and \code{as.hi.character} are also wrappers to \code{as.hi.integer},
-#!   but note that \code{as.hi.logical} is not memory efficient because it expands \emph{all} positions and then applies logical subscripting.
+#!   \code{\link[=as.hi]{as.hi.name}} and \code{\link[=as.hi]{as.hi.(}} are wrappers to \code{\link[=as.hi]{as.hi.call}}.
+#!   \code{\link[=as.hi]{as.hi.integer}} is the workhorse for coercing evaluated expressions
+#!   and \code{\link[=as.hi]{as.hi.which}} is a wrapper removing the \code{which} class attribute.
+#!   \code{\link[=as.hi]{as.hi.double}}, \code{\link[=as.hi]{as.hi.logical}} and \code{\link[=as.hi]{as.hi.character}} are also wrappers to \code{\link[=as.hi]{as.hi.integer}},
+#!   but note that \code{\link[=as.hi]{as.hi.logical}} is not memory efficient because it expands \emph{all} positions and then applies logical subscripting.
 #!   \cr
-#!   \code{as.hi.matrix} calls \code{\link{arrayIndex2vectorIndex}} and then \code{as.hi.integer} to interpret and preprocess matrix indices.
+#!   \code{\link[=as.hi]{as.hi.matrix}} calls \code{\link{arrayIndex2vectorIndex}} and then \code{\link[=as.hi]{as.hi.integer}} to interpret and preprocess matrix indices.
 #!   \cr
 #!   If the \code{dim} and \code{dimorder} parameter indicate a non-standard dimorder (\code{\link{dimorderStandard}}), the index information in \code{x} is converted from a standard dimorder interpretation to the requested \code{\link{dimorder}}.
 #!   \cr
@@ -1145,15 +1145,15 @@ as.character.hi <- function(
 #! }
 #! \details{
 #!   \command{length.hi} returns the number of the subsript elements in the index (even if they are negative).
-#!   By contrast \code{\link{poslength}} returns the number of selected elements (which for negative indices is \code{maxindex(x) - length(unique(x))}).
-#!   \code{\link{maxindex}} returns the highest possible index position.
+#!   By contrast \code{\link[bit:maxindex.default]{poslength}} returns the number of selected elements (which for negative indices is \code{maxindex(x) - length(unique(x))}).
+#!   \code{\link[bit:maxindex.default]{maxindex}} returns the highest possible index position.
 #! }
 #! \value{
 #!   an integer scalar
 #! }
 #! \author{ Jens Oehlschlägel }
 #! \note{ duplicated negative indices are removed }
-#! \seealso{ \code{\link{hi}}, \code{\link{as.hi}}, \code{\link{length.ff}}, \code{\link{length}}, \code{\link{poslength}}, \code{\link{maxindex}} }
+#! \seealso{ \code{\link{hi}}, \code{\link{as.hi}}, \code{\link{length.ff}}, \code{\link{length}}, \code{\link[bit:maxindex.default]{poslength}}, \code{\link[bit:maxindex.default]{maxindex}} }
 #! \examples{
 #!   length(as.hi(-1, maxindex=12))
 #!   poslength(as.hi(-1, maxindex=12))

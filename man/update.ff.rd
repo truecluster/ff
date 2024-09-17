@@ -37,7 +37,7 @@
   An ff object like the input 'object' updated with the content of the 'from' object.
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{ff}}, \code{\link{clone}}, \code{\link{ffvecapply}}, \code{\link{vectorCompatible}}, \code{\link{filename}} }
+\seealso{ \code{\link{ff}}, \code{\link[=clone.ff]{clone}}, \code{\link{ffvecapply}}, \code{\link{vectorCompatible}}, \code{\link{filename}} }
 \examples{
   x <- ff(1:100)
   y <- ff(-(1:100))

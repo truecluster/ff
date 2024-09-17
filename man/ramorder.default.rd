@@ -92,7 +92,7 @@ This function is called for its side-effects and breaks the functional programmi
 }
 
 \seealso{
-  \code{\link{order}}, \code{\link{fforder}}, \code{\link{dforder}}, \code{\link{ramsort}}
+  \code{\link{order}}, \code{\link{fforder}}, \code{\link{dforder}}, \code{\link[bit]{ramsort}}
 }
 \examples{
    n <- 50

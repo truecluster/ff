@@ -1,3 +1,13 @@
+    CHANGES IN ff VERSION 4.5.0
+    
+BUG FIXES
+
+    o Added Authors@R to DESCRIPTION file
+    o Replaced calls to Calloc and Free with R_Calloc and R_Free
+    o Replaced call to ScalarLogical with Rf_ScalarLogical
+
+
+
     CHANGES IN ff VERSION 4.0.12
     
 BUG FIXES

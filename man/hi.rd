@@ -32,7 +32,7 @@ hi(from, to, by = 1L, maxindex = NA, vw = NULL, pack = TRUE, NAs = NULL)
 }
 \value{
   A list of class 'hi' with components
-  \item{ x      }{ directly accessed by the C-code: the sorted index of class 'rlepack' as returned by \code{\link{rlepack}} }
+  \item{ x      }{ directly accessed by the C-code: the sorted index of class 'rlepack' as returned by \code{\link[bit]{rlepack}} }
   \item{ ix     }{ NULL or positions to restore original order }
   \item{ re     }{ logical scalar indicating if sequence was reversed from descending to ascending (in this case \code{is.null(ix)}) }
   \item{ minindex  }{ directly accessed by the C-code: represents the lowest positive subscript to be enumerated in case of negative subscripts }
@@ -43,11 +43,11 @@ hi(from, to, by = 1L, maxindex = NA, vw = NULL, pack = TRUE, NAs = NULL)
   \item{ symmetric }{ logical scalar indicating whether we have a symmetric matrix }
   \item{ fixdiag   }{ logical scalar indicating whether we have a fixed diagonal (can only be true for symmetric matrices) }
   \item{ vw     }{ virtual window information \code{\link{vw}} }
-  \item{ NAs      }{ NULL or NA positions as returned by \code{\link{rlepack}} }
+  \item{ NAs      }{ NULL or NA positions as returned by \code{\link[bit]{rlepack}} }
 }
 \author{ Jens Oehlschlägel }
 \note{ \command{hi} defines the class structure, however usually \code{\link{as.hi}} is used to acturally Hybrid Index Preprocessing for \code{\link{ff}} }
-\seealso{ \code{\link{as.hi}} for coercion, \code{\link{rlepack}}, \code{\link{intrle}}, \code{\link{maxindex}}, \code{\link{poslength}} }
+\seealso{ \code{\link{as.hi}} for coercion, \code{\link[bit]{rlepack}}, \code{\link[bit]{intrle}}, \code{\link[bit:maxindex.default]{maxindex}}, \code{\link[bit:maxindex.default]{poslength}} }
 \examples{
   hi(c(1, 11, 29), c(9, 19, 21), c(1,1,-2))
   as.integer(hi(c(1, 11, 29), c(9, 19, 21), c(1,1,-2)))

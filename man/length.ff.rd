@@ -16,7 +16,7 @@
 \details{
   Changing the length of ff objects is only allowed if no \code{\link{vw}} is used.
   Changing the length of ff objects will remove any \code{\link{dim.ff}} and \code{\link{dimnames.ff}} attribute.
-  Changing the length of ff objects will remove any \code{\link{na.count}} or \code{\link{is.sorted}} attribute and warn about this.
+  Changing the length of ff objects will remove any \code{\link[bit]{na.count}} or \code{\link[bit:Metadata]{is.sorted}} attribute and warn about this.
   New elements are usually zero, but it may depend on OS and filesystem what they really are.
   If you want standard R behaviour: filling with NA ,you need to do this yourself.
   As an exception to this rule, ff objects with \code{\link{names.ff}} will be filled with NA's automatically,
@@ -33,7 +33,7 @@
   Integer scalar
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{length}}, \code{\link{maxlength}}, \code{\link{file.resize}}, \code{\link[=dim.ff]{dim}}, \code{\link[=physical.ff]{virtual}} }
+\seealso{ \code{\link{length}}, \code{\link{maxlength}}, \code{\link{file.resize}}, \code{\link[=dim.ff]{dim}}, \code{\link[=Extract.ff]{virtual}} }
 \examples{
   x <- ff(1:12)
   maxlength(x)

@@ -28,7 +28,7 @@ deleteIfOpen(x, \dots)
 }
 \details{
   The proper sequence to fully delete an ff object is: \code{delete(x);rm(x)}, where \command{delete.ff} frees the Memory Mapping resources and deletes the ff file,
-  leaving intact the R-side object including its \code{\link{class}}, \code{\link[=physical.ff]{physical}} and \code{\link[=physical.ff]{virtual}} attributes.
+  leaving intact the R-side object including its \code{\link{class}}, \code{\link[=Extract.ff]{physical}} and \code{\link[=Extract.ff]{virtual}} attributes.
   The default method is a compatibility function doing something similar with ram objects: by assiging an empty list to the name of the ram object to the parent frame
   we destroy the content of the object, leaving an empty stub that prevents raising an error if the parent frame calls the \code{delete(x);rm(x)} sequence. \cr
   The \command{deleteIfOpen} does the same as \command{delete} but protects closed ff objects from deletion, it is mainly intended for use through a finalizer, as are the \code{ff_pointer} methods.

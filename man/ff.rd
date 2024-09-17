@@ -5,8 +5,8 @@
 \description{
   The ff package provides atomic data structures that are stored on disk but behave (almost) as if they were in RAM by
   mapping only a section (pagesize) into main memory (the effective main memory consumption per ff object).
-  Several access optimization techniques such as Hyrid Index Preprocessing (\code{\link{as.hi}}, \code{\link{update.ff}}) and Virtualization (\code{\link[=physical.ff]{virtual}}, \code{\link{vt}}, \code{\link{vw}}) are implemented to achieve good performance even with large datasets.
-  In addition to the basic access functions, the ff package also provides compatibility functions that facilitate writing code for ff and ram objects (\code{\link{clone}}, \code{\link{as.ff}}, \code{\link{as.ram}}) and very basic support for operating on ff objects (\code{\link{ffapply}}).
+  Several access optimization techniques such as Hyrid Index Preprocessing (\code{\link{as.hi}}, \code{\link{update.ff}}) and Virtualization (\code{\link[=Extract.ff]{virtual}}, \code{\link{vt}}, \code{\link{vw}}) are implemented to achieve good performance even with large datasets.
+  In addition to the basic access functions, the ff package also provides compatibility functions that facilitate writing code for ff and ram objects (\code{\link[=clone.ff]{clone}}, \code{\link{as.ff}}, \code{\link{as.ram}}) and very basic support for operating on ff objects (\code{\link{ffapply}}).
   While the (possibly packed) raw data is stored on a flat file, meta
   informations about the atomic data structure such as its dimension,
   virtual storage mode (\code{\link{vmode}}), factor level encoding,
@@ -70,11 +70,11 @@ ff( initdata  = NULL
   \item{vmode}{ virtual storage mode (default: derive from 'initdata'), see \code{\link{vmode}} and \code{\link{as.vmode}} }
   \item{update}{ set to FALSE to avoid updating with 'initdata' (default TRUE) (used by \code{\link{ffdf}}) }
   \item{pattern}{ root pattern with or without path for automatic ff filename creation (default NULL translates to "ff"), see also argument 'filename' }
-  \item{filename}{ ff \code{\link{filename}} with or without path (default tmpfile with 'pattern' prefix); without path the file is created in \code{getOption("fftempdir")}, with path '.' the file is created in \code{\link{getwd}}. Note that files created in \code{getOption("fftempdir")} have default finalizer "delete" while other files have default finalizer "close". See also arguments 'pattern' and 'finalizer' and \code{\link[=physical.ff]{physical}} }
+  \item{filename}{ ff \code{\link{filename}} with or without path (default tmpfile with 'pattern' prefix); without path the file is created in \code{getOption("fftempdir")}, with path '.' the file is created in \code{\link{getwd}}. Note that files created in \code{getOption("fftempdir")} have default finalizer "delete" while other files have default finalizer "close". See also arguments 'pattern' and 'finalizer' and \code{\link[=Extract.ff]{physical}} }
   \item{overwrite}{ set to TRUE to allow overwriting existing files (default FALSE) }
   \item{readonly}{ set to TRUE to forbid writing to existing files }
-  \item{pagesize}{ pagesize in bytes for the memory mapping (default from \code{getOptions("ffpagesize")} initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=physical.ff]{physical}} }
-  \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from \code{getOptions("ffcaching")} initialized with 'mmeachflush'), see also \code{\link[=physical.ff]{physical}} }
+  \item{pagesize}{ pagesize in bytes for the memory mapping (default from \code{getOptions("ffpagesize")} initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=Extract.ff]{physical}} }
+  \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from \code{getOptions("ffcaching")} initialized with 'mmeachflush'), see also \code{\link[=Extract.ff]{physical}} }
   \item{finalizer}{ name of finalizer function called when ff object is \code{\link{remove}d} (default: ff files created in \code{getOptions("fftempdir")} are considered temporary and have default finalizer \code{\link[=delete.ff]{delete}}, files created in other locations have default finalizer \code{\link[=close.ff]{close}}); available finalizer generics are "close", "delete" and "deleteIfOpen", available methods are \code{\link{close.ff}}, \code{\link{delete.ff}} and \code{\link{deleteIfOpen.ff}}, see also argument 'finonexit' and \code{\link{finalizer}} }
   \item{finonexit}{ logical scalar determining whether  and \code{\link{finalize}} is also called when R is closed via \code{\link{q}}, (default TRUE from \code{getOptions("fffinonexit")}) }
   \item{FF_RETURN}{ logical scalar or ff object to be used. The default TRUE creates a new ff file. FALSE returns a ram object. Handing over an ff object here uses this or stops if not \code{\link{ffsuitable}} }
@@ -100,13 +100,13 @@ ff( initdata  = NULL
  When R is exited through \code{\link{q}}, the finalizer will be invoked depending on the 'fffinonexit' option, furthermore the 'fftempdir' is \code{\link{unlink}ed}. \cr
 }
 \value{
-  If (\code{!FF_RETURN}) then a ram object like those generated by \code{\link{vector}}, \code{\link{matrix}}, \code{\link{array}} but with attributes 'vmode', 'physical' and 'virtual' accessible via \code{\link{vmode}}, \code{\link[=physical.ff]{physical}} and \code{\link[=physical.ff]{virtual}}  \cr
+  If (\code{!FF_RETURN}) then a ram object like those generated by \code{\link{vector}}, \code{\link{matrix}}, \code{\link{array}} but with attributes 'vmode', 'physical' and 'virtual' accessible via \code{\link{vmode}}, \code{\link[=Extract.ff]{physical}} and \code{\link[=Extract.ff]{virtual}}  \cr
   If (\code{FF_RETURN}) an object of class 'ff' which is a a list with two components:
   \item{physical}{an external pointer of class '\code{ff_pointer}' which carries attributes with copy by reference semantics: changing a physical attribute of a copy changes the original }
   \item{virtual}{an empty list which carries attributes with copy by value semantics: changing a virtual attribute of a copy does not change the original }
 }
 \section{Physical object component}{
-  The '\code{ff_pointer}' carries the following 'physical' or readonly attributes, which are accessible via \code{\link[=physical.ff]{physical}}:
+  The '\code{ff_pointer}' carries the following 'physical' or readonly attributes, which are accessible via \code{\link[=Extract.ff]{physical}}:
  \tabular{rl}{
   \code{vmode    } \tab see \code{\link{vmode}} \cr
   \code{maxlength} \tab see \code{\link{maxlength}} \cr
@@ -136,7 +136,7 @@ ff( initdata  = NULL
  }
 }
 \section{Class}{
-  You should not rely on the internal structure of ff objects or their ram versions. Instead use the accessor functions like \code{\link{vmode}}, \code{\link[=physical.ff]{physical}} and \code{\link[=physical.ff]{virtual}}.
+  You should not rely on the internal structure of ff objects or their ram versions. Instead use the accessor functions like \code{\link{vmode}}, \code{\link[=Extract.ff]{physical}} and \code{\link[=Extract.ff]{virtual}}.
   Still it would be wise to avoid attributes AND classes 'vmode', 'physical' and 'virtual' in any other packages.
   Note that the 'ff' object's class attribute also has copy-by-value semantics ('virtual').
   For the 'ff' object the following class attritibutes are known:
@@ -156,27 +156,27 @@ ff( initdata  = NULL
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Basic functions}  \cr
   function \tab  \code{\link{ff}}                         \tab \emph{ }  \tab constructor for ff and ram objects \cr
   generic  \tab  \code{\link[=update.ff]{update}}       \tab \emph{ }  \tab updates one ff object with the content of another \cr
-  generic  \tab  \code{\link{clone}}                      \tab \emph{ }  \tab clones an ff object optionally changing some of its features \cr
+  generic  \tab  \code{\link[=clone.ff]{clone}}                      \tab \emph{ }  \tab clones an ff object optionally changing some of its features \cr
   method   \tab  \code{\link[=print.ff]{print}}         \tab \emph{ }  \tab print ff \cr
   method   \tab  \code{\link[=str.ff]{str}}             \tab \emph{ }  \tab ff object structure \cr
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Class test and coercion}  \cr
   function \tab  \code{\link{is.ff}}                      \tab \emph{ }  \tab check if inherits from ff \cr
   generic  \tab  \code{\link{as.ff}}                      \tab \emph{ }  \tab coerce to ff, if not yet \cr
   generic  \tab  \code{\link{as.ram}}                     \tab \emph{ }  \tab coerce to ram retaining some of the ff information \cr
-  generic  \tab  \code{\link[=as.bit.ff]{as.bit}}          \tab \emph{ }  \tab coerce to \code{\link{bit}} \cr
+  generic  \tab  \code{\link[=as.bit.ff]{as.bit}}          \tab \emph{ }  \tab coerce to \code{\link[bit]{bit}} \cr
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Virtual storage mode} \cr
   generic  \tab  \code{\link{vmode}}                      \tab \code{<-} \tab get and set virtual mode (setting only for ram, not for ff objects) \cr
   generic  \tab  \code{\link{as.vmode}}                   \tab \emph{ }  \tab coerce to vmode (only for ram, not for ff objects) \cr
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Physical attributes}  \cr
-  function \tab  \code{\link[=physical.ff]{physical}}                   \tab \code{<-} \tab set and get physical attributes \cr
+  function \tab  \code{\link[=Extract.ff]{physical}}                   \tab \code{<-} \tab set and get physical attributes \cr
   generic  \tab  \code{\link{filename}}                   \tab \emph{<-}  \tab get and set filename \cr
   generic  \tab  \code{\link{pattern}}                    \tab \emph{<-}  \tab get pattern and set filename path and prefix via pattern \cr
   generic  \tab  \code{\link{maxlength}}                  \tab \emph{ }  \tab get maxlength \cr
-  generic  \tab  \code{\link{is.sorted}}                  \tab \code{<-} \tab set and get if is marked as sorted \cr
-  generic  \tab  \code{\link{na.count}}                   \tab \code{<-} \tab set and get NA count, if set to non-NA only swap methods can change and na.count is maintained automatically \cr
+  generic  \tab  \code{\link[bit:Metadata]{is.sorted}}                  \tab \code{<-} \tab set and get if is marked as sorted \cr
+  generic  \tab  \code{\link[bit]{na.count}}                   \tab \code{<-} \tab set and get NA count, if set to non-NA only swap methods can change and na.count is maintained automatically \cr
   generic  \tab  \code{\link{is.readonly}}                \tab \emph{ }   \tab get if is readonly \cr
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }   \tab \bold{Virtual attributes} \cr
-  function \tab  \code{\link[=physical.ff]{virtual}}                    \tab \code{<-} \tab set and get virtual attributes \cr
+  function \tab  \code{\link[=Extract.ff]{virtual}}                    \tab \code{<-} \tab set and get virtual attributes \cr
   method   \tab  \code{\link[=length.ff]{length}}       \tab \code{<-} \tab set and get length \cr
   method   \tab  \code{\link[=dim.ff]{dim}}             \tab \code{<-} \tab set and get dim \cr
   generic  \tab  \code{\link{dimorder}}                   \tab \code{<-} \tab set and get the order of dimension interpretation \cr

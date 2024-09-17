@@ -185,7 +185,7 @@ geterrstr.ff <- function(x)
 #! }
 #! \value{
 #!   \code{filename} and \code{pattern} return a character filename or pattern.
-#!   For \code{\link{ffdf}} returns a list with one filename element for each \code{\link[=physical.ffdf]{physical}} component.
+#!   For \code{\link{ffdf}} returns a list with one filename element for each \code{\link[=Extract.ffdf]{physical}} component.
 #!   The assignment functions return the changed object, which will keep the change even without re-assigning the return-value
 #! }
 #! \details{
@@ -335,14 +335,14 @@ filename.ffdf <- function(x, ...)
 #! }
 #! \details{
 #!   ff objects can be created/opened with \code{readonly=TRUE}.
-#!   After each opening of the ff file readonly status is stored in the \code{\link[=physical.ff]{physical}} attributes and serves as the default for the next opening.
+#!   After each opening of the ff file readonly status is stored in the \code{\link[=Extract.ff]{physical}} attributes and serves as the default for the next opening.
 #!   Thus querying a closed ff object gives the last readonly status.
 #! }
 #! \value{
 #!   logical scalar
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{open.ff}}, \code{\link[=physical.ff]{physical}} }
+#! \seealso{ \code{\link{open.ff}}, \code{\link[=Extract.ff]{physical}} }
 #! \examples{
 #!   x <- ff(1:12)
 #!   is.readonly(x)
@@ -385,7 +385,7 @@ is.readonly.ff <- function(x
 #! }
 #! \details{
 #!   ff objects open automatically if accessed while closed.
-#!   For ffdf objects we test all of their \code{\link[=physical.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
+#!   For ffdf objects we test all of their \code{\link[=Extract.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
 #! }
 #! \value{
 #!   TRUE or FALSE (or NA if not all components of an ffdf object are opened or closed)
@@ -470,7 +470,7 @@ pagesize.ff <- function(x, ...){
 #!   integer scalar
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{length.ff}}, \code{\link{maxindex}} }
+#! \seealso{ \code{\link{length.ff}}, \code{\link[=Extract.ff]{maxindex}} }
 #! \examples{
 #!   x <- ff(1:12)
 #!   length(x) <- 10
@@ -622,19 +622,19 @@ fixdiag.dist <- function(x
 #! }
 #! \details{
 #!   Sorting is slow, see \code{\link{sort}}.
-#!   Checking whether an object is sorted can avoid unnessary sorting -- see \code{\link{is.unsorted}}, \code{\link{intisasc}} -- but still takes too much time with large objects stored on disk.
+#!   Checking whether an object is sorted can avoid unnessary sorting -- see \code{\link{is.unsorted}}, \code{\link[bit:intrle]{intisasc}} -- but still takes too much time with large objects stored on disk.
 #!   Thus it makes sense to maintain an attribute, that tells us whether sorting can be skipped.
-#!   Note that -- though you change it yourself -- \code{is.sorted} is a \code{\link[=physical.ff]{physical}} attribute of an object,
-#!   because it represents an attribute of the \emph{data}, which is shared between different \code{\link[=physical.ff]{virtual}} views of the object.
+#!   Note that -- though you change it yourself -- \code{is.sorted} is a \code{\link[=Extract.ff]{physical}} attribute of an object,
+#!   because it represents an attribute of the \emph{data}, which is shared between different \code{\link[=Extract.ff]{virtual}} views of the object.
 #! }
 #! \value{
 #!   TRUE (if set to TRUE) or FALSE (if set to NULL or FALSE)
 #! }
 #! \note{
-#!   \command{ff} will set \code{is.sorted(x) <- FALSE} if \code{\link{clone}} or \code{\link{length<-.ff}} have increased length.
+#!   \command{ff} will set \code{is.sorted(x) <- FALSE} if \code{\link[=clone.ff]{clone}} or \code{\link{length<-.ff}} have increased length.
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{is.ordered.ff}} for testing factor levels, \code{\link{is.unsorted}} for testing the data, \code{\link{intisasc}} for a quick version thereof, \code{\link{na.count}} for yet another \code{\link[=physical.ff]{physical}} attribute }
+#! \seealso{ \code{\link{is.ordered.ff}} for testing factor levels, \code{\link{is.unsorted}} for testing the data, \code{\link[bit:intrle]{intisasc}} for a quick version thereof, \code{\link[bit]{na.count}} for yet another \code{\link[=Extract.ff]{physical}} attribute }
 #! \examples{
 #!   x <- 1:12
 #!   is.sorted(x) <- !( is.na(is.unsorted(x)) || is.unsorted(x))
@@ -710,7 +710,7 @@ is.sorted.default <- function(x, ...)
 #!   NA (if set to NULL or NA) or an integer value otherwise
 #! }
 #! \author{ Jens Oehlschlägel, Daniel Adler (C++ back-end) }
-#! \seealso{ \code{\link{getset.ff}}, \code{\link{readwrite.ff}} and \code{\link{swap}} for methods that support maintenance of 'na.count', \code{\link{NA}}, \code{\link{is.sorted}} for yet another \code{\link[=physical.ff]{physical}} attribute }
+#! \seealso{ \code{\link{getset.ff}}, \code{\link{readwrite.ff}} and \code{\link{swap}} for methods that support maintenance of 'na.count', \code{\link{NA}}, \code{\link[bit:Metadata]{is.sorted}} for yet another \code{\link[=Extract.ff]{physical}} attribute }
 #! \examples{
 #!   message("--- ff examples ---")
 #!   x <- ff(1:12)
@@ -831,8 +831,8 @@ na.count.default <- function(x
 #! }
 #! \author{ Jens Oehlschlägel }
 #! \seealso{
-#!  \code{\link{physical}}, \code{\link{physical.ffdf}}, \code{\link{ff}}, \code{\link{as.ram}}; \cr
-#!  \code{\link{is.sorted}} and \code{\link{na.count}} for applications of physical attributes; \cr
+#!  \code{\link[=Extract.ff]{physical.ff}}, \code{\link[=Extract.ff]{physical.ffdf}}, \code{\link{ff}}, \code{\link{as.ram}}; \cr
+#!  \code{\link[bit:Metadata]{is.sorted}} and \code{\link[bit]{na.count}} for applications of physical attributes; \cr
 #!  \code{\link{levels.ff}} and \code{\link{ramattribs}} for applications of virtual attributes
 #! }
 #! \examples{
@@ -915,7 +915,7 @@ virtual.ff <- function(x){
 #!   The vectors \code{ramclass_excludes} and \code{ramattribs_excludes} name those attributes, which are not exported from ff to ram objects when using \code{\link{as.ram}}.
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{ff}}, \code{\link[=physical.ff]{virtual}}, \code{\link{as.ram}}, \code{\link{levels.ff}}, \code{\link{attributes}}, \code{\link{DateTimeClasses}} }
+#! \seealso{ \code{\link{ff}}, \code{\link[=Extract.ff]{virtual}}, \code{\link{as.ram}}, \code{\link{levels.ff}}, \code{\link{attributes}}, \code{\link{DateTimeClasses}} }
 #! \examples{
 #!   x <- ff(as.POSIXct(as.POSIXlt(Sys.time(), "GMT")), length=12)
 #!   x
@@ -981,7 +981,7 @@ ramattribs.default <- function(x
 #! \details{
 #!   Changing the length of ff objects is only allowed if no \code{\link{vw}} is used.
 #!   Changing the length of ff objects will remove any \code{\link{dim.ff}} and \code{\link{dimnames.ff}} attribute.
-#!   Changing the length of ff objects will remove any \code{\link{na.count}} or \code{\link{is.sorted}} attribute and warn about this.
+#!   Changing the length of ff objects will remove any \code{\link[bit]{na.count}} or \code{\link[bit:Metadata]{is.sorted}} attribute and warn about this.
 #!   New elements are usually zero, but it may depend on OS and filesystem what they really are.
 #!   If you want standard R behaviour: filling with NA ,you need to do this yourself.
 #!   As an exception to this rule, ff objects with \code{\link{names.ff}} will be filled with NA's automatically,
@@ -998,7 +998,7 @@ ramattribs.default <- function(x
 #!   Integer scalar
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{length}}, \code{\link{maxlength}}, \code{\link{file.resize}}, \code{\link[=dim.ff]{dim}}, \code{\link[=physical.ff]{virtual}} }
+#! \seealso{ \code{\link{length}}, \code{\link{maxlength}}, \code{\link{file.resize}}, \code{\link[=dim.ff]{dim}}, \code{\link[=Extract.ff]{virtual}} }
 #! \examples{
 #!   x <- ff(1:12)
 #!   maxlength(x)
@@ -1191,8 +1191,8 @@ length.ff <- function(x)
 #!   \command{levels} returns a character vector of levels (possibly including \code{as.cha racter(NA)}).
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \note{ When levels as assigned to an ff object that formerly had not levels, we assign automatically \code{\link{ramclass}} == "factor". If you want to change to an ordered factor, use \code{\link[=virtual.ff]{virtual}$ramclass <- c("ordered", "factor")} }
-#! \seealso{ \code{\link{ramclass}}, \code{\link{factor}}, \code{\link[=physical.ff]{virtual}} }
+#! \note{ When levels as assigned to an ff object that formerly had not levels, we assign automatically \code{\link{ramclass}} == "factor". If you want to change to an ordered factor, use \code{\link[=Extract.ff]{virtual}$ramclass <- c("ordered", "factor")} }
+#! \seealso{ \code{\link{ramclass}}, \code{\link{factor}}, \code{\link[=Extract.ff]{virtual}} }
 #! \examples{
 #!   message("--- create an ff factor including NA as last level")
 #!   x <- ff("a", levels=c(letters, NA), length=99)
@@ -1304,7 +1304,7 @@ is.ordered.ff <- function(x){
 #!   \command{names} returns a character vector (or NULL)
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{names}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{vw}}, \code{\link[=physical.ff]{virtual}} }
+#! \seealso{ \code{\link{names}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{vw}}, \code{\link[=Extract.ff]{virtual}} }
 #! \examples{
 #!   x <- ff(1:26, names=letters)
 #!   names(x)
@@ -1390,7 +1390,7 @@ names.ff <- function(x){
 #!   \command{dimnames} returns a list, see \code{\link{dimnames}}
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{dimnames}}, \code{\link{dim.ff}} , \code{\link{names.ff}} , \code{\link{vw}}, \code{\link[=physical.ff]{virtual}} }
+#! \seealso{ \code{\link{dimnames}}, \code{\link{dim.ff}} , \code{\link{names.ff}} , \code{\link{vw}}, \code{\link[=Extract.ff]{virtual}} }
 #! \examples{
 #!   x <- ff(1:12, dim=c(3,4), dimnames=list(letters[1:3], LETTERS[1:4]))
 #!   dimnames(x)
@@ -1477,7 +1477,7 @@ dimnames.ff_array <- function(x){
 #!   \item{\dots}{ further arguments (not used) }
 #! }
 #! \details{
-#!    \command{dim} and \command{dimorder} are \code{\link[=physical.ff]{virtual}} attributes. Thus two copies of an R ff object can point to the same file but interpret it differently.
+#!    \command{dim} and \command{dimorder} are \code{\link[=Extract.ff]{virtual}} attributes. Thus two copies of an R ff object can point to the same file but interpret it differently.
 #!    \command{dim} has the usual meaning, \command{dimorder} defines the dimension order of storage, i.e. \code{c(1,2)} corresponds to R's standard column-major order,
 #!    \code{c(1,2)} corresponds to row-major order, and for higher dimensional arrays dimorder can also be used. Standard dimorder is \code{seq_along(dim(x))}. \cr
 #!    For \code{\link{ffdf}} \code{dim} returns the number of rows and virtual columns. With \code{dim<-.ffdf} only the number of rows can be changed. For convenience you can assign \code{NA} to the number of columns. \cr
@@ -1492,7 +1492,7 @@ dimnames.ff_array <- function(x){
 #!   \command{names} returns a character vector (or NULL)
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{dim}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{dimorderStandard}}, \code{\link{vw}}, \code{\link[=physical.ff]{virtual}} }
+#! \seealso{ \code{\link{dim}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{dimorderStandard}}, \code{\link{vw}}, \code{\link[=Extract.ff]{virtual}} }
 #! \examples{
 #!   x <- ff(1:12, dim=c(3,4), dimorder=c(2:1))
 #!   y <- x
@@ -1671,13 +1671,13 @@ dimorder.default <- function(x
 #!   Each dimension of an ff array (or vector) is decomposed into three components, an invisible Offset, a visibe Window and an invisible Rest.
 #!   For each dimension the sum of the vw components must match the dimension (or length).
 #!   For an \code{ff_vector}, \code{vw} is simply a vector[1:3], for an array is is a \code{matrix[1:3,seq_along(dim(x))]}.
-#!   \code{vw} is a \code{\link[=physical.ff]{virtual}} attribute. \cr
+#!   \code{vw} is a \code{\link[=Extract.ff]{virtual}} attribute. \cr
 #! }
 #! \value{
 #!   NULL or a vw specification, see details
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{length.ff}}, \code{\link{dim.ff}}, \code{\link[=physical.ff]{virtual}} }
+#! \seealso{ \code{\link{length.ff}}, \code{\link{dim.ff}}, \code{\link[=Extract.ff]{virtual}} }
 #! \examples{
 #!   x <- ff(1:26, names=letters)
 #!   y <- x
@@ -1891,8 +1891,8 @@ str.ff <- function(object, nest.lev=0, ...){
 #! \description{
 #!   The ff package provides atomic data structures that are stored on disk but behave (almost) as if they were in RAM by
 #!   mapping only a section (pagesize) into main memory (the effective main memory consumption per ff object).
-#!   Several access optimization techniques such as Hyrid Index Preprocessing (\code{\link{as.hi}}, \code{\link{update.ff}}) and Virtualization (\code{\link[=physical.ff]{virtual}}, \code{\link{vt}}, \code{\link{vw}}) are implemented to achieve good performance even with large datasets.
-#!   In addition to the basic access functions, the ff package also provides compatibility functions that facilitate writing code for ff and ram objects (\code{\link{clone}}, \code{\link{as.ff}}, \code{\link{as.ram}}) and very basic support for operating on ff objects (\code{\link{ffapply}}).
+#!   Several access optimization techniques such as Hyrid Index Preprocessing (\code{\link{as.hi}}, \code{\link{update.ff}}) and Virtualization (\code{\link[=Extract.ff]{virtual}}, \code{\link{vt}}, \code{\link{vw}}) are implemented to achieve good performance even with large datasets.
+#!   In addition to the basic access functions, the ff package also provides compatibility functions that facilitate writing code for ff and ram objects (\code{\link[=clone.ff]{clone}}, \code{\link{as.ff}}, \code{\link{as.ram}}) and very basic support for operating on ff objects (\code{\link{ffapply}}).
 #!   While the (possibly packed) raw data is stored on a flat file, meta
 #!   informations about the atomic data structure such as its dimension,
 #!   virtual storage mode (\code{\link{vmode}}), factor level encoding,
@@ -1956,11 +1956,11 @@ str.ff <- function(object, nest.lev=0, ...){
 #!   \item{vmode}{ virtual storage mode (default: derive from 'initdata'), see \code{\link{vmode}} and \code{\link{as.vmode}} }
 #!   \item{update}{ set to FALSE to avoid updating with 'initdata' (default TRUE) (used by \code{\link{ffdf}}) }
 #!   \item{pattern}{ root pattern with or without path for automatic ff filename creation (default NULL translates to "ff"), see also argument 'filename' }
-#!   \item{filename}{ ff \code{\link{filename}} with or without path (default tmpfile with 'pattern' prefix); without path the file is created in \code{getOption("fftempdir")}, with path '.' the file is created in \code{\link{getwd}}. Note that files created in \code{getOption("fftempdir")} have default finalizer "delete" while other files have default finalizer "close". See also arguments 'pattern' and 'finalizer' and \code{\link[=physical.ff]{physical}} }
+#!   \item{filename}{ ff \code{\link{filename}} with or without path (default tmpfile with 'pattern' prefix); without path the file is created in \code{getOption("fftempdir")}, with path '.' the file is created in \code{\link{getwd}}. Note that files created in \code{getOption("fftempdir")} have default finalizer "delete" while other files have default finalizer "close". See also arguments 'pattern' and 'finalizer' and \code{\link[=Extract.ff]{physical}} }
 #!   \item{overwrite}{ set to TRUE to allow overwriting existing files (default FALSE) }
 #!   \item{readonly}{ set to TRUE to forbid writing to existing files }
-#!   \item{pagesize}{ pagesize in bytes for the memory mapping (default from \code{getOptions("ffpagesize")} initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=physical.ff]{physical}} }
-#!   \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from \code{getOptions("ffcaching")} initialized with 'mmeachflush'), see also \code{\link[=physical.ff]{physical}} }
+#!   \item{pagesize}{ pagesize in bytes for the memory mapping (default from \code{getOptions("ffpagesize")} initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=Extract.ff]{physical}} }
+#!   \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from \code{getOptions("ffcaching")} initialized with 'mmeachflush'), see also \code{\link[=Extract.ff]{physical}} }
 #!   \item{finalizer}{ name of finalizer function called when ff object is \code{\link{remove}d} (default: ff files created in \code{getOptions("fftempdir")} are considered temporary and have default finalizer \code{\link[=delete.ff]{delete}}, files created in other locations have default finalizer \code{\link[=close.ff]{close}}); available finalizer generics are "close", "delete" and "deleteIfOpen", available methods are \code{\link{close.ff}}, \code{\link{delete.ff}} and \code{\link{deleteIfOpen.ff}}, see also argument 'finonexit' and \code{\link{finalizer}} }
 #!   \item{finonexit}{ logical scalar determining whether  and \code{\link{finalize}} is also called when R is closed via \code{\link{q}}, (default TRUE from \code{getOptions("fffinonexit")}) }
 #!   \item{FF_RETURN}{ logical scalar or ff object to be used. The default TRUE creates a new ff file. FALSE returns a ram object. Handing over an ff object here uses this or stops if not \code{\link{ffsuitable}} }
@@ -1986,13 +1986,13 @@ str.ff <- function(object, nest.lev=0, ...){
 #!  When R is exited through \code{\link{q}}, the finalizer will be invoked depending on the 'fffinonexit' option, furthermore the 'fftempdir' is \code{\link{unlink}ed}. \cr
 #! }
 #! \value{
-#!   If (\code{!FF_RETURN}) then a ram object like those generated by \code{\link{vector}}, \code{\link{matrix}}, \code{\link{array}} but with attributes 'vmode', 'physical' and 'virtual' accessible via \code{\link{vmode}}, \code{\link[=physical.ff]{physical}} and \code{\link[=physical.ff]{virtual}}  \cr
+#!   If (\code{!FF_RETURN}) then a ram object like those generated by \code{\link{vector}}, \code{\link{matrix}}, \code{\link{array}} but with attributes 'vmode', 'physical' and 'virtual' accessible via \code{\link{vmode}}, \code{\link[=Extract.ff]{physical}} and \code{\link[=Extract.ff]{virtual}}  \cr
 #!   If (\code{FF_RETURN}) an object of class 'ff' which is a a list with two components:
 #!   \item{physical}{an external pointer of class '\code{ff_pointer}' which carries attributes with copy by reference semantics: changing a physical attribute of a copy changes the original }
 #!   \item{virtual}{an empty list which carries attributes with copy by value semantics: changing a virtual attribute of a copy does not change the original }
 #! }
 #! \section{Physical object component}{
-#!   The '\code{ff_pointer}' carries the following 'physical' or readonly attributes, which are accessible via \code{\link[=physical.ff]{physical}}:
+#!   The '\code{ff_pointer}' carries the following 'physical' or readonly attributes, which are accessible via \code{\link[=Extract.ff]{physical}}:
 #!  \tabular{rl}{
 #!   \code{vmode    } \tab see \code{\link{vmode}} \cr
 #!   \code{maxlength} \tab see \code{\link{maxlength}} \cr
@@ -2022,7 +2022,7 @@ str.ff <- function(object, nest.lev=0, ...){
 #!  }
 #! }
 #! \section{Class}{
-#!   You should not rely on the internal structure of ff objects or their ram versions. Instead use the accessor functions like \code{\link{vmode}}, \code{\link[=physical.ff]{physical}} and \code{\link[=physical.ff]{virtual}}.
+#!   You should not rely on the internal structure of ff objects or their ram versions. Instead use the accessor functions like \code{\link{vmode}}, \code{\link[=Extract.ff]{physical}} and \code{\link[=Extract.ff]{virtual}}.
 #!   Still it would be wise to avoid attributes AND classes 'vmode', 'physical' and 'virtual' in any other packages.
 #!   Note that the 'ff' object's class attribute also has copy-by-value semantics ('virtual').
 #!   For the 'ff' object the following class attritibutes are known:
@@ -2042,27 +2042,27 @@ str.ff <- function(object, nest.lev=0, ...){
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Basic functions}  \cr
 #!   function \tab  \code{\link{ff}}                         \tab \emph{ }  \tab constructor for ff and ram objects \cr
 #!   generic  \tab  \code{\link[=update.ff]{update}}       \tab \emph{ }  \tab updates one ff object with the content of another \cr
-#!   generic  \tab  \code{\link{clone}}                      \tab \emph{ }  \tab clones an ff object optionally changing some of its features \cr
+#!   generic  \tab  \code{\link[=clone.ff]{clone}}                      \tab \emph{ }  \tab clones an ff object optionally changing some of its features \cr
 #!   method   \tab  \code{\link[=print.ff]{print}}         \tab \emph{ }  \tab print ff \cr
 #!   method   \tab  \code{\link[=str.ff]{str}}             \tab \emph{ }  \tab ff object structure \cr
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Class test and coercion}  \cr
 #!   function \tab  \code{\link{is.ff}}                      \tab \emph{ }  \tab check if inherits from ff \cr
 #!   generic  \tab  \code{\link{as.ff}}                      \tab \emph{ }  \tab coerce to ff, if not yet \cr
 #!   generic  \tab  \code{\link{as.ram}}                     \tab \emph{ }  \tab coerce to ram retaining some of the ff information \cr
-#!   generic  \tab  \code{\link[=as.bit.ff]{as.bit}}          \tab \emph{ }  \tab coerce to \code{\link{bit}} \cr
+#!   generic  \tab  \code{\link[=as.bit.ff]{as.bit}}          \tab \emph{ }  \tab coerce to \code{\link[bit]{bit}} \cr
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Virtual storage mode} \cr
 #!   generic  \tab  \code{\link{vmode}}                      \tab \code{<-} \tab get and set virtual mode (setting only for ram, not for ff objects) \cr
 #!   generic  \tab  \code{\link{as.vmode}}                   \tab \emph{ }  \tab coerce to vmode (only for ram, not for ff objects) \cr
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Physical attributes}  \cr
-#!   function \tab  \code{\link[=physical.ff]{physical}}                   \tab \code{<-} \tab set and get physical attributes \cr
+#!   function \tab  \code{\link[=Extract.ff]{physical}}                   \tab \code{<-} \tab set and get physical attributes \cr
 #!   generic  \tab  \code{\link{filename}}                   \tab \emph{<-}  \tab get and set filename \cr
 #!   generic  \tab  \code{\link{pattern}}                    \tab \emph{<-}  \tab get pattern and set filename path and prefix via pattern \cr
 #!   generic  \tab  \code{\link{maxlength}}                  \tab \emph{ }  \tab get maxlength \cr
-#!   generic  \tab  \code{\link{is.sorted}}                  \tab \code{<-} \tab set and get if is marked as sorted \cr
-#!   generic  \tab  \code{\link{na.count}}                   \tab \code{<-} \tab set and get NA count, if set to non-NA only swap methods can change and na.count is maintained automatically \cr
+#!   generic  \tab  \code{\link[bit:Metadata]{is.sorted}}                  \tab \code{<-} \tab set and get if is marked as sorted \cr
+#!   generic  \tab  \code{\link[bit]{na.count}}                   \tab \code{<-} \tab set and get NA count, if set to non-NA only swap methods can change and na.count is maintained automatically \cr
 #!   generic  \tab  \code{\link{is.readonly}}                \tab \emph{ }   \tab get if is readonly \cr
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }   \tab \bold{Virtual attributes} \cr
-#!   function \tab  \code{\link[=physical.ff]{virtual}}                    \tab \code{<-} \tab set and get virtual attributes \cr
+#!   function \tab  \code{\link[=Extract.ff]{virtual}}                    \tab \code{<-} \tab set and get virtual attributes \cr
 #!   method   \tab  \code{\link[=length.ff]{length}}       \tab \code{<-} \tab set and get length \cr
 #!   method   \tab  \code{\link[=dim.ff]{dim}}             \tab \code{<-} \tab set and get dim \cr
 #!   generic  \tab  \code{\link{dimorder}}                   \tab \code{<-} \tab set and get the order of dimension interpretation \cr
@@ -2650,7 +2650,7 @@ ff <- function(
 #!   An ff object like the input 'object' updated with the content of the 'from' object.
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{ff}}, \code{\link{clone}}, \code{\link{ffvecapply}}, \code{\link{vectorCompatible}}, \code{\link{filename}} }
+#! \seealso{ \code{\link{ff}}, \code{\link[=clone.ff]{clone}}, \code{\link{ffvecapply}}, \code{\link{vectorCompatible}}, \code{\link{filename}} }
 #! \examples{
 #!   x <- ff(1:100)
 #!   y <- ff(-(1:100))
@@ -2919,11 +2919,11 @@ update.ff <- function(
 #!   \item{ramattribs}{ additional attributes attached when moving all or parts of this ff into ram, see \code{\link{ramattribs}} }
 #!   \item{vmode}{ virtual storage mode (default: derive from 'initdata'), see \code{\link{vmode}} and \code{\link{as.vmode}} }
 #!   \item{update}{ set to FALSE to avoid updating with 'initdata' (default TRUE) (used by \code{\link{ffdf}}) }
-#!   \item{pattern}{ root pattern for automatic ff filename creation (default "ff"), see also \code{\link[=physical.ff]{physical}} }
-#!   \item{filename}{ ff \code{\link{filename}} (default tmpfile with 'pattern' prefix), see also \code{\link[=physical.ff]{physical}} }
+#!   \item{pattern}{ root pattern for automatic ff filename creation (default "ff"), see also \code{\link[=Extract.ff]{physical}} }
+#!   \item{filename}{ ff \code{\link{filename}} (default tmpfile with 'pattern' prefix), see also \code{\link[=Extract.ff]{physical}} }
 #!   \item{overwrite}{ set to TRUE to allow overwriting existing files (default FALSE) }
-#!   \item{pagesize}{ pagesize in bytes for the memory mapping (default from getOptions("ffpagesize") initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=physical.ff]{physical}} }
-#!   \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from getOptions("ffcaching") initialized with 'memorymap'), see also \code{\link[=physical.ff]{physical}} }
+#!   \item{pagesize}{ pagesize in bytes for the memory mapping (default from getOptions("ffpagesize") initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=Extract.ff]{physical}} }
+#!   \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from getOptions("ffcaching") initialized with 'memorymap'), see also \code{\link[=Extract.ff]{physical}} }
 #!   \item{finalizer}{ name of finalizer function called when ff object is \code{\link{remove}d}, (default "deleteIfOpen" from getOptions("fffinalizer"))), standard finalizers are \code{\link{close.ff}}, \code{\link{delete.ff}} and \code{\link{deleteIfOpen.ff}}, see also \code{\link{reg.finalizer}} }
 #!   \item{finonexit}{ logical scalar determining whether finalizer is also called when R is closed via \code{\link{q}}, (default TRUE from getOptions("fffinonexit")) }
 #!   \item{FF_RETURN}{ logical scalar or ff object to be used. The default NULL creates a ff or ram clone, TRUE returns a ff clone, FALSE returns a ram clone. Handing over an ff object here uses this or stops if not \code{\link{ffsuitable}} }
@@ -3157,7 +3157,7 @@ clone.ff <- function(
 #!   The user can define custom finalizers by creating a generic function like \code{\link{delete}}, a ff_pointer method like \code{\link{delete.ff_pointer}} and a ff method for manual calls like \code{\link{delete.ff}}. The user then is responsible to take care of two things
 #!   \enumerate{
 #!     \item adequate freeing of ressources
-#!     \item proper maintenance of the finalizer name in the ff object via \code{\link[=physical.ff]{physical}$finalizer}
+#!     \item proper maintenance of the finalizer name in the ff object via \code{\link[=Extract.ff]{physical}$finalizer}
 #!   }
 #!   \code{is.null(finalizer(ff))} indicates NO active finalizer, i.e. no pending execution of \code{finalize.ff_pointer} lurking around after call of \code{reg.finalizer}.
 #!   This requires that
@@ -3169,7 +3169,7 @@ clone.ff <- function(
 #! \value{
 #!   \code{finalizer} returns the name of the active finalizer or \code{NULL} if no finalizer is active. \cr
 #!   \code{finalizer<-} returns the changed ff object (reassignment of this return value not needed to keep the change).
-#!   If there was no pending call to \code{\link{finalize.ff_pointer}} (\code{is.null(finalizer(ff))}), \code{finalizer<-} will create one by calling \code{reg.finalizer} with the current setting of \code{\link[=physical.ff]{physical}$finonexit}.
+#!   If there was no pending call to \code{\link{finalize.ff_pointer}} (\code{is.null(finalizer(ff))}), \code{finalizer<-} will create one by calling \code{reg.finalizer} with the current setting of \code{\link[=Extract.ff]{physical}$finonexit}.
 #! }
 #! \note{
 #!   You can not assign NULL to an active finalizer using \code{finalizer<-} because this would not stop R's finalization mechanism and would carry the risk of assiging MULTIPLE finalization tasks.
@@ -3330,14 +3330,14 @@ x       # ff object
 #! \arguments{
 #!   \item{con}{ an \code{\link{ff}} or \code{\link{ffdf}} object }
 #!   \item{readonly}{ \code{readonly} }
-#!   \item{pagesize}{ number of bytes to use as pagesize or NULL to take the pagesize stored in the \code{\link[=physical.ff]{physical}} attribute of the ff object, see \code{\link{getalignedpagesize}} }
+#!   \item{pagesize}{ number of bytes to use as pagesize or NULL to take the pagesize stored in the \code{\link[=Extract.ff]{physical}} attribute of the ff object, see \code{\link{getalignedpagesize}} }
 #!   \item{caching}{ one of 'mmnoflush' or 'mmeachflush', see \code{\link{ff}} }
 #!   \item{assert}{ setting this to TRUE will give a message if the ff was not open already }
 #!   \item{\dots}{ further arguments (not used) }
 #! }
 #! \details{
 #!   ff objects will be opened automatically when accessing their content and the file is still closed.
-#!   Opening ffdf objects will open all of their \code{\link[=physical.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
+#!   Opening ffdf objects will open all of their \code{\link[=Extract.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
 #! }
 #! \value{
 #!   TRUE if object could be opened, FALSE if it was opened already (or NA if not all components of an ffdf returned FALSE or TRUE on opening)
@@ -3426,7 +3426,7 @@ open.ff <- function(con
 #! }
 #! \details{
 #!   The \code{ff_pointer} method is not intended for manual use, it is used at finalizer dispatch time.
-#!   Closing ffdf objects will close all of their \code{\link[=physical.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
+#!   Closing ffdf objects will close all of their \code{\link[=Extract.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
 #! }
 #! \value{
 #!   TRUE if the file could be closed, FALSE if it was closed already (or NA if not all components of an ffdf returned FALSE or TRUE on closing)
@@ -3491,7 +3491,7 @@ close.ff <- function(con
 #! }
 #! \details{
 #!   The proper sequence to fully delete an ff object is: \code{delete(x);rm(x)}, where \command{delete.ff} frees the Memory Mapping resources and deletes the ff file,
-#!   leaving intact the R-side object including its \code{\link{class}}, \code{\link[=physical.ff]{physical}} and \code{\link[=physical.ff]{virtual}} attributes.
+#!   leaving intact the R-side object including its \code{\link{class}}, \code{\link[=Extract.ff]{physical}} and \code{\link[=Extract.ff]{virtual}} attributes.
 #!   The default method is a compatibility function doing something similar with ram objects: by assiging an empty list to the name of the ram object to the parent frame
 #!   we destroy the content of the object, leaving an empty stub that prevents raising an error if the parent frame calls the \code{delete(x);rm(x)} sequence. \cr
 #!   The \command{deleteIfOpen} does the same as \command{delete} but protects closed ff objects from deletion, it is mainly intended for use through a finalizer, as are the \code{ff_pointer} methods.
@@ -3624,7 +3624,7 @@ if (FALSE){
 #! }
 #! \details{
 #!   \command{getset.ff} combines the effects of \command{get.ff} and \command{set.ff} in a single operation: it retrieves the old value at position \code{i} before changing it.
-#!   \command{getset.ff} will maintain \code{\link{na.count}}.
+#!   \command{getset.ff} will maintain \code{\link[bit]{na.count}}.
 #! }
 #! \value{
 #!   \command{get.ff} returns a vector, \command{set.ff} returns the 'changed' ff object (like all assignment functions do) and \command{getset.ff} returns the value at the subscript positions.
@@ -3747,7 +3747,7 @@ set.ff <- function(x, i, value, add=FALSE)
 #! }
 #! \details{
 #!   \command{readwrite.ff} combines the effects of \command{read.ff} and \command{write.ff} in a single operation: it retrieves the old values starting from position \code{i} before changing them.
-#!   \command{getset.ff} will maintain \code{\link{na.count}}.
+#!   \command{getset.ff} will maintain \code{\link[bit]{na.count}}.
 #! }
 #! \value{
 #!   \command{read.ff} returns a vector of values, \command{write.ff} returns the 'changed' ff object (like all assignment functions do) and \command{readwrite.ff} returns the values at the target position.
@@ -3980,11 +3980,11 @@ write.ff <- function(x, i, value, add=FALSE)
 #! \section{RAM expansion of index expressions}{
 #!   Some index expressions do not consume RAM due to the \code{\link{hi}} representation,
 #!   for example \code{1:n} will almost consume no RAM hoewever large n.
-#!   However, some index expressions are expanded and require to \code{\link{maxindex}(i) * .rambytes["integer"]} bytes,
+#!   However, some index expressions are expanded and require to \code{\link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes,
 #!   either because the sorted sequence of index positions cannot be rle-packed efficiently
 #!   or because \code{\link{hiparse}} cannot yet parse such expression and falls back to evaluating/expanding the index expression.
 #!   If the index positions are not sorted, the index will be expanded and a second vector is needed to store the information for re-ordering,
-#!   thus the index requires \code{2 * \link{maxindex}(i) * .rambytes["integer"]} bytes.
+#!   thus the index requires \code{2 * \link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes.
 #! }
 #! \section{RAM expansion when recycling assigment values}{
 #!   Some assignment expressions do not consume RAM for recycling, for example \code{x[1:n] <- 1:k}
@@ -4926,8 +4926,8 @@ swap.default <- function(
 #!   This is also true for ram compatibility functions \code{\link{swap.default}}, and \code{\link{add.default}}.
 #! }
 #! \section{Hybrid copying semantics}{
-#!   If you modify a copy of an ff object, changes of data (\code{\link[=Extract.ff]{[<-}}) and of \code{\link[=physical.ff]{physical}} attributes
-#!   will be shared, but changes in \code{\link[=physical.ff]{virtual}} and class attributes will not.
+#!   If you modify a copy of an ff object, changes of data (\code{\link[=Extract.ff]{[<-}}) and of \code{\link[=Extract.ff]{physical}} attributes
+#!   will be shared, but changes in \code{\link[=Extract.ff]{virtual}} and class attributes will not.
 #! }
 #! \section{Limits of compatibility between ff and ram objects}{
 #!   If it's not too big, you can move an ff object completely into R's RAM through \code{\link{as.ram}}.
@@ -4978,11 +4978,11 @@ swap.default <- function(
 #! \section{RAM expansion of index expressions}{
 #!   Some index expressions do not consume RAM due to the \code{\link{hi}} representation.
 #!   For example \code{1:n} will almost consume no RAM however large n.
-#!   However, some index expressions are expanded and require to \code{\link{maxindex}(i) * .rambytes["integer"]} bytes,
+#!   However, some index expressions are expanded and require to \code{\link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes,
 #!   either because the sorted sequence of index positions cannot be rle-packed efficiently
 #!   or because \code{\link{hiparse}} cannot yet parse such expression and falls back to evaluating/expanding the index expression.
 #!   If the index positions are not sorted, the index will be expanded and a second vector is needed to store the information for re-ordering,
-#!   thus the index requires \code{2 * \link{maxindex}(i) * .rambytes["integer"]} bytes.
+#!   thus the index requires \code{2 * \link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes.
 #! }
 #! \section{RAM expansion when recycling assigment values}{
 #!   Some assignment expressions do not consume RAM for recycling. For example \code{x[1:n] <- 1:k}

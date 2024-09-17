@@ -70,7 +70,7 @@
 #!   depends on the CFUN used
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{ \code{\link{ffapply}}, \code{\link{do.call}}, \code{\link{na.count}} }
+#! \seealso{ \code{\link{ffapply}}, \code{\link{do.call}}, \code{\link[bit]{na.count}} }
 #! \examples{
 #!    X <- lapply(split(rnorm(1000), 1:10), summary)
 #!    do.call("crbind", X)

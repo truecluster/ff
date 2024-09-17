@@ -29,7 +29,7 @@
 \details{
   The subscript methods \code{[}, \code{[[} and \code{$}, behave symmetrical to the assignment functions \code{[<-}, \code{[[<-} and \code{$<-}.
   What the former return is the assignment value to the latter.
-  A notable exception is assigning \code{NULL} in \code{[[<-} and \code{$<-} which removes the \code{\link[=virtual]{virtual}} column from the ffdf (and the \code{\link[=physical]{physical}} component if it is no longer needed by any virtual column).
+  A notable exception is assigning \code{NULL} in \code{[[<-} and \code{$<-} which removes the \code{\link[=Extract.ffdf]{virtual}} column from the ffdf (and the \code{\link[=Extract]{physical}} component if it is no longer needed by any virtual column).
   Creating new columns via \code{[[<-} and \code{$<-} requires giving a name to the new column (character subscripting). \code{[<-} does not allow to create new columns, only to replace existing ones.
 }
 \section{Subscript expressions and return values}{

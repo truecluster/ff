@@ -57,18 +57,18 @@ boolean scalar telling fforder whether to order increasing or decreasing
 }
 \details{
   fforder tries to order the vector in-RAM, if not possible it uses (a yet simple) out-of-memory algorithm.
-  Like \code{\link{ramorder}} the in-RAM ordering method is choosen depending on context information.
+  Like \code{\link[bit]{ramorder}} the in-RAM ordering method is choosen depending on context information.
 }
 \value{
   An ff vector with the positions that ore required to sort the input as specified
--- with an attribute \code{\link{na.count}} with as many values as columns in \dots
+-- with an attribute \code{\link[bit]{na.count}} with as many values as columns in \dots
 }
 \author{
   Jens Oehlschlägel
 }
 
 \seealso{
-  \code{\link{ramorder}}, \code{\link{ffsort}}, \code{\link{ffdforder}}, \code{\link{ffindexget}}
+  \code{\link[bit]{ramorder}}, \code{\link{ffsort}}, \code{\link{ffdforder}}, \code{\link{ffindexget}}
 }
 \examples{
    x <- ff(sample(1e5, 1e6, TRUE))

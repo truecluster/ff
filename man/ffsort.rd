@@ -41,8 +41,8 @@ boolean scalar telling ffsort whether to sort the original ff vector (\code{TRUE
 or to create a sorted copy (\code{FALSE}, the default)
 }
   \item{decorate}{
-boolean scalar telling ffsort whether to decorate the returned ff vector with \code{\link{is.sorted}}
-and \code{\link{na.count}} attributes.
+boolean scalar telling ffsort whether to decorate the returned ff vector with \code{\link[bit:Metadata]{is.sorted}}
+and \code{\link[bit]{na.count}} attributes.
 }
   \item{BATCHBYTES}{
   maximum number of RAM bytes ffsort should try not to exceed
@@ -55,7 +55,7 @@ and \code{\link{na.count}} attributes.
   ffsort tries to sort the vector in-RAM respecting the BATCHBYTES limit.
   If a fast sort it not possible, it uses a slower in-place sort (shellsort).
   If in-RAM is not possible, it uses (a yet simple) out-of-memory algorithm.
-  Like \code{\link{ramsort}} the in-RAM sorting method is choosen depending on context information.
+  Like \code{\link[bit]{ramsort}} the in-RAM sorting method is choosen depending on context information.
   If a key-index sort can be used, ffsort completely avoids merging disk based subsorts.
   If argument \code{decorate=TRUE} is used, then \code{na.count(x)} will return the number of NAs
   and \code{is.sorted(x)} will return TRUE if the sort was done with \code{na.last=TRUE} and \code{decreasing=FALSE}.
@@ -64,14 +64,14 @@ and \code{\link{na.count}} attributes.
   the ff vector may not have a names attribute
 }
 \value{
-  An ff vector -- optionally decorated with \code{\link{is.sorted}} and \code{\link{na.count}}, see argument 'decorate'
+  An ff vector -- optionally decorated with \code{\link[bit:Metadata]{is.sorted}} and \code{\link[bit]{na.count}}, see argument 'decorate'
 }
 \author{
   Jens Oehlschlägel
 }
 
 \seealso{
-  \code{\link{ramsort}}, \code{\link{fforder}}, \code{\link{ffdfsort}}
+  \code{\link[bit]{ramsort}}, \code{\link{fforder}}, \code{\link{ffdfsort}}
 }
 \examples{
    n <- 1e6

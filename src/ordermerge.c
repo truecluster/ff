@@ -2757,11 +2757,11 @@ SEXP r_ff_double_ordermerge(
   ValueT *valuebuffer2;
   IndexT *indexbuffer2;
 
-  // we use Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
-  valuebuffer = (ValueT *) Calloc(ordersize, ValueT);
-  indexbuffer = (IndexT *) Calloc(ordersize, IndexT);
+  // we use R_Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
+  valuebuffer = (ValueT *) R_Calloc(ordersize, ValueT);
+  indexbuffer = (IndexT *) R_Calloc(ordersize, IndexT);
   if (method!=1 || orderindex)
-    auxindexbuffer = (IndexT *) Calloc(ordersize, IndexT);
+    auxindexbuffer = (IndexT *) R_Calloc(ordersize, IndexT);
   else
     auxindexbuffer = 0; // keep compiler quiet
 
@@ -2876,18 +2876,18 @@ SEXP r_ff_double_ordermerge(
   }
 
   // this was large RAM, let's free here, then we have it for the filesystem cache
-  Free(valuebuffer);
-  Free(indexbuffer);
+  R_Free(valuebuffer);
+  R_Free(indexbuffer);
   if (method!=1 || orderindex)
-    Free(auxindexbuffer);
+    R_Free(auxindexbuffer);
 
 
   N = ordersize;
   if (n<T){
 
-    valuebuffer1 = (ValueT *) Calloc(mergesize, ValueT);
-    valuebuffer2 = (ValueT *) Calloc(mergesize, ValueT);
-    valuebuffer = (ValueT *) Calloc(mergesize2, ValueT);
+    valuebuffer1 = (ValueT *) R_Calloc(mergesize, ValueT);
+    valuebuffer2 = (ValueT *) R_Calloc(mergesize, ValueT);
+    valuebuffer = (ValueT *) R_Calloc(mergesize2, ValueT);
 
     if (index_==R_NilValue){
 
@@ -3080,9 +3080,9 @@ SEXP r_ff_double_ordermerge(
 
     }else{
 
-      indexbuffer1 = (IndexT *) Calloc(mergesize, IndexT);
-      indexbuffer2 = (IndexT *) Calloc(mergesize, IndexT);
-      indexbuffer = (IndexT *) Calloc(mergesize2, IndexT);
+      indexbuffer1 = (IndexT *) R_Calloc(mergesize, IndexT);
+      indexbuffer2 = (IndexT *) R_Calloc(mergesize, IndexT);
+      indexbuffer = (IndexT *) R_Calloc(mergesize2, IndexT);
 
       while(N<T){
 #if VERBOSE_LEVEL>0
@@ -3296,14 +3296,14 @@ SEXP r_ff_double_ordermerge(
         merges -= 1;
       }
 
-      Free(indexbuffer1);
-      Free(indexbuffer2);
-      Free(indexbuffer);
+      R_Free(indexbuffer1);
+      R_Free(indexbuffer2);
+      R_Free(indexbuffer);
     }
 
-    Free(valuebuffer1);
-    Free(valuebuffer2);
-    Free(valuebuffer);
+    R_Free(valuebuffer1);
+    R_Free(valuebuffer2);
+    R_Free(valuebuffer);
   }
 
   INTEGER(ret_)[0] = nNA;
@@ -3366,10 +3366,10 @@ SEXP r_ff_double_sortmerge(
   default: error("unknown .ffmode[vmode(ffobj)]");
   }
 
-  // we use Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
-  valuebuffer = (ValueT *) Calloc(ordersize, ValueT);
+  // we use R_Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
+  valuebuffer = (ValueT *) R_Calloc(ordersize, ValueT);
   if (method!=1)
-    auxvaluebuffer = (ValueT *) Calloc(ordersize, ValueT);
+    auxvaluebuffer = (ValueT *) R_Calloc(ordersize, ValueT);
   else
     auxvaluebuffer = 0; // keep compiler quiet
 
@@ -3420,16 +3420,16 @@ SEXP r_ff_double_sortmerge(
   }
 
   // this was large RAM, let's free here, then we have it for the filesystem cache
-  Free(valuebuffer);
+  R_Free(valuebuffer);
   if (method!=1)
-    Free(auxvaluebuffer);
+    R_Free(auxvaluebuffer);
 
   N = ordersize;
   if (n<T){
 
-  valuebuffer1 = (ValueT *) Calloc(mergesize, ValueT);
-  valuebuffer2 = (ValueT *) Calloc(mergesize, ValueT);
-  valuebuffer = (ValueT *) Calloc(mergesize2, ValueT);
+  valuebuffer1 = (ValueT *) R_Calloc(mergesize, ValueT);
+  valuebuffer2 = (ValueT *) R_Calloc(mergesize, ValueT);
+  valuebuffer = (ValueT *) R_Calloc(mergesize2, ValueT);
 
     while(N<T){
 #if VERBOSE_LEVEL>0
@@ -3600,9 +3600,9 @@ SEXP r_ff_double_sortmerge(
     }
 
 
-    Free(valuebuffer1);
-    Free(valuebuffer2);
-    Free(valuebuffer);
+    R_Free(valuebuffer1);
+    R_Free(valuebuffer2);
+    R_Free(valuebuffer);
   }
 
   INTEGER(ret_)[0] = nNA;
@@ -3759,16 +3759,16 @@ SEXP r_ff_integer_ordermerge(
     keylength = INTEGER(keyrange_)[1] - INTEGER(keyrange_)[0] + 1;
   }
 
-  // we use Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
-  valuebuffer = (IndexT *) Calloc(ordersize, IndexT);
-  indexbuffer = (IndexT *) Calloc(ordersize, IndexT);
+  // we use R_Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
+  valuebuffer = (IndexT *) R_Calloc(ordersize, IndexT);
+  indexbuffer = (IndexT *) R_Calloc(ordersize, IndexT);
   if (method!=1 || orderindex){
-    auxindexbuffer = (IndexT *) Calloc(ordersize, IndexT);
+    auxindexbuffer = (IndexT *) R_Calloc(ordersize, IndexT);
     if (method>1){
       if (method==2){
-        count = (IndexT *) Calloc(NWORD+1, IndexT);
+        count = (IndexT *) R_Calloc(NWORD+1, IndexT);
       }else
-        count = (IndexT *) Calloc(keylength+2, IndexT);
+        count = (IndexT *) R_Calloc(keylength+2, IndexT);
     }else{ // keep compiler quiet
       count = 0;
     }
@@ -3867,21 +3867,21 @@ SEXP r_ff_integer_ordermerge(
 
 
   // this was large RAM, let's free here, then we have it for the filesystem cache
-  Free(valuebuffer);
-  Free(indexbuffer);
+  R_Free(valuebuffer);
+  R_Free(indexbuffer);
   if (method!=1 || orderindex){
-    Free(auxindexbuffer);
+    R_Free(auxindexbuffer);
     if (method>1){
-      Free(count);
+      R_Free(count);
     }
   }
 
   N = ordersize;
   if (n<T){
 
-    valuebuffer1 = (IndexT *) Calloc(mergesize, IndexT);
-    valuebuffer2 = (IndexT *) Calloc(mergesize, IndexT);
-    valuebuffer = (IndexT *) Calloc(mergesize2, IndexT);
+    valuebuffer1 = (IndexT *) R_Calloc(mergesize, IndexT);
+    valuebuffer2 = (IndexT *) R_Calloc(mergesize, IndexT);
+    valuebuffer = (IndexT *) R_Calloc(mergesize2, IndexT);
 
     if (index_==R_NilValue){
 
@@ -4074,9 +4074,9 @@ SEXP r_ff_integer_ordermerge(
 
     }else{
 
-      indexbuffer1 = (IndexT *) Calloc(mergesize, IndexT);
-      indexbuffer2 = (IndexT *) Calloc(mergesize, IndexT);
-      indexbuffer = (IndexT *) Calloc(mergesize2, IndexT);
+      indexbuffer1 = (IndexT *) R_Calloc(mergesize, IndexT);
+      indexbuffer2 = (IndexT *) R_Calloc(mergesize, IndexT);
+      indexbuffer = (IndexT *) R_Calloc(mergesize2, IndexT);
 
       while(N<T){
 #if VERBOSE_LEVEL>0
@@ -4290,14 +4290,14 @@ SEXP r_ff_integer_ordermerge(
         merges -= 1;
       }
 
-      Free(indexbuffer1);
-      Free(indexbuffer2);
-      Free(indexbuffer);
+      R_Free(indexbuffer1);
+      R_Free(indexbuffer2);
+      R_Free(indexbuffer);
     }
 
-    Free(valuebuffer1);
-    Free(valuebuffer2);
-    Free(valuebuffer);
+    R_Free(valuebuffer1);
+    R_Free(valuebuffer2);
+    R_Free(valuebuffer);
   }
 
   INTEGER(ret_)[0] = nNA;
@@ -4398,15 +4398,15 @@ SEXP r_ff_integer_sortmerge(
     keylength = INTEGER(keyrange_)[1] - INTEGER(keyrange_)[0] + 1;
   }
 
-  // we use Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
-  valuebuffer = (IndexT *) Calloc(ordersize, IndexT);
+  // we use R_Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
+  valuebuffer = (IndexT *) R_Calloc(ordersize, IndexT);
   if (method!=1){
-    auxvaluebuffer = (IndexT *) Calloc(ordersize, IndexT);
+    auxvaluebuffer = (IndexT *) R_Calloc(ordersize, IndexT);
     if (method>1){
       if (method==2){
-        count = (IndexT *) Calloc(NWORD+1, IndexT);
+        count = (IndexT *) R_Calloc(NWORD+1, IndexT);
       }else
-        count = (IndexT *) Calloc(keylength+2, IndexT);
+        count = (IndexT *) R_Calloc(keylength+2, IndexT);
     }else{ // keep compiler quiet
       count = 0;
     }
@@ -4470,20 +4470,20 @@ SEXP r_ff_integer_sortmerge(
   }
 
   // this was large RAM, let's free here, then we have it for the filesystem cache
-  Free(valuebuffer);
+  R_Free(valuebuffer);
   if (method!=1){
-    Free(auxvaluebuffer);
+    R_Free(auxvaluebuffer);
     if (method>1){
-      Free(count);
+      R_Free(count);
     }
   }
 
   N = ordersize;
   if (n<T){
 
-  valuebuffer1 = (IndexT *) Calloc(mergesize, IndexT);
-  valuebuffer2 = (IndexT *) Calloc(mergesize, IndexT);
-  valuebuffer = (IndexT *) Calloc(mergesize2, IndexT);
+  valuebuffer1 = (IndexT *) R_Calloc(mergesize, IndexT);
+  valuebuffer2 = (IndexT *) R_Calloc(mergesize, IndexT);
+  valuebuffer = (IndexT *) R_Calloc(mergesize2, IndexT);
 
     while(N<T){
 #if VERBOSE_LEVEL>0
@@ -4654,9 +4654,9 @@ SEXP r_ff_integer_sortmerge(
     }
 
 
-    Free(valuebuffer1);
-    Free(valuebuffer2);
-    Free(valuebuffer);
+    R_Free(valuebuffer1);
+    R_Free(valuebuffer2);
+    R_Free(valuebuffer);
   }
 
   INTEGER(ret_)[0] = nNA;
@@ -4698,11 +4698,11 @@ SEXP r_ff_integer_keysort(
   IndexT *count;
   IndexT *allcount;
 
-  // we use Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
-  valuebuffer = (IndexT *) Calloc(ordersize, IndexT);
+  // we use R_Calloc because then we can free big RAM after the ordering pass and have more for the file system cache
+  valuebuffer = (IndexT *) R_Calloc(ordersize, IndexT);
 
-  count = (IndexT *) Calloc(keylength+2, IndexT);
-  allcount = (IndexT *) Calloc(keylength+2, IndexT);
+  count = (IndexT *) R_Calloc(keylength+2, IndexT);
+  allcount = (IndexT *) R_Calloc(keylength+2, IndexT);
 
   IndexT l,r,i,k,v,n;
 
@@ -4782,7 +4782,7 @@ SEXP r_ff_integer_keysort(
 
 
   // this was large RAM, let's free here, then we have it for the filesystem cache
-  Free(count);
+  R_Free(count);
 
 
   nNA = allcount[0];
@@ -4902,8 +4902,8 @@ SEXP r_ff_integer_keysort(
     }
   }
 
-  Free(valuebuffer);
-  Free(allcount);
+  R_Free(valuebuffer);
+  R_Free(allcount);
 
   INTEGER(ret_)[0] = nNA;
   UNPROTECT(1);

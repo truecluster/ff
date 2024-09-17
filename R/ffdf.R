@@ -361,7 +361,7 @@ get_nvw <- function(x){
 #! most notably in \code{data.frame(matrix())}, where an input matrix is converted to single columns.
 #! ffdf by contrast, will store an input matrix physically as the same matrix and virtually map it to columns.
 #! Physically copying a large ff matrix to single ff vectors can be expensive.
-#! More generally, ffdf objects have a \code{\link[=physical.ffdf]{physical}} and a \code{\link[=virtual.ffdf]{virtual}} component,
+#! More generally, ffdf objects have a \code{\link[=Extract.ffdf]{physical}} and a \code{\link[=Extract.ffdf]{virtual}} component,
 #! which allows very flexible dataframe designs: a physically stored matrix can be virtually mapped to single columns,
 #! a couple of physically stored vectors can be virtually mapped to a single matrix.
 #! The means to configure these are \code{\link{I}} for the virtual representation and the 'ff_split' and 'ff_join'
@@ -389,9 +389,9 @@ get_nvw <- function(x){
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Virtual storage mode} \cr
 #!   generic  \tab  \code{\link[=vmode.ffdf]{vmode}}         \tab \code{ }  \tab get virtual modes for all (virtual) columns \cr
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Physical attributes}  \cr
-#!   function \tab  \code{\link[=physical.ffdf]{physical}}   \tab \code{ }  \tab get physical attributes \cr
+#!   function \tab  \code{\link[=Extract.ffdf]{physical}}   \tab \code{ }  \tab get physical attributes \cr
 #!   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Virtual attributes} \cr
-#!   function \tab  \code{\link[=virtual.ffdf]{virtual}}     \tab \code{ } \tab get virtual attributes \cr
+#!   function \tab  \code{\link[=Extract.ffdf]{virtual}}     \tab \code{ } \tab get virtual attributes \cr
 #!   method   \tab  \code{\link[=length.ffdf]{length}}       \tab \code{ }  \tab get length \cr
 #!   method   \tab  \code{\link[=dim.ffdf]{dim }}            \tab \code{<-} \tab get dim and set nrow \cr
 #!   generic  \tab  \code{\link[=dimorder.ffdf]{dimorder}}   \tab \code{ }  \tab get the dimorder (non-standard if any component is non-standard) \cr
@@ -418,8 +418,8 @@ get_nvw <- function(x){
 
 #! \value{
 #! A list with components
-#! \item{physical}{the underlying ff vectors and matrices, to be accessed via \code{\link[=physical.ffdf]{physical}}}
-#! \item{virtual}{the virtual features of the ffdf including the virtual-to-physical mapping, to be accessed via \code{\link[=virtual.ffdf]{virtual}}}
+#! \item{physical}{the underlying ff vectors and matrices, to be accessed via \code{\link[=Extract.ffdf]{physical}}}
+#! \item{virtual}{the virtual features of the ffdf including the virtual-to-physical mapping, to be accessed via \code{\link[=Extract.ffdf]{virtual}}}
 #! \item{row.names}{the optional row.names, see argument row.names}
 #! and class 'ffdf' (NOTE that ffdf dows not inherit from ff)
 #! }
@@ -431,7 +431,7 @@ get_nvw <- function(x){
 #! However, at least under windows, the OS has difficulties filecaching parts from very large files, therefore - until we have partitioning - the recommended physical storage is in single vectors.
 #! }
 #! \seealso{
-#!   \code{\link{data.frame}}, \code{\link{ff}}, for more example see \code{\link[=physical.ffdf]{physical}}
+#!   \code{\link{data.frame}}, \code{\link{ff}}, for more example see \code{\link[=Extract.ffdf]{physical}}
 #! }
 #! \examples{
 #!  m <- matrix(1:12, 3, 4, dimnames=list(c("r1","r2","r3"), c("m1","m2","m3","m4")))
@@ -845,7 +845,7 @@ ffdf <- function(
 #! \details{
 #!   The subscript methods \code{[}, \code{[[} and \code{$}, behave symmetrical to the assignment functions \code{[<-}, \code{[[<-} and \code{$<-}.
 #!   What the former return is the assignment value to the latter.
-#!   A notable exception is assigning \code{NULL} in \code{[[<-} and \code{$<-} which removes the \code{\link[=virtual]{virtual}} column from the ffdf (and the \code{\link[=physical]{physical}} component if it is no longer needed by any virtual column).
+#!   A notable exception is assigning \code{NULL} in \code{[[<-} and \code{$<-} which removes the \code{\link[=Extract.ffdf]{virtual}} column from the ffdf (and the \code{\link[=physical]{physical}} component if it is no longer needed by any virtual column).
 #!   Creating new columns via \code{[[<-} and \code{$<-} requires giving a name to the new column (character subscripting). \code{[<-} does not allow to create new columns, only to replace existing ones.
 #! }
 #! \section{Subscript expressions and return values}{
@@ -1426,10 +1426,10 @@ ffdf <- function(
 #! \arguments{
 #!   \item{x}{an \code{\link{ffdf}} }
 #!   \item{nrow}{ optionally the desired number of rows in the new object. Currently this works only together with \code{initdata=NULL} }
-#!   \item{\dots}{ further arguments passed to \code{\link{clone}} (usually not usefull) }
+#!   \item{\dots}{ further arguments passed to \code{\link[=clone.ff]{clone}} (usually not usefull) }
 #! }
 #! \details{
-#!   Creates a deep copy of an ffdf object by cloning all \code{\link[=physical.ffdf]{physical}} components including the \code{\link[=dimnames.ffdf]{row.names}}
+#!   Creates a deep copy of an ffdf object by cloning all \code{\link[=Extract.ffdf]{physical}} components including the \code{\link[=dimnames.ffdf]{row.names}}
 #! }
 #! \value{
 #!   An object of type \code{\link{ffdf}}
@@ -1438,7 +1438,7 @@ ffdf <- function(
 #!   Jens Oehlschlägel
 #! }
 #! \seealso{
-#!   \code{\link{clone}}, \code{\link{ffdf}}
+#!   \code{\link[=clone.ff]{clone}}, \code{\link{ffdf}}
 #! }
 #! \examples{
 #!   x <- as.ffdf(data.frame(a=1:26, b=letters, stringsAsFactors = TRUE))
@@ -1764,15 +1764,15 @@ vmode.ffdf <- function(x, ...){
 #!   \item{x}{\code{\link{ff}} or \code{\link{ffdf}}}
 #!   \item{RECORDBYTES}{ optional integer scalar representing the bytes needed to process an element of the \code{ff_vector} a single row of the \code{ffdf} }
 #!   \item{BATCHBYTES}{ integer scalar limiting the number of bytes to be processed in one chunk, default from \code{getOption("ffbatchbytes")}, see also \code{\link{.rambytes}} }
-#!   \item{\dots}{further arguments passed to \code{\link{chunk}}}
+#!   \item{\dots}{further arguments passed to \code{\link[bit]{chunk}}}
 #! }
 #! \value{
-#!   A list with \code{\link{ri}} indexes each representing one chunk
+#!   A list with \code{\link[bit]{ri}} indexes each representing one chunk
 #! }
 #! \author{
 #!   Jens Oehlschlägel
 #! }
-#! \seealso{ \code{\link{chunk}}, \code{\link{ffdf}} }
+#! \seealso{ \code{\link[bit]{chunk}}, \code{\link{ffdf}} }
 #! \examples{
 #!   x <- data.frame(x=as.double(1:26), y=factor(letters), z=ordered(LETTERS), stringsAsFactors = TRUE)
 #!   a <- as.ffdf(x)
@@ -2068,7 +2068,7 @@ dimnames.ffdf <- function(x){
 #!   Jens Oehlschlägel
 #! }
 #! \seealso{
-#!   \code{\link{ffdf}}, \code{\link[=physical.ff]{physical}}, \code{\link[=virtual.ff]{virtual}}, \code{\link[=vmode.ffdf]{vmode}}
+#!   \code{\link{ffdf}}, \code{\link[=Extract.ff]{physical}}, \code{\link[=Extract.ff]{virtual}}, \code{\link[=vmode.ffdf]{vmode}}
 #! }
 #! \examples{
 #!   x <- 1:2

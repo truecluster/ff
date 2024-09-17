@@ -45,13 +45,13 @@ ffindexorder(index, BATCHSIZE, FF_RETURN = NULL, VERBOSE = FALSE)
 \value{
   Function \code{ffindexorder} returns an ff integer vector with an attribute \code{BATCHSIZE} (the chunksize finally used, not the one given with argument \code{BATCHSIZE}).
   \cr
-  Function \code{ffindexordersize} returns a balanced batchsize as returned from \code{\link{bbatch}}.
+  Function \code{ffindexordersize} returns a balanced batchsize as returned from \code{\link[bit]{bbatch}}.
 }
 \author{
   Jens Oehlschlägel
 }
 \seealso{
-   \code{\link{ffindexget}},  \code{\link{as.hi}},  \code{\link{bbatch}}
+   \code{\link{ffindexget}},  \code{\link{as.hi}},  \code{\link[bit]{bbatch}}
 }
 \examples{
      x <- ff(sample(40))

@@ -35,7 +35,7 @@ The virtual component is itself a dataframe, each row of which defines a column 
   Jens Oehlschlägel
 }
 \seealso{
-  \code{\link{ffdf}}, \code{\link[=physical.ff]{physical}}, \code{\link[=virtual.ff]{virtual}}, \code{\link[=vmode.ffdf]{vmode}}
+  \code{\link{ffdf}}, \code{\link[=Extract.ff]{physical}}, \code{\link[=Extract.ff]{virtual}}, \code{\link[=vmode.ffdf]{vmode}}
 }
 \examples{
   x <- 1:2

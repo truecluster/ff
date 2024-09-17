@@ -46,7 +46,7 @@ finalizer(x, ...) <- value
   The user can define custom finalizers by creating a generic function like \code{\link{delete}}, a ff_pointer method like \code{\link{delete.ff_pointer}} and a ff method for manual calls like \code{\link{delete.ff}}. The user then is responsible to take care of two things
   \enumerate{
     \item adequate freeing of ressources
-    \item proper maintenance of the finalizer name in the ff object via \code{\link[=physical.ff]{physical}$finalizer}
+    \item proper maintenance of the finalizer name in the ff object via \code{\link[=Extract.ff]{physical}$finalizer}
   }
   \code{is.null(finalizer(ff))} indicates NO active finalizer, i.e. no pending execution of \code{finalize.ff_pointer} lurking around after call of \code{reg.finalizer}.
   This requires that
@@ -58,7 +58,7 @@ finalizer(x, ...) <- value
 \value{
   \code{finalizer} returns the name of the active finalizer or \code{NULL} if no finalizer is active. \cr
   \code{finalizer<-} returns the changed ff object (reassignment of this return value not needed to keep the change).
-  If there was no pending call to \code{\link{finalize.ff_pointer}} (\code{is.null(finalizer(ff))}), \code{finalizer<-} will create one by calling \code{reg.finalizer} with the current setting of \code{\link[=physical.ff]{physical}$finonexit}.
+  If there was no pending call to \code{\link{finalize.ff_pointer}} (\code{is.null(finalizer(ff))}), \code{finalizer<-} will create one by calling \code{reg.finalizer} with the current setting of \code{\link[=Extract.ff]{physical}$finonexit}.
 }
 \note{
   You can not assign NULL to an active finalizer using \code{finalizer<-} because this would not stop R's finalization mechanism and would carry the risk of assiging MULTIPLE finalization tasks.

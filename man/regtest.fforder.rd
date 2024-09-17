@@ -24,7 +24,7 @@ regtest.fforder(n = 100)
   Jens Oehlschlägel
 }
 \seealso{
-  \code{\link{ramsort}}
+  \code{\link[bit]{ramsort}}
 }
 \examples{
   regtest.fforder()

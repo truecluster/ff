@@ -13,10 +13,10 @@ clone physically duplicates ffdf objects
 \arguments{
   \item{x}{an \code{\link{ffdf}} }
   \item{nrow}{ optionally the desired number of rows in the new object. Currently this works only together with \code{initdata=NULL} }
-  \item{\dots}{ further arguments passed to \code{\link{clone}} (usually not usefull) }
+  \item{\dots}{ further arguments passed to \code{\link[=clone.ff]{clone}} (usually not usefull) }
 }
 \details{
-  Creates a deep copy of an ffdf object by cloning all \code{\link[=physical.ffdf]{physical}} components including the \code{\link[=dimnames.ffdf]{row.names}}
+  Creates a deep copy of an ffdf object by cloning all \code{\link[=Extract.ffdf]{physical}} components including the \code{\link[=dimnames.ffdf]{row.names}}
 }
 \value{
   An object of type \code{\link{ffdf}}
@@ -25,7 +25,7 @@ clone physically duplicates ffdf objects
   Jens Oehlschlägel
 }
 \seealso{
-  \code{\link{clone}}, \code{\link{ffdf}}
+  \code{\link[=clone.ff]{clone}}, \code{\link{ffdf}}
 }
 \examples{
   x <- as.ffdf(data.frame(a=1:26, b=letters, stringsAsFactors = TRUE))

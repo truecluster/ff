@@ -28,8 +28,8 @@
 }
 \author{ Jens Oehlschlägel }
 \seealso{
- \code{\link{physical}}, \code{\link{physical.ffdf}}, \code{\link{ff}}, \code{\link{as.ram}}; \cr
- \code{\link{is.sorted}} and \code{\link{na.count}} for applications of physical attributes; \cr
+ \code{\link[=Extract.ff]{physical.ff}}, \code{\link[=Extract.ff]{physical.ffdf}}, \code{\link{ff}}, \code{\link{as.ram}}; \cr
+ \code{\link[bit:Metadata]{is.sorted}} and \code{\link[bit]{na.count}} for applications of physical attributes; \cr
  \code{\link{levels.ff}} and \code{\link{ramattribs}} for applications of virtual attributes
 }
 \examples{

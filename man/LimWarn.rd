@@ -22,8 +22,8 @@
   This is also true for ram compatibility functions \code{\link{swap.default}}, and \code{\link{add.default}}.
 }
 \section{Hybrid copying semantics}{
-  If you modify a copy of an ff object, changes of data (\code{\link[=Extract.ff]{[<-}}) and of \code{\link[=physical.ff]{physical}} attributes
-  will be shared, but changes in \code{\link[=physical.ff]{virtual}} and class attributes will not.
+  If you modify a copy of an ff object, changes of data (\code{\link[=Extract.ff]{[<-}}) and of \code{\link[=Extract.ff]{physical}} attributes
+  will be shared, but changes in \code{\link[=Extract.ff]{virtual}} and class attributes will not.
 }
 \section{Limits of compatibility between ff and ram objects}{
   If it's not too big, you can move an ff object completely into R's RAM through \code{\link{as.ram}}.
@@ -74,11 +74,11 @@
 \section{RAM expansion of index expressions}{
   Some index expressions do not consume RAM due to the \code{\link{hi}} representation.
   For example \code{1:n} will almost consume no RAM however large n.
-  However, some index expressions are expanded and require to \code{\link{maxindex}(i) * .rambytes["integer"]} bytes,
+  However, some index expressions are expanded and require to \code{\link[bit:maxindex.default]{maxindex}(i) * .rambytes["integer"]} bytes,
   either because the sorted sequence of index positions cannot be rle-packed efficiently
   or because \code{\link{hiparse}} cannot yet parse such expression and falls back to evaluating/expanding the index expression.
   If the index positions are not sorted, the index will be expanded and a second vector is needed to store the information for re-ordering,
-  thus the index requires \code{2 * \link{maxindex}(i) * .rambytes["integer"]} bytes.
+  thus the index requires \code{2 * \link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes.
 }
 \section{RAM expansion when recycling assigment values}{
   Some assignment expressions do not consume RAM for recycling. For example \code{x[1:n] <- 1:k}

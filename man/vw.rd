@@ -29,13 +29,13 @@ vw(x, \dots) <- value
   Each dimension of an ff array (or vector) is decomposed into three components, an invisible Offset, a visibe Window and an invisible Rest.
   For each dimension the sum of the vw components must match the dimension (or length).
   For an \code{ff_vector}, \code{vw} is simply a vector[1:3], for an array is is a \code{matrix[1:3,seq_along(dim(x))]}.
-  \code{vw} is a \code{\link[=physical.ff]{virtual}} attribute. \cr
+  \code{vw} is a \code{\link[=Extract.ff]{virtual}} attribute. \cr
 }
 \value{
   NULL or a vw specification, see details
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{length.ff}}, \code{\link{dim.ff}}, \code{\link[=physical.ff]{virtual}} }
+\seealso{ \code{\link{length.ff}}, \code{\link{dim.ff}}, \code{\link[=Extract.ff]{virtual}} }
 \examples{
   x <- ff(1:26, names=letters)
   y <- x

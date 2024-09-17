@@ -1,15 +1,34 @@
 Package: ff
-Version: 4.0.12
-Date: 2024-01-10
+Version: 4.5.0
+Date: 2024-09-17
 Title: Memory-Efficient Storage of Large Data on Disk and Fast Access Functions
+Authors@R: c(person(given = "Daniel",
+                      family = "Adler",
+                      role = "aut"),
+               person(given = "Christian",
+                      family = "Gläser",
+                      role = "ctb"),
+               person(given = "Oleg",
+                      family = "Nenadic",
+                      role = "ctb"),
+               person(given = "Jens",
+                      family = "Oehlschlägel",
+                      role = c("aut", "cre"),
+                      email = "Jens.Oehlschlaegel@truecluster.com"),
+               person(given = "Martijn",
+                      family = "Schuemie",
+                      role = "ctb"),
+               person(given = "Walter",
+                      family = "Zucchini",
+                      role = "ctb"))
 Author: Daniel Adler [aut],
-	Christian Gläser [aut],
-	Oleg Nenadic  [aut], 
+	Christian Gläser [ctb],
+	Oleg Nenadic  [ctb], 
 	Jens Oehlschlägel [aut, cre],
-	Martijn Schuemie [aut],
-	Walter Zucchini  [aut]
+	Martijn Schuemie [ctb],
+	Walter Zucchini  [ctb]
 Maintainer: Jens Oehlschlägel <Jens.Oehlschlaegel@truecluster.com>
-Depends: R (>= 2.10.1), bit (>= 4.0.0), utils
+Depends: R (>= 3.4.0), bit (>= 4.0.0), utils
 Suggests: biglm, testthat (>= 0.11.0)
 Description: The ff package provides data structures that are stored on
 	disk but behave (almost) as if they were in RAM by transparently 

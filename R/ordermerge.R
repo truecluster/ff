@@ -91,7 +91,7 @@
 #! }
 #!
 #! \seealso{
-#!   \code{\link{sort}}, \code{\link{ffsort}}, \code{\link{dfsort}}, \code{\link{ramorder}}
+#!   \code{\link{sort}}, \code{\link{ffsort}}, \code{\link{dfsort}}, \code{\link[bit]{ramorder}}
 #! }
 #! \examples{
 #!    n <- 50
@@ -218,7 +218,7 @@
 #! }
 #!
 #! \seealso{
-#!   \code{\link{order}}, \code{\link{fforder}}, \code{\link{dforder}}, \code{\link{ramsort}}
+#!   \code{\link{order}}, \code{\link{fforder}}, \code{\link{dforder}}, \code{\link[bit]{ramsort}}
 #! }
 #! \examples{
 #!    n <- 50
@@ -608,8 +608,8 @@ ramorder.default <- function(x, i
 #! or to create a sorted copy (\code{FALSE}, the default)
 #! }
 #!   \item{decorate}{
-#! boolean scalar telling ffsort whether to decorate the returned ff vector with \code{\link{is.sorted}}
-#! and \code{\link{na.count}} attributes.
+#! boolean scalar telling ffsort whether to decorate the returned ff vector with \code{\link[bit:Metadata]{is.sorted}}
+#! and \code{\link[bit]{na.count}} attributes.
 #! }
 #!   \item{BATCHBYTES}{
 #!   maximum number of RAM bytes ffsort should try not to exceed
@@ -622,7 +622,7 @@ ramorder.default <- function(x, i
 #!   ffsort tries to sort the vector in-RAM respecting the BATCHBYTES limit.
 #!   If a fast sort it not possible, it uses a slower in-place sort (shellsort).
 #!   If in-RAM is not possible, it uses (a yet simple) out-of-memory algorithm.
-#!   Like \code{\link{ramsort}} the in-RAM sorting method is choosen depending on context information.
+#!   Like \code{\link[bit]{ramsort}} the in-RAM sorting method is choosen depending on context information.
 #!   If a key-index sort can be used, ffsort completely avoids merging disk based subsorts.
 #!   If argument \code{decorate=TRUE} is used, then \code{na.count(x)} will return the number of NAs
 #!   and \code{is.sorted(x)} will return TRUE if the sort was done with \code{na.last=TRUE} and \code{decreasing=FALSE}.
@@ -631,14 +631,14 @@ ramorder.default <- function(x, i
 #!   the ff vector may not have a names attribute
 #! }
 #! \value{
-#!   An ff vector -- optionally decorated with \code{\link{is.sorted}} and \code{\link{na.count}}, see argument 'decorate'
+#!   An ff vector -- optionally decorated with \code{\link[bit:Metadata]{is.sorted}} and \code{\link[bit]{na.count}}, see argument 'decorate'
 #! }
 #! \author{
 #!   Jens Oehlschlägel
 #! }
 #!
 #! \seealso{
-#!   \code{\link{ramsort}}, \code{\link{fforder}}, \code{\link{ffdfsort}}
+#!   \code{\link[bit]{ramsort}}, \code{\link{fforder}}, \code{\link{ffdfsort}}
 #! }
 #! \examples{
 #!    n <- 1e6
@@ -862,18 +862,18 @@ ffsort <- function(
 #! }
 #! \details{
 #!   fforder tries to order the vector in-RAM, if not possible it uses (a yet simple) out-of-memory algorithm.
-#!   Like \code{\link{ramorder}} the in-RAM ordering method is choosen depending on context information.
+#!   Like \code{\link[bit]{ramorder}} the in-RAM ordering method is choosen depending on context information.
 #! }
 #! \value{
 #!   An ff vector with the positions that ore required to sort the input as specified
-#! -- with an attribute \code{\link{na.count}} with as many values as columns in \dots
+#! -- with an attribute \code{\link[bit]{na.count}} with as many values as columns in \dots
 #! }
 #! \author{
 #!   Jens Oehlschlägel
 #! }
 #!
 #! \seealso{
-#!   \code{\link{ramorder}}, \code{\link{ffsort}}, \code{\link{ffdforder}}, \code{\link{ffindexget}}
+#!   \code{\link[bit]{ramorder}}, \code{\link{ffsort}}, \code{\link{ffdforder}}, \code{\link{ffindexget}}
 #! }
 #! \examples{
 #!    x <- ff(sample(1e5, 1e6, TRUE))
@@ -1154,13 +1154,13 @@ fforder <- function(
 #! \value{
 #!   Function \code{ffindexorder} returns an ff integer vector with an attribute \code{BATCHSIZE} (the chunksize finally used, not the one given with argument \code{BATCHSIZE}).
 #!   \cr
-#!   Function \code{ffindexordersize} returns a balanced batchsize as returned from \code{\link{bbatch}}.
+#!   Function \code{ffindexordersize} returns a balanced batchsize as returned from \code{\link[bit]{bbatch}}.
 #! }
 #! \author{
 #!   Jens Oehlschlägel
 #! }
 #! \seealso{
-#!    \code{\link{ffindexget}},  \code{\link{as.hi}},  \code{\link{bbatch}}
+#!    \code{\link{ffindexget}},  \code{\link{as.hi}},  \code{\link[bit]{bbatch}}
 #! }
 #! \examples{
 #!      x <- ff(sample(40))
@@ -1904,8 +1904,8 @@ ffdfindexset <- function(
 #!   a \code{\link{data.frame}} (for \code{dforder, dfsort, ramorder, ramsort}) or an \code{\link{ffdf}} object (for \code{ffdforder, ffdfsort})
 #! }
 #!   \item{\dots}{
-#!   further arguments passed to \code{\link{sort}}, \code{\link{ramsort}} or \code{\link{ffsort}} (for objects with one column)
-#!   or passed to \code{\link{order}}, \code{\link{ramorder}} or \code{\link{fforder}} (for objects with mulitple columns)
+#!   further arguments passed to \code{\link{sort}}, \code{\link[bit]{ramsort}} or \code{\link{ffsort}} (for objects with one column)
+#!   or passed to \code{\link{order}}, \code{\link[bit]{ramorder}} or \code{\link{fforder}} (for objects with mulitple columns)
 #! }
 #! }
 #! \value{
@@ -1916,8 +1916,8 @@ ffdfindexset <- function(
 #! }
 #!
 #! \seealso{
-#!     \code{\link{sort}}, \code{\link{ramsort}} or \code{\link{ffsort}} \cr
-#!     \code{\link{order}}, \code{\link{ramorder}} or \code{\link{fforder}}
+#!     \code{\link{sort}}, \code{\link[bit]{ramsort}} or \code{\link{ffsort}} \cr
+#!     \code{\link{order}}, \code{\link[bit]{ramorder}} or \code{\link{fforder}}
 #! }
 #! \examples{
 #!    x <- ff(sample(1e5, 1e6, TRUE))
@@ -2053,7 +2053,7 @@ ffdfsort <- function(
 #!   Jens Oehlschlägel
 #! }
 #! \seealso{
-#!   \code{\link{ramsort}}
+#!   \code{\link[bit]{ramsort}}
 #! }
 #! \examples{
 #!   regtest.fforder()

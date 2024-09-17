@@ -19,7 +19,7 @@ getset.ff(x, i, value, add = FALSE)
 }
 \details{
   \command{getset.ff} combines the effects of \command{get.ff} and \command{set.ff} in a single operation: it retrieves the old value at position \code{i} before changing it.
-  \command{getset.ff} will maintain \code{\link{na.count}}.
+  \command{getset.ff} will maintain \code{\link[bit]{na.count}}.
 }
 \value{
   \command{get.ff} returns a vector, \command{set.ff} returns the 'changed' ff object (like all assignment functions do) and \command{getset.ff} returns the value at the subscript positions.

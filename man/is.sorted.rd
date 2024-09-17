@@ -16,19 +16,19 @@
 }
 \details{
   Sorting is slow, see \code{\link{sort}}.
-  Checking whether an object is sorted can avoid unnessary sorting -- see \code{\link{is.unsorted}}, \code{\link{intisasc}} -- but still takes too much time with large objects stored on disk.
+  Checking whether an object is sorted can avoid unnessary sorting -- see \code{\link{is.unsorted}}, \code{\link[bit:intrle]{intisasc}} -- but still takes too much time with large objects stored on disk.
   Thus it makes sense to maintain an attribute, that tells us whether sorting can be skipped.
-  Note that -- though you change it yourself -- \code{is.sorted} is a \code{\link[=physical.ff]{physical}} attribute of an object,
-  because it represents an attribute of the \emph{data}, which is shared between different \code{\link[=physical.ff]{virtual}} views of the object.
+  Note that -- though you change it yourself -- \code{is.sorted} is a \code{\link[=Extract.ff]{physical}} attribute of an object,
+  because it represents an attribute of the \emph{data}, which is shared between different \code{\link[=Extract.ff]{virtual}} views of the object.
 }
 \value{
   TRUE (if set to TRUE) or FALSE (if set to NULL or FALSE)
 }
 \note{
-  \command{ff} will set \code{is.sorted(x) <- FALSE} if \code{\link{clone}} or \code{\link{length<-.ff}} have increased length.
+  \command{ff} will set \code{is.sorted(x) <- FALSE} if \code{\link[=clone.ff]{clone}} or \code{\link{length<-.ff}} have increased length.
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{is.ordered.ff}} for testing factor levels, \code{\link{is.unsorted}} for testing the data, \code{\link{intisasc}} for a quick version thereof, \code{\link{na.count}} for yet another \code{\link[=physical.ff]{physical}} attribute }
+\seealso{ \code{\link{is.ordered.ff}} for testing factor levels, \code{\link{is.unsorted}} for testing the data, \code{\link[bit:intrle]{intisasc}} for a quick version thereof, \code{\link[bit]{na.count}} for yet another \code{\link[=Extract.ff]{physical}} attribute }
 \examples{
   x <- 1:12
   is.sorted(x) <- !( is.na(is.unsorted(x)) || is.unsorted(x))

@@ -15,14 +15,14 @@ is.readonly(x, \dots)
 }
 \details{
   ff objects can be created/opened with \code{readonly=TRUE}.
-  After each opening of the ff file readonly status is stored in the \code{\link[=physical.ff]{physical}} attributes and serves as the default for the next opening.
+  After each opening of the ff file readonly status is stored in the \code{\link[=Extract.ff]{physical}} attributes and serves as the default for the next opening.
   Thus querying a closed ff object gives the last readonly status.
 }
 \value{
   logical scalar
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{open.ff}}, \code{\link[=physical.ff]{physical}} }
+\seealso{ \code{\link{open.ff}}, \code{\link[=Extract.ff]{physical}} }
 \examples{
   x <- ff(1:12)
   is.readonly(x)

@@ -28,7 +28,7 @@
   \command{names} returns a character vector (or NULL)
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{names}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{vw}}, \code{\link[=physical.ff]{virtual}} }
+\seealso{ \code{\link{names}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{vw}}, \code{\link[=Extract.ff]{virtual}} }
 \examples{
   x <- ff(1:26, names=letters)
   names(x)

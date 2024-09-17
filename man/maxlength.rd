@@ -19,7 +19,7 @@ maxlength(x, \dots)
   integer scalar
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{length.ff}}, \code{\link{maxindex}} }
+\seealso{ \code{\link{length.ff}}, \code{\link[bit:maxindex.default]{maxindex}} }
 \examples{
   x <- ff(1:12)
   length(x) <- 10

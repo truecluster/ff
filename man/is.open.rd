@@ -19,7 +19,7 @@ is.open(x, \dots)
 }
 \details{
   ff objects open automatically if accessed while closed.
-  For ffdf objects we test all of their \code{\link[=physical.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
+  For ffdf objects we test all of their \code{\link[=Extract.ffdf]{physical}} components including their \code{\link[=row.names.ffdf]{row.names}} if they are \code{\link{is.ff}}
 }
 \value{
   TRUE or FALSE (or NA if not all components of an ffdf object are opened or closed)

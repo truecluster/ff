@@ -55,7 +55,7 @@ This differs from \code{\link{data.frame}}, which always creates copies of the i
 most notably in \code{data.frame(matrix())}, where an input matrix is converted to single columns.
 ffdf by contrast, will store an input matrix physically as the same matrix and virtually map it to columns.
 Physically copying a large ff matrix to single ff vectors can be expensive.
-More generally, ffdf objects have a \code{\link[=physical.ffdf]{physical}} and a \code{\link[=virtual.ffdf]{virtual}} component,
+More generally, ffdf objects have a \code{\link[=Extract.ffdf]{physical}} and a \code{\link[=Extract.ffdf]{virtual}} component,
 which allows very flexible dataframe designs: a physically stored matrix can be virtually mapped to single columns,
 a couple of physically stored vectors can be virtually mapped to a single matrix.
 The means to configure these are \code{\link{I}} for the virtual representation and the 'ff_split' and 'ff_join'
@@ -83,9 +83,9 @@ Currently, \code{\link[=vw]{virtual windows}} are not supported for ffdf.
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Virtual storage mode} \cr
   generic  \tab  \code{\link[=vmode.ffdf]{vmode}}         \tab \code{ }  \tab get virtual modes for all (virtual) columns \cr
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Physical attributes}  \cr
-  function \tab  \code{\link[=physical.ffdf]{physical}}   \tab \code{ }  \tab get physical attributes \cr
+  function \tab  \code{\link[=Extract.ffdf]{physical}}   \tab \code{ }  \tab get physical attributes \cr
   \emph{ } \tab  \emph{ }                                 \tab \emph{ }  \tab \bold{Virtual attributes} \cr
-  function \tab  \code{\link[=virtual.ffdf]{virtual}}     \tab \code{ } \tab get virtual attributes \cr
+  function \tab  \code{\link[=Extract.ffdf]{virtual}}     \tab \code{ } \tab get virtual attributes \cr
   method   \tab  \code{\link[=length.ffdf]{length}}       \tab \code{ }  \tab get length \cr
   method   \tab  \code{\link[=dim.ffdf]{dim }}            \tab \code{<-} \tab get dim and set nrow \cr
   generic  \tab  \code{\link[=dimorder.ffdf]{dimorder}}   \tab \code{ }  \tab get the dimorder (non-standard if any component is non-standard) \cr
@@ -111,8 +111,8 @@ Currently, \code{\link[=vw]{virtual windows}} are not supported for ffdf.
 }
 \value{
 A list with components
-\item{physical}{the underlying ff vectors and matrices, to be accessed via \code{\link[=physical.ffdf]{physical}}}
-\item{virtual}{the virtual features of the ffdf including the virtual-to-physical mapping, to be accessed via \code{\link[=virtual.ffdf]{virtual}}}
+\item{physical}{the underlying ff vectors and matrices, to be accessed via \code{\link[=Extract.ffdf]{physical}}}
+\item{virtual}{the virtual features of the ffdf including the virtual-to-physical mapping, to be accessed via \code{\link[=Extract.ffdf]{virtual}}}
 \item{row.names}{the optional row.names, see argument row.names}
 and class 'ffdf' (NOTE that ffdf dows not inherit from ff)
 }
@@ -124,7 +124,7 @@ Note that in theory, accessing a chunk of rows from a matrix with \code{dimorder
 However, at least under windows, the OS has difficulties filecaching parts from very large files, therefore - until we have partitioning - the recommended physical storage is in single vectors.
 }
 \seealso{
-  \code{\link{data.frame}}, \code{\link{ff}}, for more example see \code{\link[=physical.ffdf]{physical}}
+  \code{\link{data.frame}}, \code{\link{ff}}, for more example see \code{\link[=Extract.ffdf]{physical}}
 }
 \examples{
  m <- matrix(1:12, 3, 4, dimnames=list(c("r1","r2","r3"), c("m1","m2","m3","m4")))

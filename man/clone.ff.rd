@@ -52,11 +52,11 @@
   \item{ramattribs}{ additional attributes attached when moving all or parts of this ff into ram, see \code{\link{ramattribs}} }
   \item{vmode}{ virtual storage mode (default: derive from 'initdata'), see \code{\link{vmode}} and \code{\link{as.vmode}} }
   \item{update}{ set to FALSE to avoid updating with 'initdata' (default TRUE) (used by \code{\link{ffdf}}) }
-  \item{pattern}{ root pattern for automatic ff filename creation (default "ff"), see also \code{\link[=physical.ff]{physical}} }
-  \item{filename}{ ff \code{\link{filename}} (default tmpfile with 'pattern' prefix), see also \code{\link[=physical.ff]{physical}} }
+  \item{pattern}{ root pattern for automatic ff filename creation (default "ff"), see also \code{\link[=Extract.ff]{physical}} }
+  \item{filename}{ ff \code{\link{filename}} (default tmpfile with 'pattern' prefix), see also \code{\link[=Extract.ff]{physical}} }
   \item{overwrite}{ set to TRUE to allow overwriting existing files (default FALSE) }
-  \item{pagesize}{ pagesize in bytes for the memory mapping (default from getOptions("ffpagesize") initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=physical.ff]{physical}} }
-  \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from getOptions("ffcaching") initialized with 'memorymap'), see also \code{\link[=physical.ff]{physical}} }
+  \item{pagesize}{ pagesize in bytes for the memory mapping (default from getOptions("ffpagesize") initialized by \code{\link{getdefaultpagesize}}), see also \code{\link[=Extract.ff]{physical}} }
+  \item{caching}{ caching scheme for the backend, currently 'mmnoflush' or 'mmeachflush' (flush mmpages at each swap, default from getOptions("ffcaching") initialized with 'memorymap'), see also \code{\link[=Extract.ff]{physical}} }
   \item{finalizer}{ name of finalizer function called when ff object is \code{\link{remove}d}, (default "deleteIfOpen" from getOptions("fffinalizer"))), standard finalizers are \code{\link{close.ff}}, \code{\link{delete.ff}} and \code{\link{deleteIfOpen.ff}}, see also \code{\link{reg.finalizer}} }
   \item{finonexit}{ logical scalar determining whether finalizer is also called when R is closed via \code{\link{q}}, (default TRUE from getOptions("fffinonexit")) }
   \item{FF_RETURN}{ logical scalar or ff object to be used. The default NULL creates a ff or ram clone, TRUE returns a ff clone, FALSE returns a ram clone. Handing over an ff object here uses this or stops if not \code{\link{ffsuitable}} }

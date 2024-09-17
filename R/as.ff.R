@@ -44,7 +44,7 @@
 #!   A ram or ff object.
 #! }
 #! \author{ Jens Oehlschlägel }
-#! \seealso{  \code{\link{as.ff.bit}}, \code{\link{ff}}, \code{\link{clone}} %, \code{\link{as.symm}}
+#! \seealso{  \code{\link{as.ff.bit}}, \code{\link{ff}}, \code{\link[=clone.ff]{clone}} %, \code{\link{as.symm}}
 #!          , \code{\link{as.vmode}}, \code{\link{vmode}}, \code{\link{as.hi}} }
 #! \examples{
 #!    message("create ff")

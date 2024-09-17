@@ -20,7 +20,7 @@ readwrite.ff(x, i, value, add = FALSE)
 }
 \details{
   \command{readwrite.ff} combines the effects of \command{read.ff} and \command{write.ff} in a single operation: it retrieves the old values starting from position \code{i} before changing them.
-  \command{getset.ff} will maintain \code{\link{na.count}}.
+  \command{getset.ff} will maintain \code{\link[bit]{na.count}}.
 }
 \value{
   \command{read.ff} returns a vector of values, \command{write.ff} returns the 'changed' ff object (like all assignment functions do) and \command{readwrite.ff} returns the values at the target position.

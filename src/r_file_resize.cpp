@@ -28,7 +28,7 @@ SEXP r_file_resize(SEXP spath, SEXP size)
   const char* path = CHAR(STRING_ELT(spath,0));
   fsize_t  newsize = (fsize_t) REAL(size)[0];
   err = utk::file_resize(path, newsize);
-  return ScalarLogical( (err == 0) ? TRUE : FALSE);
+  return Rf_ScalarLogical( (err == 0) ? TRUE : FALSE);
 }
 
 

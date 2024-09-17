@@ -18,15 +18,15 @@
   \item{x}{\code{\link{ff}} or \code{\link{ffdf}}}
   \item{RECORDBYTES}{ optional integer scalar representing the bytes needed to process an element of the \code{ff_vector} a single row of the \code{ffdf} }
   \item{BATCHBYTES}{ integer scalar limiting the number of bytes to be processed in one chunk, default from \code{getOption("ffbatchbytes")}, see also \code{\link{.rambytes}} }
-  \item{\dots}{further arguments passed to \code{\link{chunk}}}
+  \item{\dots}{further arguments passed to \code{\link[bit]{chunk}}}
 }
 \value{
-  A list with \code{\link{ri}} indexes each representing one chunk
+  A list with \code{\link[bit]{ri}} indexes each representing one chunk
 }
 \author{
   Jens Oehlschlägel
 }
-\seealso{ \code{\link{chunk}}, \code{\link{ffdf}} }
+\seealso{ \code{\link[bit]{chunk}}, \code{\link{ffdf}} }
 \examples{
   x <- data.frame(x=as.double(1:26), y=factor(letters), z=ordered(LETTERS), stringsAsFactors = TRUE)
   a <- as.ffdf(x)

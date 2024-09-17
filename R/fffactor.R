@@ -57,7 +57,7 @@
 #! }
 #! \note{
 #!   You need to re-assign the return value not only for ram- but also for ff-objects. Remember ff's hybrid copying semantics: \code{\link{LimWarn}}.
-#!   If you forget to re-assign the returned object, you will end up with ff objects that have their integer codes re-coded to the new levels but still carry the old levels as a \code{\link[=virtual.ff]{virtual}} attribute.
+#!   If you forget to re-assign the returned object, you will end up with ff objects that have their integer codes re-coded to the new levels but still carry the old levels as a \code{\link[=Extract.ff]{virtual}} attribute.
 #! }
 #! \seealso{
 #!   \code{\link{read.table.ffdf}}, \code{\link{levels.ff}}

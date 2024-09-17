@@ -76,11 +76,11 @@
 \section{RAM expansion of index expressions}{
   Some index expressions do not consume RAM due to the \code{\link{hi}} representation,
   for example \code{1:n} will almost consume no RAM hoewever large n.
-  However, some index expressions are expanded and require to \code{\link{maxindex}(i) * .rambytes["integer"]} bytes,
+  However, some index expressions are expanded and require to \code{\link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes,
   either because the sorted sequence of index positions cannot be rle-packed efficiently
   or because \code{\link{hiparse}} cannot yet parse such expression and falls back to evaluating/expanding the index expression.
   If the index positions are not sorted, the index will be expanded and a second vector is needed to store the information for re-ordering,
-  thus the index requires \code{2 * \link{maxindex}(i) * .rambytes["integer"]} bytes.
+  thus the index requires \code{2 * \link[=Extract.ff]{maxindex}(i) * .rambytes["integer"]} bytes.
 }
 \section{RAM expansion when recycling assigment values}{
   Some assignment expressions do not consume RAM for recycling, for example \code{x[1:n] <- 1:k}

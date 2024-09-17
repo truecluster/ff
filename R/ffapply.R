@@ -18,7 +18,7 @@
 #! \description{
 #!   The \code{ffapply} functions support convenient batched processing of ff objects
 #!   such that each single batch or chunk will not exhaust RAM
-#!   and such that batchs have sizes as similar as possible, see \code{\link{bbatch}}.
+#!   and such that batchs have sizes as similar as possible, see \code{\link[bit]{bbatch}}.
 #!   Differing from R's standard \code{\link{apply}} which applies a \code{FUNction},
 #!   the \code{ffapply} functions do apply an \code{EXPRession} and provide two indices \code{FROM="i1"} and \code{TO="i2"},
 #!   which mark beginning and end of the batch and can be used in the applied expression.
@@ -108,7 +108,7 @@
 #! }
 #! \author{ Jens Oehlschlägel }
 #! \note{ xx The complete generation of the return value is preliminary and the arguments related to defining the return value might still change, especially ffapply is work in progress }
-#! \seealso{ \code{\link{apply}}, \code{\link{expression}}, \code{\link{bbatch}}, \code{\link{repfromto}}, \code{\link{ffsuitable}} }
+#! \seealso{ \code{\link{apply}}, \code{\link{expression}}, \code{\link[bit]{bbatch}}, \code{\link[bit]{repfromto}}, \code{\link{ffsuitable}} }
 #! \examples{
 #!    message("ffvecapply examples")
 #!    x <- ff(vmode="integer", length=100)

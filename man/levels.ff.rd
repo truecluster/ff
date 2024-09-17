@@ -37,8 +37,8 @@
   \command{levels} returns a character vector of levels (possibly including \code{as.cha racter(NA)}).
 }
 \author{ Jens Oehlschlägel }
-\note{ When levels as assigned to an ff object that formerly had not levels, we assign automatically \code{\link{ramclass}} == "factor". If you want to change to an ordered factor, use \code{\link[=virtual.ff]{virtual}$ramclass <- c("ordered", "factor")} }
-\seealso{ \code{\link{ramclass}}, \code{\link{factor}}, \code{\link[=physical.ff]{virtual}} }
+\note{ When levels as assigned to an ff object that formerly had not levels, we assign automatically \code{\link{ramclass}} == "factor". If you want to change to an ordered factor, use \code{\link[=Extract.ff]{virtual}$ramclass <- c("ordered", "factor")} }
+\seealso{ \code{\link{ramclass}}, \code{\link{factor}}, \code{\link[=Extract.ff]{virtual}} }
 \examples{
   message("--- create an ff factor including NA as last level")
   x <- ff("a", levels=c(letters, NA), length=99)

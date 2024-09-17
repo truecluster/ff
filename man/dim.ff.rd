@@ -34,7 +34,7 @@
   \item{\dots}{ further arguments (not used) }
 }
 \details{
-   \command{dim} and \command{dimorder} are \code{\link[=physical.ff]{virtual}} attributes. Thus two copies of an R ff object can point to the same file but interpret it differently.
+   \command{dim} and \command{dimorder} are \code{\link[=Extract.ff]{virtual}} attributes. Thus two copies of an R ff object can point to the same file but interpret it differently.
    \command{dim} has the usual meaning, \command{dimorder} defines the dimension order of storage, i.e. \code{c(1,2)} corresponds to R's standard column-major order,
    \code{c(1,2)} corresponds to row-major order, and for higher dimensional arrays dimorder can also be used. Standard dimorder is \code{seq_along(dim(x))}. \cr
    For \code{\link{ffdf}} \code{dim} returns the number of rows and virtual columns. With \code{dim<-.ffdf} only the number of rows can be changed. For convenience you can assign \code{NA} to the number of columns. \cr
@@ -49,7 +49,7 @@
   \command{names} returns a character vector (or NULL)
 }
 \author{ Jens Oehlschlägel }
-\seealso{ \code{\link{dim}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{dimorderStandard}}, \code{\link{vw}}, \code{\link[=physical.ff]{virtual}} }
+\seealso{ \code{\link{dim}}, \code{\link[=dimnames.ff]{dimnames.ff_array}}, \code{\link{dimorderStandard}}, \code{\link{vw}}, \code{\link[=Extract.ff]{virtual}} }
 \examples{
   x <- ff(1:12, dim=c(3,4), dimorder=c(2:1))
   y <- x

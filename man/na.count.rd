@@ -29,7 +29,7 @@
   NA (if set to NULL or NA) or an integer value otherwise
 }
 \author{ Jens Oehlschlägel, Daniel Adler (C++ back-end) }
-\seealso{ \code{\link{getset.ff}}, \code{\link{readwrite.ff}} and \code{\link{swap}} for methods that support maintenance of 'na.count', \code{\link{NA}}, \code{\link{is.sorted}} for yet another \code{\link[=physical.ff]{physical}} attribute }
+\seealso{ \code{\link{getset.ff}}, \code{\link{readwrite.ff}} and \code{\link{swap}} for methods that support maintenance of 'na.count', \code{\link{NA}}, \code{\link[bit:Metadata]{is.sorted}} for yet another \code{\link[=Extract.ff]{physical}} attribute }
 \examples{
   message("--- ff examples ---")
   x <- ff(1:12)
