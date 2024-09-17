@@ -29,7 +29,7 @@ Author: Daniel Adler [aut],
 	Walter Zucchini  [ctb]
 Maintainer: Jens Oehlschlägel <Jens.Oehlschlaegel@truecluster.com>
 Depends: R (>= 3.4.0), bit (>= 4.0.0), utils
-Suggests: biglm, testthat (>= 0.11.0)
+Suggests: biglm, testthat (>= 0.11.0), markdown
 Description: The ff package provides data structures that are stored on
 	disk but behave (almost) as if they were in RAM by transparently 
 	mapping only a section (pagesize) in main memory - the effective 
