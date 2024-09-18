@@ -4,5 +4,6 @@ README.md
 rhub.R
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
-^.gitignore
 ^.github
+^.gitignore
+
