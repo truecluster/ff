@@ -138,6 +138,8 @@
     #define UTK__Aarch_AARCH64
   #elif defined(__sh__)
     #define UTK__Arch_SuperH
+  #elif defined(__riscv64__)
+    #define UTK__Arch_RISCV64
   #else
     #error Architecture not supported.
   #endif
