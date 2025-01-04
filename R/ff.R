@@ -4752,7 +4752,6 @@ swap.ff_array <- function(
     }else if(nvalue<1){
       stop("no value for replacement")
     }
-
     if (simple){
       if (add)
         attr(x, "physical") <- .Call(C_addset_vector, .ffmode[vmode], attr(x, "physical"), index, nreturn, value, PACKAGE="ff")

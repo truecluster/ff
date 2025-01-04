@@ -88,43 +88,51 @@ hi <- function (from, to, by = 1L, maxindex = NA, vw=NULL, pack = TRUE, NAs = NU
         N <- d%/%by
         if (any(d != 0 & sign(d) != sign(by)) || any(N * by != d))
             stop("illegal input to hi")
-        l <- as.vector(rbind(rep(1L, nspec), N))[-1]
-        v <- as.vector(rbind(c(0L, from[-1] - to[-nspec]), by))[-1]
-        v <- v[l > 0]
-        l <- l[l > 0]
-        from <- from[1]
-        to <- to[nspec]
-        nl <- length(l)
-        r <- list(lengths = l, values = v)
-        n <- sum(r$lengths) + 1L
-        tab <- tabulate(sign(r$values) + 2, 3)
-        s <- !tab[1] || !tab[3]
-        if (s) {  # sorted
-            #if (nl) {
-            #    if (pack)
-            #      pack <- 2 * nl < n
-            #}else
-            #  pack <- FALSE
-            #if (pack){
-                class(r) <- "rle"
-            #}else{
-            #    r <- as.integer(cumsum(c(from, rep(r$values, r$lengths))))
-            #}
-            x <- list(first = from, dat = r, last = to)
-            class(x) <- "rlepack"
-            ix <- NULL
-            re <- tab[1] > 0
-            if (re)
-                x <- rev(x)  # rev.rlepack
+        if (nspec > 1 || d[1] != 0){
+          l <- as.vector(rbind(rep(1L, nspec), N))[-1]
+          v <- as.vector(rbind(c(0L, from[-1] - to[-nspec]), by))[-1]
+          v <- v[l > 0]
+          l <- l[l > 0]
+          from <- from[1]
+          to <- to[nspec]
+          nl <- length(l)
+          r <- list(lengths = l, values = v)
+          n <- sum(r$lengths) + 1L
+          tab <- tabulate(sign(r$values) + 2, 3)
+          s <- !tab[1] || !tab[3]
+          if (s) {  # sorted
+              #if (nl) {
+              #    if (pack)
+              #      pack <- 2 * nl < n
+              #}else
+              #  pack <- FALSE
+              #if (pack){
+                  class(r) <- "rle"
+              #}else{
+              #    r <- as.integer(cumsum(c(from, rep(r$values, r$lengths))))
+              #}
+              x <- list(first = from, dat = r, last = to)
+              class(x) <- "rlepack"
+              ix <- NULL
+              re <- tab[1] > 0
+              if (re)
+                  x <- rev(x)  # rev.rlepack
+          }else{
+              re <- FALSE
+              x <- as.integer(cumsum(c(from, rep(r$values, r$lengths))))
+              x <- sort.int(x, index.return = TRUE, method = "quick")
+              ix <- x$ix
+              x <- rlepack(x$x, pack = pack)
+              #ix <- seq_len(n)
+              #radixorder(x, ix)
+              #x <- rlepack(x[ix], pack = pack)
+          }
         }else{
-            re <- FALSE
-            x <- as.integer(cumsum(c(from, rep(r$values, r$lengths))))
-            x <- sort.int(x, index.return = TRUE, method = "quick")
-            ix <- x$ix
-            x <- rlepack(x$x, pack = pack)
-            #ix <- seq_len(n)
-            #radixorder(x, ix)
-            #x <- rlepack(x[ix], pack = pack)
+          # nspec==1 && d[1] != 0
+          re <- FALSE
+          ix <- NULL
+          x <- list(first = from[1], dat = from[1], last = from[1])
+          class(x) <- "rlepack"
         }
 
         x <- unique(x) # unique.rlepack
@@ -178,12 +186,12 @@ hi <- function (from, to, by = 1L, maxindex = NA, vw=NULL, pack = TRUE, NAs = NU
             stop("0s and mixed positive/negative subscripts not allowed")
         }
     }else{
-        x <- list(first = NA_integer_, dat = integer(), last = NA_integer_)
-        re <- FALSE
-        ix <- NULL
-        n <- 0L
-        minindex <- 1L
-        maxindex <- as.integer(maxindex)
+      x <- list(first = NA_integer_, dat = integer(), last = NA_integer_)
+      re <- FALSE
+      ix <- NULL
+      n <- 0L
+      minindex <- 1L
+      maxindex <- as.integer(maxindex)
     }
     if (!is.null(NAs))
         NAs <- rlepack(as.integer(NAs), pack = pack)

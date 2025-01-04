@@ -656,6 +656,10 @@ SEXP r_ff_double_getset_array(SEXP ff_, SEXP index_, SEXP indexdim_, SEXP ffdim_
           subscript[d] = seqfirst[d];
         }
       }else if(strcmp(CHAR(asChar(class)),"rle")==0){
+        if (asInteger(getListElement(VECTOR_ELT(index_, d), "length")) < 2){
+          UNPROTECT(1);
+          error("less than two indices must not be RLE packed\n");
+        }
         packed[d] = TRUE;
         seqsize[d] = LENGTH(getListElement(dat, "lengths"));
         pseqval[d] = INTEGER(getListElement(dat, "values"));
@@ -937,7 +941,6 @@ SEXP FF_GLUE_NAME(r_ff_, FF_NAME_VMODE, FF_NAME_ADD, FF_NAME_GET, FF_NAME_SET, F
       x = getListElement(VECTOR_ELT(index_, d), "x"); \
       dat = getListElement(x, "dat"); \
       class = getAttrib(dat, R_ClassSymbol); \
-  \
       i[d] = 0;                                                     /* for(i[d]=0;i[d]<indexdim[d];i[d]++) */ \
       isneg[d] = asInteger(getListElement(x, "first")) < 0; \
       if (class==R_NilValue){ \
@@ -960,12 +963,16 @@ SEXP FF_GLUE_NAME(r_ff_, FF_NAME_VMODE, FF_NAME_ADD, FF_NAME_GET, FF_NAME_SET, F
           } \
           subscript[d] = seqfirst[d]; \
           neg[d] = negfirst[d]; \
-          j[d] = j0[d];                                                 /* for(j[d]=j0[d];j[d]>=0;j[d]--) */ \
+          j[d] = j0[d]; /* for(j[d]=j0[d];j[d]>=0;j[d]--) */ \
         }else{ \
           seqfirst[d] = pseqval[d][0] - 1; \
           subscript[d] = seqfirst[d]; \
         } \
       }else if(strcmp(CHAR(asChar(class)),"rle")==0){ \
+        if (asInteger(getListElement(VECTOR_ELT(index_, d), "length")) < 2){ \
+          FF_CODE_GET_UNPROTECT_ \
+          error("less than two indices must not be RLE packed\n"); \
+        } \
         packed[d] = TRUE; \
         seqsize[d] = LENGTH(getListElement(dat, "lengths")); \
         pseqval[d] = INTEGER(getListElement(dat, "values")); \
@@ -1046,7 +1053,7 @@ SEXP FF_GLUE_NAME(r_ff_, FF_NAME_VMODE, FF_NAME_ADD, FF_NAME_GET, FF_NAME_SET, F
     /* handle found value */ \
     iff = sumFF + subscript[0] * cumffdim[0]; \
     iR=0;for (d2=0;d2<ndim;d2++)iR += i[d2]*cumindexdim[d2]; \
-    /*Rprintf("d=%d sumFF=%d iFF=%d iR=%d\n", d, sumFF, iff, iR);*/\
+    /*Rprintf("d=%d sumFF=%d iFF=%d iR=%d\n", d, sumFF, iff, iR);*/ \
     /*for (int d2=0;d2<ndim;d2++)Rprintf("d2=%d i=%d subscript=%d partFF=%d cumffdim=%d cumindexdim=%d\n",d2, i[d2], subscript[d2], partFF[d2], cumffdim[d2], cumindexdim[d2]);*/\
     FF_CODE_GET_ASSIGN_ FF_GLUE_NAME(ff_, FF_FFNAME_VMODE, FF_NAME_ADD, FF_NAME_GET, FF_NAME_SET, )( ff, iff FF_CODE_SET_VALUEPAR_CEXP_ ); \
   \
