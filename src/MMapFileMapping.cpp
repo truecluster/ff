@@ -56,12 +56,12 @@
 #include "utk_file_allocate_fseek.hpp"
 namespace ff {
 
+#if 0
 static msize_t getZeroPageSize()
 {
   return MMapFileMapping::getPageSize();
 }
 
-#if 0
 static void* getZeroPage()
 {
   static void* ptr = 0;

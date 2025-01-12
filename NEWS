@@ -1,3 +1,11 @@
+    CHANGES IN ff VERSION 4.5.2
+    
+BUG FIXES
+
+    o removed remaining non-used definition of getZeroPageSize 
+
+
+
     CHANGES IN ff VERSION 4.5.1
     
 BUG FIXES

@@ -23,9 +23,9 @@
 # > rhub_check(platforms = c("linux", "macos", "windows", "ubuntu-clang", "ubuntu-gcc12"))
 # ✔ Found git repository at /home/jo/SIK/truecluster/ff.
 # ✔ Found GitHub PAT.                                 
-# ✔ Check started: linux, macos, windows, ubuntu-clang, ubuntu-gcc12 (aspherical-sphinx).
+# 
+# ✔ Check started: linux, macos, windows, ubuntu-clang, ubuntu-gcc12 (brown-foxhound).
 # See <https://github.com/truecluster/ff/actions> for live output!
-
 
 
 .onLoad <- function(lib, pkg) {

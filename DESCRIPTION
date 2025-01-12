@@ -1,6 +1,6 @@
 Package: ff
-Version: 4.5.1
-Date: 2025-01-04
+Version: 4.5.2
+Date: 2025-01-12
 Title: Memory-Efficient Storage of Large Data on Disk and Fast Access Functions
 Authors@R: c(person(given = "Daniel",
                       family = "Adler",

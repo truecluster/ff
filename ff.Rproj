@@ -1,4 +1,5 @@
 Version: 1.0
+ProjectId: 1826d015-59fc-4faa-8d54-b8a26b181fac
 
 RestoreWorkspace: Default
 SaveWorkspace: Default
@@ -11,6 +12,8 @@ Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
+
+LineEndingConversion: Posix
 
 BuildType: Package
 PackageUseDevtools: Yes
